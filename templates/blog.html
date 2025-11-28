@@ -21,7 +21,7 @@
                     </div>
                     <h5 class="card-title fw-bold">{{ post.title }}</h5>
                     <p class="card-text text-muted flex-grow-1">{{ post.content[:100] }}...</p>
-                    <a href="{{ url_for('post', post_id=post.id) }}" class="btn btn-primary mt-3">Read More</a>
+                    <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-primary mt-3">Read More</a>
                 </div>
             </div>
         </div>
