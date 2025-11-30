@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify
-from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug
+from flask import Flask, render_template, request, jsonify, Response
+from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
+from datetime import datetime
 # from functions.helpers import slugify
 
 # from flask_babel import Babel
@@ -65,6 +66,56 @@ def contact():
 
     # GET
     return render_template('contact.html')
+
+
+
+@app.route('/sitemap.xml')
+def sitemap():
+    """Generate sitemap.xml dynamically"""
+    pages = [
+        {'loc': '/', 'priority': '1.0', 'changefreq': 'daily'},
+        {'loc': '/about', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': '/services', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': '/blog', 'priority': '0.9', 'changefreq': 'daily'},
+        {'loc': '/contact', 'priority': '0.7', 'changefreq': 'monthly'},
+    ]
+    
+    # Add all blog posts
+    posts = get_all_posts()
+    for post in posts:
+        pages.append({
+            'loc': f"/post/{post['slug']}",
+            'priority': '0.6',
+            'changefreq': 'monthly',
+            'lastmod': post.get('created_at', '')
+        })
+    
+    # Generate XML
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    for page in pages:
+        xml += '  <url>\n'
+        xml += f'    <loc>https://www.yallaiot.com{page["loc"]}</loc>\n'
+        if page.get('lastmod'):
+            xml += f'    <lastmod>{page["lastmod"]}</lastmod>\n'
+        xml += f'    <changefreq>{page["changefreq"]}</changefreq>\n'
+        xml += f'    <priority>{page["priority"]}</priority>\n'
+        xml += '  </url>\n'
+    
+    xml += '</urlset>'
+    
+    return Response(xml, mimetype='application/xml')
+
+
+
+@app.route('/robots.txt')
+def robots():
+    """Serve robots.txt"""
+    with open('robots.txt', 'r') as f:
+        robots_txt = f.read()
+    return Response(robots_txt, mimetype='text/plain')
+
 
 
 @app.errorhandler(404)

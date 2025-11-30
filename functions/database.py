@@ -81,3 +81,13 @@ def get_post_by_slug(post_slug: str):
     post = dict(row) if row else None
     conn.close()
     return post
+
+def get_all_posts():
+    """Get all posts for sitemap generation"""
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT slug, created_at FROM posts ORDER BY id DESC")
+    rows = cur.fetchall()
+    posts = [dict(r) for r in rows]
+    conn.close()
+    return posts
