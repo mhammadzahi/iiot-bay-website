@@ -1,12 +1,8 @@
 from flask import Flask, render_template, request, jsonify, Response
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
 from datetime import datetime
-# from functions.helpers import slugify
+from asgiref.wsgi import WsgiToAsgi
 
-# from flask_babel import Babel
-# app.config['BABEL_DEFAULT_LOCALE'] = 'en'
-# app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'ar']
-# babel = Babel(app)
 
 
 app = Flask(__name__)
@@ -111,7 +107,6 @@ def sitemap():
 
 @app.route('/robots.txt')
 def robots():
-    """Serve robots.txt"""
     with open('robots.txt', 'r') as f:
         robots_txt = f.read()
     return Response(robots_txt, mimetype='text/plain')
@@ -122,5 +117,13 @@ def robots():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    import uvicorn
+    asgi_app = WsgiToAsgi(app)  # Convert Flask WSGI to ASGI
+
+    uvicorn.run(asgi_app, host="0.0.0.0", port=5000)
+    #app.run(port=5000, host="0.0.0.0")
+    #app.run(debug=True, port=5000, host="0.0.0.0") #dev
+    #app.run()
