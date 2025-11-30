@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, Response
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
 from datetime import datetime
-from asgiref.wsgi import WsgiToAsgi
+
 
 
 
@@ -120,10 +120,11 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    import uvicorn
-    asgi_app = WsgiToAsgi(app)  # Convert Flask WSGI to ASGI
-
-    uvicorn.run(asgi_app, host="0.0.0.0", port=5000)
-    #app.run(port=5000, host="0.0.0.0")
-    #app.run(debug=True, port=5000, host="0.0.0.0") #dev
+    # import uvicorn
+    # from asgiref.wsgi import WsgiToAsgi
+    # asgi_app = WsgiToAsgi(app)  # Convert Flask WSGI to ASGI
+    # uvicorn.run(asgi_app, host="0.0.0.0", port=5000)
+    # app.run(port=5000, host="0.0.0.0")  #production
+    
+    app.run(debug=True, port=5000, host="0.0.0.0")  #development
     #app.run()

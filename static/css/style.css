@@ -53,7 +53,7 @@ body {
 /* Hero Section */
 .hero-section {
     padding: 100px 0;
-    background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('/static/img/IoT.jpg');
+    background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('/static/img/iot-security.jpg');
     background-size: cover;
     background-position: center;
     min-height: 80vh;
