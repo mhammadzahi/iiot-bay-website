@@ -31,6 +31,88 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    .blog-post-content h2 {
+        color: var(--text-color);
+        font-weight: 700;
+        margin-top: 2.5rem;
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid transparent;
+        border-image: linear-gradient(90deg, var(--primary-color), var(--accent-color)) 1;
+        font-size: 1.8rem;
+    }
+    
+    .blog-post-content h3 {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+    }
+    
+    .blog-post-content p {
+        color: #444;
+        margin-bottom: 1.5rem;
+        line-height: 1.9;
+    }
+    
+    .blog-post-content ul, .blog-post-content ol {
+        color: #444;
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+    
+    .blog-post-content li {
+        margin-bottom: 0.75rem;
+        line-height: 1.8;
+    }
+    
+    .blog-post-content strong {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    
+    .blog-post-content a {
+        color: var(--accent-color);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .blog-post-content a:hover {
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
+    }
+    
+    .blog-post-content .introduction {
+        background: linear-gradient(135deg, rgba(0, 173, 181, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);
+        padding: 2rem;
+        border-radius: 12px;
+        border-left: 4px solid var(--primary-color);
+        margin-bottom: 2rem;
+    }
+    
+    .blog-post-content section {
+        margin-bottom: 2.5rem;
+    }
+    
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+    }
+    
+    .breadcrumb-item a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    
+    .breadcrumb-item a:hover {
+        color: var(--accent-color);
+    }
+</style>
 <div class="container section-padding" style="margin-top: 60px;">
     {% if post %}
     <article itemscope itemtype="https://schema.org/BlogPosting">
@@ -44,23 +126,23 @@
                 </ol>
             </nav>
 
-            <img src="{{ post.image }}" class="img-fluid rounded mb-4 w-100" alt="{{ post.title }}" itemprop="image" loading="eager">
+            <img src="{{ post.image }}" class="img-fluid rounded mb-4 w-100" alt="{{ post.title }}" itemprop="image" loading="eager" style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 173, 181, 0.1);">
 
-            <h1 class="mb-3" itemprop="headline">{{ post.title }}</h1>
-            <div class="d-flex align-items-center mb-4 text-muted">
+            <h1 class="mb-3 gradient-text" itemprop="headline" style="font-size: 2.5rem; font-weight: 700;">{{ post.title }}</h1>
+            <div class="d-flex align-items-center mb-4" style="color: #666; font-size: 0.95rem;">
                 <div class="me-3">
-                    <i class="far fa-user me-1" aria-hidden="true"></i> <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{{ post.author }}</span></span>
+                    <i class="far fa-user me-1" aria-hidden="true" style="color: var(--primary-color);"></i> <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name" style="font-weight: 500;">{{ post.author }}</span></span>
                 </div>
                 <div>
-                    <i class="far fa-calendar-alt me-1" aria-hidden="true"></i> <time itemprop="datePublished" datetime="{{ post.date }}">{{ post.date }}</time>
+                    <i class="far fa-calendar-alt me-1" aria-hidden="true" style="color: var(--primary-color);"></i> <time itemprop="datePublished" datetime="{{ post.date }}" style="font-weight: 500;">{{ post.date }}</time>
                 </div>
             </div>
 
-            <div class="text-muted lead" style="line-height: 1.8;" itemprop="articleBody">
+            <div class="lead blog-post-content" style="line-height: 1.9; color: #333; font-size: 1.1rem;" itemprop="articleBody">
                 {{ post.content | safe }}
             </div>
 
-            <div class="mt-5 pt-4 border-top">
+            <div class="mt-5 pt-4" style="border-top: 2px solid rgba(0, 173, 181, 0.2);">
                 <a href="{{ url_for('blog') }}" class="btn btn-gradient"><i class="fas fa-arrow-left me-2" aria-hidden="true"></i>
                     Back to Blog</a>
             </div>
