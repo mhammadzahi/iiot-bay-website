@@ -103,7 +103,7 @@ def sitemap():
     
     for page in pages:
         xml += '  <url>\n'
-        xml += f'    <loc>https://www.yallaiot.com{page["loc"]}</loc>\n'
+        xml += f'    <loc>https://www.iiot-bay.com{page["loc"]}</loc>\n'
         if page.get('lastmod'):
             xml += f'    <lastmod>{page["lastmod"]}</lastmod>\n'
         xml += f'    <changefreq>{page["changefreq"]}</changefreq>\n'
@@ -123,11 +123,11 @@ def robots():
     return Response(robots_txt, mimetype='text/plain')
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # import uvicorn
     # from asgiref.wsgi import WsgiToAsgi
     # asgi_app = WsgiToAsgi(app)  # Convert Flask WSGI to ASGI
     # uvicorn.run(asgi_app, host="0.0.0.0", port=5000)
     
-    app.run(debug=True, port=5000, host="0.0.0.0")  #development
-    #app.run()
+    # app.run(debug=True, port=5000, host="0.0.0.0")  #development
+    # app.run()

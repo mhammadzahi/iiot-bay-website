@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: 'Please enter your email address',
                     showConfirmButton: false,
                     timer: 3000,
-                    timerProgressBar: true
+                    timerProgressBar: false
                 });
                 return;
             }
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: 'Please enter a valid email address',
                     showConfirmButton: false,
                     timer: 3000,
-                    timerProgressBar: true
+                    timerProgressBar: false
                 });
                 return;
             }
