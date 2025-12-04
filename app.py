@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, Response
+from flask import Flask, render_template, request, jsonify, Response, send_from_directory
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
 from datetime import datetime
 
@@ -6,6 +6,11 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static/img', 'iio-bay-icon.png', mimetype='image/png')
 
 
 @app.errorhandler(404)
