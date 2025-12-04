@@ -27,6 +27,19 @@ body {
     min-height: var(--navbar-height);
 }
 
+.navbar-toggler {
+    border-color: rgba(0, 173, 181, 0.5);
+    padding: 0.5rem 0.75rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 173, 181, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 173, 181, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 .navbar .container {
     height: var(--navbar-height);
     display: flex;
@@ -390,5 +403,115 @@ nav[aria-label="Blog pagination"] .page-link i {
     
     .partner-logo-wrapper {
         padding: 1.5rem 0.5rem;
+    }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 991.98px) {
+    /* Navbar mobile styles */
+    .navbar-collapse {
+        background-color: rgba(255, 255, 255, 0.98);
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    .navbar-nav {
+        align-items: flex-start !important;
+    }
+    
+    .nav-item {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 1rem !important;
+        border-radius: 8px;
+    }
+    
+    .nav-link:hover {
+        background-color: rgba(0, 173, 181, 0.1);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Hero section mobile optimization */
+    .hero-section {
+        padding: 60px 0;
+        min-height: 100vh;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem !important;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-content .btn {
+        font-size: 0.95rem;
+        padding: 0.65rem 1.25rem;
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-content .btn.me-3 {
+        margin-right: 0 !important;
+    }
+    
+    /* Section padding mobile */
+    .section-padding {
+        padding: 50px 0;
+    }
+    
+    /* Cards spacing */
+    .row.g-4 {
+        gap: 1rem !important;
+    }
+    
+    /* Section titles */
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Navbar height adjustment */
+    :root {
+        --navbar-height: 64px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Extra small devices */
+    .hero-content h1 {
+        font-size: 1.75rem !important;
+    }
+    
+    .hero-content p {
+        font-size: 0.95rem !important;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .card-title {
+        font-size: 1.15rem;
+    }
+    
+    .card-text {
+        font-size: 0.9rem;
+    }
+    
+    /* Button full width on very small screens */
+    .btn-lg {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
     }
 }
