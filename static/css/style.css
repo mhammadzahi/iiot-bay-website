@@ -247,6 +247,17 @@ footer {
     color: var(--primary-color);
 }
 
+/* Footer Contact Icons with Gradient */
+footer .fas.fa-map-marker-alt,
+footer .fas.fa-envelope,
+footer .fas.fa-phone {
+    background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.1rem;
+}
+
 .gradient-text {
     background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
     background-clip: text;

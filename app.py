@@ -134,7 +134,6 @@ def sitemap():
         xml += '  </url>\n'
     
     xml += '</urlset>'
-    
     return Response(xml, mimetype='application/xml')
 
 
