@@ -95,11 +95,28 @@ def sitemap():
     # Add all blog posts
     posts = get_all_posts()
     for post in posts:
+        # Parse and format the date to W3C format (ISO 8601)
+        lastmod = None
+        if post.get('created_at'):
+            try:
+                # Try to parse various date formats and convert to YYYY-MM-DD
+                date_str = post['created_at']
+                # Try common date formats
+                for fmt in ['%Y-%m-%d', '%Y-%m-%d %H:%M:%S', '%Y/%m/%d', '%d/%m/%Y', '%m/%d/%Y']:
+                    try:
+                        dt = datetime.strptime(date_str, fmt)
+                        lastmod = dt.strftime('%Y-%m-%d')
+                        break
+                    except ValueError:
+                        continue
+            except:
+                pass
+        
         pages.append({
             'loc': f"/post/{post['slug']}",
             'priority': '0.6',
             'changefreq': 'monthly',
-            'lastmod': post.get('created_at', '')
+            'lastmod': lastmod
         })
     
     # Generate XML
