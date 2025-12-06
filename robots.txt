@@ -12,5 +12,5 @@ Disallow: /*.db$
 Disallow: /env/
 
 # Sitemap location
-Sitemap: https://www.yallaiot.com/sitemap.xml
-Sitemap: https://yallaiot.com/sitemap.xml
+Sitemap: https://www.iiot-bay.com/sitemap.xml
+Sitemap: https://iiot-bay.com/sitemap.xml
