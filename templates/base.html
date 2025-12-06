@@ -8,6 +8,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}">
     
     <!-- Primary Meta Tags -->
@@ -28,7 +29,9 @@
     <meta property="og:url" content="{{ request.url }}">
     <meta property="og:title" content="{% block og_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='img/og-image.jpg', _external=True) }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='img/iio-bay-landscape-logo.png', _external=True) }}{% endblock %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="IIoT Bay">
     <meta property="og:locale" content="en_US">
     
@@ -37,11 +40,8 @@
     <meta name="twitter:url" content="{{ request.url }}">
     <meta name="twitter:title" content="{% block twitter_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{{ url_for('static', filename='img/og-image.jpg', _external=True) }}{% endblock %}">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ url_for('static', filename='img/iio-bay-landscape-logo.png', _external=True) }}{% endblock %}">
+    <meta name="twitter:image:alt" content="IIoT Bay Logo">
     
     <!-- Geo Tags -->
     <meta name="geo.region" content="SA-01">
@@ -55,20 +55,35 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "IIoT Bay",
+      "alternateName": "IIoT Bay KSA",
       "description": "Innovative industrial IoT Solutions for Smart Homes and Industries in Saudi Arabia",
       "url": "{{ request.url_root }}",
-      "logo": "{{ url_for('static', filename='img/logo.png', _external=True) }}",
+      "logo": "{{ url_for('static', filename='img/iio-bay-logo.png', _external=True) }}",
+      "image": "{{ url_for('static', filename='img/iio-bay-landscape-logo.png', _external=True) }}",
+      "email": "hello@iiot-bay.com",
+      "foundingDate": "2024",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+966-50-123-4567",
         "contactType": "Customer Service",
+        "email": "hello@iiot-bay.com",
         "areaServed": "SA",
         "availableLanguage": ["English", "Arabic"]
       },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Riyadh",
+        "addressRegion": "Riyadh Province",
         "addressCountry": "SA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "24.7136",
+        "longitude": "46.6753"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Saudi Arabia"
       },
       "sameAs": [
         "https://instagram.com/iiot-bay",
@@ -76,8 +91,26 @@
         "https://x.com/iiot-bay",
         "https://linkedin.com/company/iiot-bay",
         "https://youtube.com/iiot-bay",
-        "https://facebook.com/iiot-bay"
+        "https://facebook.com/iiot-bay",
+        "https://pinterest.com/iiotbay",
+        "https://medium.com/@iiot-bay"
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "IIoT Bay",
+      "url": "{{ request.url_root }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ request.url_root }}blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
     {% block structured_data %}{% endblock %}

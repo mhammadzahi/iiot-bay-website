@@ -2,10 +2,20 @@
 
 {% block title %}{{ post.title }} - IIoT Bay Blog{% endblock %}
 
+{% block meta_title %}{{ post.title }} - IIoT Bay Blog{% endblock %}
+
 {% block meta_description %}{{ post.content[:155] | striptags }}{% endblock %}
 
+{% block meta_keywords %}{{ post.title }}, IIoT, Industrial IoT, Smart Home, Industry 4.0, IoT Solutions, Saudi Arabia, {{ post.author }}{% endblock %}
+
 {% block og_type %}article{% endblock %}
+{% block og_title %}{{ post.title }} - IIoT Bay{% endblock %}
+{% block og_description %}{{ post.content[:155] | striptags }}{% endblock %}
 {% block og_image %}{{ post.image }}{% endblock %}
+
+{% block twitter_title %}{{ post.title }} - IIoT Bay{% endblock %}
+{% block twitter_description %}{{ post.content[:155] | striptags }}{% endblock %}
+{% block twitter_image %}{{ post.image }}{% endblock %}
 
 {% block structured_data %}
 {% if post %}
@@ -15,16 +25,55 @@
   "@type": "BlogPosting",
   "headline": "{{ post.title }}",
   "image": "{{ post.image }}",
+  "url": "{{ request.url }}",
   "datePublished": "{{ post.date }}",
+  "dateModified": "{{ post.date }}",
   "author": {
     "@type": "Person",
     "name": "{{ post.author }}"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "IIoT Bay"
+    "name": "IIoT Bay",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ url_for('static', filename='img/iio-bay-logo.png', _external=True) }}"
+    }
   },
-  "description": "{{ post.content[:155] | striptags }}"
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ request.url }}"
+  },
+  "description": "{{ post.content[:155] | striptags }}",
+  "keywords": "{{ post.title }}, IIoT, Industrial IoT, Smart Home, Industry 4.0, IoT Solutions",
+  "articleSection": "Technology",
+  "inLanguage": "en-US"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url_for('index', _external=True) }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "{{ url_for('blog', _external=True) }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ post.title }}",
+      "item": "{{ request.url }}"
+    }
+  ]
 }
 </script>
 {% endif %}
