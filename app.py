@@ -147,13 +147,6 @@ def robots():
 
 
 
-# import uvicorn
-# from asgiref.wsgi import WsgiToAsgi
-# asgi_app = WsgiToAsgi(app)  # Convert Flask WSGI to ASGI
-# uvicorn.run(asgi_app, host="0.0.0.0", port=5000)
-
-
-
 # if __name__ == '__main__':
-#     app.run(debug=True, port=5000, host="0.0.0.0")
+#     app.run(debug=True)
 
