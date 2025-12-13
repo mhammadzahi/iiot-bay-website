@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Script to add a new blog post to the database
-"""
+
 import sqlite3
 import os
 from datetime import datetime
