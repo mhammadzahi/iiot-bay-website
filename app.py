@@ -87,23 +87,27 @@ def contact():
 
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
+    """Generate a standards-compliant sitemap for Google/Bing"""
+    # Get current date for static pages
+    today = datetime.now().strftime('%Y-%m-%d')
+    
+    # Define static pages with lastmod
     pages = [
-        {'loc': '/', 'priority': '1.0', 'changefreq': 'daily'},
-        {'loc': '/about', 'priority': '0.8', 'changefreq': 'monthly'},
-        {'loc': '/services', 'priority': '0.8', 'changefreq': 'monthly'},
-        {'loc': '/blog', 'priority': '0.9', 'changefreq': 'daily'},
-        {'loc': '/contact', 'priority': '0.7', 'changefreq': 'monthly'},
-        {'loc': '/terms', 'priority': '0.5', 'changefreq': 'yearly'},
+        {'loc': 'https://www.iiot-bay.com/', 'lastmod': today},
+        {'loc': 'https://www.iiot-bay.com/about', 'lastmod': today},
+        {'loc': 'https://www.iiot-bay.com/services', 'lastmod': today},
+        {'loc': 'https://www.iiot-bay.com/blog', 'lastmod': today},
+        {'loc': 'https://www.iiot-bay.com/contact', 'lastmod': today},
+        {'loc': 'https://www.iiot-bay.com/terms', 'lastmod': today},
     ]
     
-    # Add all blog posts
+    # Add all blog posts with their creation dates
     posts = get_all_posts()
     for post in posts:
-        # Parse and format the date to W3C format (ISO 8601)
-        lastmod = None
+        # Parse and format the date to YYYY-MM-DD
+        lastmod = today  # Default to today if parsing fails
         if post.get('created_at'):
             try:
-                # Try to parse various date formats and convert to YYYY-MM-DD
                 date_str = post['created_at']
                 # Try common date formats
                 for fmt in ['%Y-%m-%d', '%Y-%m-%d %H:%M:%S', '%Y/%m/%d', '%d/%m/%Y', '%m/%d/%Y']:
@@ -113,31 +117,27 @@ def sitemap():
                         break
                     except ValueError:
                         continue
-            except:
+            except Exception:
                 pass
         
         pages.append({
-            'loc': f"/post/{post['slug']}",
-            'priority': '0.6',
-            'changefreq': 'monthly',
+            'loc': f"https://www.iiot-bay.com/post/{post['slug']}",
             'lastmod': lastmod
         })
     
-    # Generate XML
-    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
-    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    # Generate XML without whitespace issues
+    xml_lines = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml_lines.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
     
     for page in pages:
-        xml += '  <url>\n'
-        xml += f'    <loc>https://www.iiot-bay.com{page["loc"]}</loc>\n'
-        if page.get('lastmod'):
-            xml += f'    <lastmod>{page["lastmod"]}</lastmod>\n'
-        xml += f'    <changefreq>{page["changefreq"]}</changefreq>\n'
-        xml += f'    <priority>{page["priority"]}</priority>\n'
-        xml += '  </url>\n'
+        xml_lines.append('<url>')
+        xml_lines.append(f'<loc>{page["loc"]}</loc>')
+        xml_lines.append(f'<lastmod>{page["lastmod"]}</lastmod>')
+        xml_lines.append('</url>')
     
-    xml += '</urlset>'
-    return Response(xml, mimetype='application/xml')
+    xml_lines.append('</urlset>')
+    
+    return Response(''.join(xml_lines), mimetype='application/xml')
 
 
 
