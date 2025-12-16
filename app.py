@@ -1,11 +1,53 @@
 from flask import Flask, render_template, request, jsonify, Response, send_from_directory
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
 from datetime import datetime
+import re
+from markupsafe import escape
 
 
 
 
 app = Flask(__name__)
+
+
+@app.after_request
+def set_security_headers(response):
+    """Add security headers to all responses"""
+    # Content Security Policy - Prevent XSS
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
+        "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; "
+        "img-src 'self' data: https:; "
+        "connect-src 'self'; "
+        "frame-ancestors 'none'; "
+        "base-uri 'self'; "
+        "form-action 'self';"
+    )
+    
+    # HTTP Strict Transport Security - Force HTTPS
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload'
+    
+    # Prevent clickjacking
+    response.headers['X-Frame-Options'] = 'DENY'
+    
+    # Cross-Origin Opener Policy
+    response.headers['Cross-Origin-Opener-Policy'] = 'same-origin'
+    
+    # Prevent MIME sniffing
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    
+    # XSS Protection (legacy browsers)
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    
+    # Referrer Policy
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    
+    # Permissions Policy
+    response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
+    
+    return response
 
 
 @app.route('/favicon.ico')
@@ -57,10 +99,16 @@ def post(post_slug):
 
 @app.route('/api/newsletter/subscribe', methods=['POST'])
 def newsletter_subscribe():
-    email_address = request.json.get('email')
+    email_address = request.json.get('email', '').strip()
+    
+    # Validate email format
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not email_address or not re.match(email_pattern, email_address):
+        return jsonify({"message": "Invalid email address"}), 400
 
     if not new_subscriber(email_address):
         print("Failed to add new subscriber: ", email_address)
+        return jsonify({"message": "Subscription failed"}), 500
 
     return jsonify({"message": "Subscription successful"}), 200
 
@@ -70,13 +118,23 @@ def newsletter_subscribe():
 def contact():
     if request.method == 'POST':
         data = request.json
-        name = data.get('name')
-        email_address = data.get('email')
-        subject = data.get('subject')
-        message = data.get('message')
+        name = escape(data.get('name', '').strip())
+        email_address = data.get('email', '').strip()
+        subject = escape(data.get('subject', '').strip())
+        message = escape(data.get('message', '').strip())
+        
+        # Validate required fields
+        if not name or not email_address or not message:
+            return jsonify({"success": False, "message": "All required fields must be filled"}), 400
+        
+        # Validate email format
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_pattern, email_address):
+            return jsonify({"success": False, "message": "Invalid email address"}), 400
 
         if not new_message(name, email_address, subject, message):
             print("Failed to save message: ", data)
+            return jsonify({"success": False, "message": "Failed to send message"}), 500
 
         return jsonify({"success": True, "message": "Message sent successfully"}), 200
 
