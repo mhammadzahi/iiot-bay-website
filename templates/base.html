@@ -4,51 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="48x48" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}">
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}"> -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/iio-bay-icon.png') }}">
-    
+
     <!-- Primary Meta Tags -->
     <title>{% block title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}</title>
-    <meta name="title" content="{% block meta_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
-    <meta name="description" content="{% block meta_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}industrial IoT solutions Saudi Arabia, Internet of Things, Smart Home, Industrial IoT, Factory Monitoring, Industry 4.0, SIRI Assessment, Predictive Maintenance, IoT Security, Riyadh, KSA{% endblock %}">
+    <meta name="title"
+        content="{% block meta_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
+    <meta name="description"
+        content="{% block meta_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
+    <meta name="keywords"
+        content="{% block meta_keywords %}industrial IoT solutions Saudi Arabia, Internet of Things, Smart Home, Industrial IoT, Factory Monitoring, Industry 4.0, SIRI Assessment, Predictive Maintenance, IoT Security, Riyadh, KSA{% endblock %}">
     <meta name="author" content="IIoT Bay">
     <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href="{% block canonical %}{{ request.url }}{% endblock %}">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:url" content="{{ request.url }}">
-    <meta property="og:title" content="{% block og_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='img/iio-bay-landscape-logo.png', _external=True) }}{% endblock %}">
+    <meta property="og:title"
+        content="{% block og_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
+    <meta property="og:image"
+        content="{% block og_image %}{{ url_for('static', filename='img/iio-bay-landscape-logo.png', _external=True) }}{% endblock %}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="IIoT Bay">
     <meta property="og:locale" content="en_US">
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ request.url }}">
-    <meta name="twitter:title" content="{% block twitter_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{{ url_for('static', filename='img/iio-bay-landscape-logo.png', _external=True) }}{% endblock %}">
+    <meta name="twitter:title"
+        content="{% block twitter_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
+    <meta name="twitter:description"
+        content="{% block twitter_description %}Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.{% endblock %}">
+    <meta name="twitter:image"
+        content="{% block twitter_image %}{{ url_for('static', filename='img/iio-bay-landscape-logo.png', _external=True) }}{% endblock %}">
     <meta name="twitter:image:alt" content="IIoT Bay Logo">
-    
+
     <!-- Geo Tags -->
     <meta name="geo.region" content="SA-01">
     <meta name="geo.placename" content="Riyadh">
     <meta name="geo.position" content="24.7136;46.6753">
     <meta name="ICBM" content="24.7136, 46.6753">
-    
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -127,7 +136,8 @@
             <a class="navbar-brand gradient-text" href="{{ url_for('index') }}" aria-label="IIoT Bay Home">
                 <i class="fas fa-network-wired me-2" aria-hidden="true"></i>IIoT Bay
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -162,23 +172,45 @@
         {% block content %}{% endblock %}
     </main>
 
+    {% raw %}
+    <div id="custom-cursor"></div><style>body,a,button,input,textarea,.elementor-button{cursor:none!important}#custom-cursor{position:fixed;top:0;left:0;width:20px;height:20px;pointer-events:none;z-index:2147483647;transform:translate(-50%,-50%);transition:transform .05s linear,width .2s,height .2s,opacity .2s,clip-path .3s;will-change:width,height,transform,clip-path;background:linear-gradient(135deg,#003DFF,#5A2DFF,#8A2BE2,#003DFF);background-size:400% 400%;animation:duCursorGradient 4s ease infinite;border-radius:50%}body.hovering-link #custom-cursor{width:28px;height:28px;opacity:.8;border-radius:0;clip-path:polygon(50% 0%,0% 100%,100% 100%)}@media(max-width:1024px){#custom-cursor{display:none}body,a,button,input,textarea{cursor:auto!important}}@keyframes duCursorGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}</style><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("custom-cursor");let t=0,n=0;document.addEventListener("mousemove",function(o){t=o.clientX,n=o.clientY,e.style.left=t+"px",e.style.top=n+"px"});const r="a, button, input[type='submit'], .elementor-button, .elementor-cta, .elementor-flip-box";document.addEventListener("mouseover",function(o){(o.target.matches(r)||o.target.closest(r))&&document.body.classList.add("hovering-link")}),document.addEventListener("mouseout",function(o){(o.target.matches(r)||o.target.closest(r))&&document.body.classList.remove("hovering-link")}),document.addEventListener("mouseout",function(o){o.relatedTarget||o.toElement||(e.style.opacity="0")}),document.addEventListener("mouseenter",function(o){e.style.opacity="1"})});</script>
+
+    {% endraw %}
+
     <!-- Footer -->
     <footer role="contentinfo" aria-label="Footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <h5 class="fw-bold mb-3">IIoT Bay</h5>
-                    <p class="text-muted">Connecting the world, one device at a time. We provide cutting-edge industrial IoT
+                    <p class="text-muted">Connecting the world, one device at a time. We provide cutting-edge industrial
+                        IoT
                         solutions for homes and industries.</p>
                     <div class="mt-4">
-                        <a href="https://instagram.com/iiot-bay" target="_blank" rel="noopener noreferrer" class="social-icon me-3" aria-label="Follow us on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="https://tiktok.com/@iiot_bay" target="_blank" rel="noopener noreferrer" class="social-icon me-3" aria-label="Follow us on TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-                        <a href="https://x.com/iiot_bay" target="_blank" rel="noopener noreferrer" class="social-icon me-3" aria-label="Follow us on X (Twitter)"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="https://linkedin.com/company/iiot-bay" target="_blank" rel="noopener noreferrer" class="social-icon me-3" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="https://youtube.com/@iiot-bay" target="_blank" rel="noopener noreferrer" class="social-icon me-3" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-                        <a href="https://facebook.com/iiot.bay0" target="_blank" rel="noopener noreferrer" class="social-icon me-3" aria-label="Like us on Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/966501234567" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Contact us on WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                        <a href="https://medium.com/@iiot-bay" target="_blank" rel="noopener noreferrer" class="social-icon ms-3" aria-label="Read our Medium blog"><i class="fab fa-medium-m" aria-hidden="true"></i></a>
+                        <a href="https://instagram.com/iiot-bay" target="_blank" rel="noopener noreferrer"
+                            class="social-icon me-3" aria-label="Follow us on Instagram"><i class="fab fa-instagram"
+                                aria-hidden="true"></i></a>
+                        <a href="https://tiktok.com/@iiot_bay" target="_blank" rel="noopener noreferrer"
+                            class="social-icon me-3" aria-label="Follow us on TikTok"><i class="fab fa-tiktok"
+                                aria-hidden="true"></i></a>
+                        <a href="https://x.com/iiot_bay" target="_blank" rel="noopener noreferrer"
+                            class="social-icon me-3" aria-label="Follow us on X (Twitter)"><i class="fab fa-twitter"
+                                aria-hidden="true"></i></a>
+                        <a href="https://linkedin.com/company/iiot-bay" target="_blank" rel="noopener noreferrer"
+                            class="social-icon me-3" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"
+                                aria-hidden="true"></i></a>
+                        <a href="https://youtube.com/@iiot-bay" target="_blank" rel="noopener noreferrer"
+                            class="social-icon me-3" aria-label="Subscribe to our YouTube channel"><i
+                                class="fab fa-youtube" aria-hidden="true"></i></a>
+                        <a href="https://facebook.com/iiot.bay0" target="_blank" rel="noopener noreferrer"
+                            class="social-icon me-3" aria-label="Like us on Facebook"><i class="fab fa-facebook-f"
+                                aria-hidden="true"></i></a>
+                        <a href="https://wa.me/966501234567" target="_blank" rel="noopener noreferrer"
+                            class="social-icon" aria-label="Contact us on WhatsApp"><i class="fab fa-whatsapp"
+                                aria-hidden="true"></i></a>
+                        <a href="https://medium.com/@iiot-bay" target="_blank" rel="noopener noreferrer"
+                            class="social-icon ms-3" aria-label="Read our Medium blog"><i class="fab fa-medium-m"
+                                aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="col-md-2 mb-4">
@@ -204,8 +236,10 @@
                     <h6 class="fw-bold mb-3">Join our weekly newsletter</h6>
                     <form id="newsletter-form">
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control border-secondary" placeholder="Email" name="email" required>
-                            <button class="btn btn-gradient" type="button" id="newsletter-submit"><i class="fas fa-paper-plane"></i></button>
+                            <input type="email" class="form-control border-secondary" placeholder="Email" name="email"
+                                required>
+                            <button class="btn btn-gradient" type="button" id="newsletter-submit"><i
+                                    class="fas fa-paper-plane"></i></button>
                         </div>
                     </form>
                 </div>
@@ -221,8 +255,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
-    <div id="custom-cursor"></div><style>body,a,button,input,textarea,.elementor-button{cursor:none!important}#custom-cursor{position:fixed;top:0;left:0;width:20px;height:20px;border-radius:50%;pointer-events:none;z-index:2147483647;transform:translate(-50%,-50%);transition:transform .05s linear,width .2s,height .2s,opacity .2s;will-change:width,height,transform;background:linear-gradient(135deg,#003DFF,#5A2DFF,#8A2BE2,#003DFF);background-size:400% 400%;animation:duCursorGradient 4s ease infinite}body.hovering-link #custom-cursor{width:35px;height:35px;opacity:.8}@media(max-width:1024px){#custom-cursor{display:none}body,a,button,input,textarea{cursor:auto!important}}@keyframes duCursorGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}</style><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("custom-cursor");let t=0,n=0;document.addEventListener("mousemove",function(o){t=o.clientX,n=o.clientY,e.style.left=t+"px",e.style.top=n+"px"});const r="a, button, input[type='submit'], .elementor-button, .elementor-cta, .elementor-flip-box";document.addEventListener("mouseover",function(o){(o.target.matches(r)||o.target.closest(r))&&document.body.classList.add("hovering-link")}),document.addEventListener("mouseout",function(o){(o.target.matches(r)||o.target.closest(r))&&document.body.classList.remove("hovering-link")}),document.addEventListener("mouseout",function(o){o.relatedTarget||o.toElement||(e.style.opacity="0")}),document.addEventListener("mouseenter",function(o){e.style.opacity="1"})});</script>
 </body>
 
 </html>
