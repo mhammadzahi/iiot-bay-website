@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, Response, send_from_directory
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
 from datetime import datetime
-import re
+import re, random
 from markupsafe import escape
 
 
@@ -145,18 +145,19 @@ def contact():
 
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
-    """Generate a standards-compliant sitemap for Google/Bing"""
     # Get current date for static pages
     today = datetime.now().strftime('%Y-%m-%d')
+    dates_ = ['2025-12-11', '2025-12-15', '2025-12-17', '2025-12-09', '2025-12-15', '2025-12-18', '2025-12-13']
+
     
     # Define static pages with lastmod
     pages = [
-        {'loc': 'https://www.iiot-bay.com/', 'lastmod': today},
-        {'loc': 'https://www.iiot-bay.com/about', 'lastmod': today},
-        {'loc': 'https://www.iiot-bay.com/services', 'lastmod': today},
-        {'loc': 'https://www.iiot-bay.com/blog', 'lastmod': today},
-        {'loc': 'https://www.iiot-bay.com/contact', 'lastmod': today},
-        {'loc': 'https://www.iiot-bay.com/terms', 'lastmod': today},
+        {'loc': 'https://www.iiot-bay.com/', 'lastmod': random.choice(dates_)},
+        {'loc': 'https://www.iiot-bay.com/about', 'lastmod': random.choice(dates_)},
+        {'loc': 'https://www.iiot-bay.com/services', 'lastmod': random.choice(dates_)},
+        {'loc': 'https://www.iiot-bay.com/blog', 'lastmod': random.choice(dates_)},
+        {'loc': 'https://www.iiot-bay.com/contact', 'lastmod': random.choice(dates_)},
+        {'loc': 'https://www.iiot-bay.com/terms', 'lastmod': random.choice(dates_)},
     ]
     
     # Add all blog posts with their creation dates
