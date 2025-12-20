@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, Response, send_from_directory
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
 from datetime import datetime
-import re, random
+import re
 from markupsafe import escape
 
 
@@ -152,12 +152,12 @@ def sitemap():
     
     # Define static pages with lastmod
     pages = [
-        {'loc': 'https://www.iiot-bay.com/', 'lastmod': random.choice(dates_)},
-        {'loc': 'https://www.iiot-bay.com/about', 'lastmod': random.choice(dates_)},
-        {'loc': 'https://www.iiot-bay.com/services', 'lastmod': random.choice(dates_)},
-        {'loc': 'https://www.iiot-bay.com/blog', 'lastmod': random.choice(dates_)},
-        {'loc': 'https://www.iiot-bay.com/contact', 'lastmod': random.choice(dates_)},
-        {'loc': 'https://www.iiot-bay.com/terms', 'lastmod': random.choice(dates_)},
+        {'loc': 'https://www.iiot-bay.com/', 'lastmod': dates_[0]},
+        {'loc': 'https://www.iiot-bay.com/about', 'lastmod': dates_[1]},
+        {'loc': 'https://www.iiot-bay.com/services', 'lastmod': dates_[2]},
+        {'loc': 'https://www.iiot-bay.com/blog', 'lastmod': dates_[3]},
+        {'loc': 'https://www.iiot-bay.com/contact', 'lastmod': dates_[4]},
+        {'loc': 'https://www.iiot-bay.com/terms', 'lastmod': dates_[5]},
     ]
     
     # Add all blog posts with their creation dates
