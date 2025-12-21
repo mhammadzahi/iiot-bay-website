@@ -109,36 +109,26 @@
         }
     }
     
-    /* Pagination Styles */
-    .pagination .page-link {
-        border: 2px solid #e0e0e0;
-        margin: 0 5px;
-        border-radius: 8px;
-        padding: 8px 16px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+    /* Pagination Styles - Override global styles */
+    nav[aria-label="Blog pagination"] .pagination .page-link {
+        -webkit-text-fill-color: initial !important;
+        background-clip: initial !important;
+        -webkit-background-clip: initial !important;
     }
     
-    .pagination .page-link.gradient-text {
-        color: #00ADB5 !important;
-        background-color: white;
+    nav[aria-label="Blog pagination"] .pagination .page-link.gradient-text {
+        background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%) !important;
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
     }
     
-    .pagination .page-link.gradient-text:hover {
-        background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
-        color: white !important;
-        border-color: #00ADB5;
-    }
-    
-    .pagination .page-item.active .page-link {
-        background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
-        color: white !important;
-        border-color: #00ADB5;
-    }
-    
-    .pagination .page-item.disabled .page-link {
-        color: #ccc;
-        border-color: #e0e0e0;
+    nav[aria-label="Blog pagination"] .page-item.active .page-link {
+        background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%) !important;
+        background-clip: initial !important;
+        -webkit-background-clip: initial !important;
+        -webkit-text-fill-color: initial !important;
+        color: #fff !important;
     }
 </style>
 <div class="container section-padding" style="margin-top: 60px;">
