@@ -156,7 +156,11 @@
             </li>
             {% else %}
             <li class="page-item {% if p == page %}active{% endif %}">
-                <a class="page-link {% if p != page %}gradient-text{% endif %}" href="{{ url_for('blog', page=p) }}">{{ p }}</a>
+                {% if p == page %}
+                <span class="page-link" style="background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%); color: white; border-color: #00ADB5;">{{ p }}</span>
+                {% else %}
+                <a class="page-link gradient-text" href="{{ url_for('blog', page=p) }}">{{ p }}</a>
+                {% endif %}
             </li>
             {% endif %}
             {% endfor %}
