@@ -62,7 +62,7 @@ def page_not_found(e):
 
 @app.route('/')
 def index():
-    random_posts = get_random_posts(limit=6)
+    random_posts = get_random_posts(limit=9)
     return render_template('index.html', random_posts=random_posts)
 
 
