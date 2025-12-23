@@ -222,6 +222,184 @@
     </div>
 </section>
 
+<!-- Latest Blog Posts Carousel Section -->
+<section class="section-padding" style="background-color: #f8f9fa;" aria-labelledby="blog-posts-heading">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 id="blog-posts-heading" class="section-title gradient-text">Latest Insights</h2>
+            <p class="text-muted">Explore our latest articles on Industrial IoT and Industry 4.0</p>
+        </div>
+        {% if random_posts %}
+        <style>
+            .blog-carousel .blog-card {
+                background-color: #FFFFFF !important;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                border: 1px solid rgba(0, 173, 181, 0.15) !important;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+                border-radius: 12px !important;
+            }
+            
+            .blog-carousel .blog-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 35px rgba(0, 173, 181, 0.2) !important;
+                border-color: var(--primary-color) !important;
+            }
+            
+            .blog-carousel .blog-card .card-img-top {
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+                border-bottom: 3px solid var(--primary-color);
+            }
+            
+            .blog-carousel .blog-card .card-title {
+                color: #222 !important;
+                font-weight: 700;
+                line-height: 1.4;
+                transition: all 0.3s ease;
+                font-size: 1.15rem !important;
+            }
+            
+            .blog-carousel .blog-card:hover .card-title {
+                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            
+            .blog-carousel .blog-card .card-text {
+                color: #444 !important;
+                line-height: 1.7;
+                font-size: 0.95rem;
+            }
+            
+            .blog-carousel .blog-card time {
+                color: var(--primary-color) !important;
+                font-weight: 600;
+                font-size: 0.85rem;
+            }
+            
+            .blog-carousel .blog-card time i {
+                color: var(--primary-color);
+            }
+            
+            .blog-carousel .blog-card .card-body {
+                background-color: #FFFFFF;
+                border-bottom-left-radius: 12px;
+                border-bottom-right-radius: 12px;
+                padding: 1.5rem;
+            }
+            
+            /* Custom Carousel Controls */
+            .blog-carousel .carousel-control-prev,
+            .blog-carousel .carousel-control-next {
+                width: 50px;
+                height: 50px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+                border-radius: 50%;
+                opacity: 1;
+                transition: all 0.3s ease;
+            }
+            
+            .blog-carousel .carousel-control-prev {
+                left: -60px;
+            }
+            
+            .blog-carousel .carousel-control-next {
+                right: -60px;
+            }
+            
+            .blog-carousel .carousel-control-prev:hover,
+            .blog-carousel .carousel-control-next:hover {
+                transform: translateY(-50%) scale(1.1);
+                box-shadow: 0 8px 20px rgba(0, 173, 181, 0.3);
+            }
+            
+            .blog-carousel .carousel-control-prev-icon,
+            .blog-carousel .carousel-control-next-icon {
+                width: 24px;
+                height: 24px;
+                filter: brightness(0) invert(1);
+            }
+            
+            @media (max-width: 1200px) {
+                .blog-carousel .carousel-control-prev {
+                    left: -25px;
+                }
+                .blog-carousel .carousel-control-next {
+                    right: -25px;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .blog-carousel .carousel-control-prev,
+                .blog-carousel .carousel-control-next {
+                    width: 40px;
+                    height: 40px;
+                }
+                .blog-carousel .carousel-control-prev {
+                    left: -15px;
+                }
+                .blog-carousel .carousel-control-next {
+                    right: -15px;
+                }
+            }
+        </style>
+        <div id="blogPostsCarousel" class="carousel slide blog-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for i in range(0, random_posts|length, 3) %}
+                <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                    <div class="row g-4">
+                        {% for post in random_posts[i:i+3] %}
+                        <div class="col-md-4">
+                            <article class="card blog-card h-100 overflow-hidden">
+                                {% if post.image %}
+                                <img src="{{ post.image }}" 
+                                     class="card-img-top" 
+                                     alt="{{ post.title }}"
+                                     style="height: 220px; object-fit: cover;" 
+                                     loading="lazy">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <time class="mb-3" datetime="{{ post.date }}">
+                                        <i class="far fa-calendar-alt me-1" aria-hidden="true"></i> {{ post.date }}
+                                    </time>
+                                    <h3 class="card-title h5 mb-3">{{ post.title }}</h3>
+                                    <p class="card-text flex-grow-1">{{ (post.content|striptags)[:150] }}...</p>
+                                    <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read more about {{ post.title }}">Read More <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
+                                </div>
+                            </article>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Carousel Controls -->
+            {% if random_posts|length > 3 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#blogPostsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#blogPostsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            {% endif %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('blog') }}" class="btn btn-primary">View All Posts</a>
+        </div>
+        {% else %}
+        <div class="text-center">
+            <p class="text-muted">No blog posts available at the moment.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="section-padding text-center cta-bg">
     <div class="container">

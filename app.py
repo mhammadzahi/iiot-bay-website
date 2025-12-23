@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, Response, send_from_directory
-from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts
+from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts, get_random_posts
 from datetime import datetime
 import re
 from markupsafe import escape
@@ -62,8 +62,8 @@ def page_not_found(e):
 
 @app.route('/')
 def index():
-    print("Home page accessed")
-    return render_template('index.html')
+    random_posts = get_random_posts(limit=6)
+    return render_template('index.html', random_posts=random_posts)
 
 
 @app.route('/about')

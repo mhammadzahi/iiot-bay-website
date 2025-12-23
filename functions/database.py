@@ -91,3 +91,13 @@ def get_all_posts():
     posts = [dict(r) for r in rows]
     conn.close()
     return posts
+
+def get_random_posts(limit: int = 6):
+    """Get random posts for homepage carousel"""
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM posts ORDER BY RANDOM() LIMIT ?", (limit,))
+    rows = cur.fetchall()
+    random_posts = [dict(r) for r in rows]
+    conn.close()
+    return random_posts
