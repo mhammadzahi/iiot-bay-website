@@ -4,13 +4,13 @@ Allow: /
 # Disallow API endpoints
 Disallow: /api/
 
-# Disallow static assets (optional - prevents direct crawling of images/css/js)
-Disallow: /static/
+# REMOVED THE STATIC BLOCK HERE
+# Allowing Google to crawl /static/ is required for the favicon 
+# and for Google to understand your page layout (CSS/JS).
 
 # Disallow database and environment files (extra protection)
 Disallow: /*.db$
 Disallow: /env/
 
 # Sitemap location
-Sitemap: https://www.iiot-bay.com/sitemap.xml
 Sitemap: https://iiot-bay.com/sitemap.xml
