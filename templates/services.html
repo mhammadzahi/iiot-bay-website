@@ -57,10 +57,10 @@
     <div class="container hero-content">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h1 id="services-hero-heading" class="gradient-text">Our Services</h1>
-                <p class="lead mb-4">Comprehensive IoT services built to scale and secure your operations.</p>
-                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3">Get Started</a>
-                <a href="{{ url_for('blog') }}" class="btn btn-outline-light btn-lg">Read Our Blog</a>
+                <h1 id="services-hero-heading" class="gradient-text">{{ _('Our Services') }}</h1>
+                <p class="lead mb-4">{{ _('Comprehensive IoT services built to scale and secure your operations.') }}</p>
+                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3">{{ _('Get Started') }}</a>
+                <a href="{{ url_for('blog') }}" class="btn btn-outline-light btn-lg">{{ _('Read Our Blog') }}</a>
             </div>
         </div>
     </div>
@@ -70,8 +70,8 @@
 <section class="section-padding" aria-labelledby="services-list-heading">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 id="services-list-heading" class="section-title gradient-text">What We Offer</h2>
-            <p class="text-muted">Tailored services to meet your IoT transformation goals</p>
+            <h2 id="services-list-heading" class="section-title gradient-text">{{ _('What We Offer') }}</h2>
+            <p class="text-muted">{{ _('Tailored services to meet your IoT transformation goals') }}</p>
         </div>
 
         <div class="row g-4">
@@ -84,8 +84,8 @@
                         </div>
                         <div class="col-8 col-md-8">
                             <div class="card-body">
-                                <h3 class="card-title gradient-text">Software Development</h3>
-                                <p class="card-text text-muted mb-0">Custom software solutions tailored to your business needs with modern technologies and best practices. From web applications to enterprise systems, we deliver scalable and maintainable code.</p>
+                                <h3 class="card-title gradient-text">{{ _('Software Development') }}</h3>
+                                <p class="card-text text-muted mb-0">{{ _('Custom software solutions tailored to your business needs with modern technologies and best practices. From web applications to enterprise systems, we deliver scalable and maintainable code.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -101,8 +101,8 @@
                         </div>
                         <div class="col-8 col-md-8">
                             <div class="card-body">
-                                <h3 class="card-title gradient-text">Industrial IoT</h3>
-                                <p class="card-text text-muted mb-0">Optimize manufacturing processes with real-time monitoring and predictive maintenance. Connect your factory floor to the cloud for enhanced visibility and operational efficiency.</p>
+                                <h3 class="card-title gradient-text">{{ _('Industrial IoT') }}</h3>
+                                <p class="card-text text-muted mb-0">{{ _('Optimize manufacturing processes with real-time monitoring and predictive maintenance. Connect your factory floor to the cloud for enhanced visibility and operational efficiency.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -118,8 +118,8 @@
                         </div>
                         <div class="col-8 col-md-8">
                             <div class="card-body">
-                                <h3 class="card-title gradient-text">Factory Machines Real Time Monitoring</h3>
-                                <p class="card-text text-muted mb-0">Turn data into monitoring insights with our advanced and smart tools. Real-time dashboards provide instant visibility into machine performance and production metrics.</p>
+                                <h3 class="card-title gradient-text">{{ _('Factory Machines Real Time Monitoring') }}</h3>
+                                <p class="card-text text-muted mb-0">{{ _('Turn data into monitoring insights with our advanced and smart tools. Real-time dashboards provide instant visibility into machine performance and production metrics.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -135,8 +135,8 @@
                         </div>
                         <div class="col-8 col-md-8">
                             <div class="card-body">
-                                <h3 class="card-title gradient-text">IoT Security</h3>
-                                <p class="card-text text-muted mb-0">Protect your connected devices and networks with enterprise-grade security solutions and threat monitoring. Comprehensive security assessments and implementations safeguard your IoT infrastructure.</p>
+                                <h3 class="card-title gradient-text">{{ _('IoT Security') }}</h3>
+                                <p class="card-text text-muted mb-0">{{ _('Protect your connected devices and networks with enterprise-grade security solutions and threat monitoring. Comprehensive security assessments and implementations safeguard your IoT infrastructure.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -152,8 +152,8 @@
                         </div>
                         <div class="col-8 col-md-8">
                             <div class="card-body">
-                                <h3 class="card-title gradient-text">Predictive Maintenance</h3>
-                                <p class="card-text text-muted mb-0">Prevent equipment failures before they occur with AI-powered predictive analytics and maintenance scheduling. Leverage sensor data and machine learning to reduce downtime and extend asset life.</p>
+                                <h3 class="card-title gradient-text">{{ _('Predictive Maintenance') }}</h3>
+                                <p class="card-text text-muted mb-0">{{ _('Prevent equipment failures before they occur with AI-powered predictive analytics and maintenance scheduling. Leverage sensor data and machine learning to reduce downtime and extend asset life.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -169,8 +169,8 @@
                         </div>
                         <div class="col-8 col-md-8">
                             <div class="card-body">
-                                <h3 class="card-title gradient-text">SIRI System Factory Assessment For Industry 4.0</h3>
-                                <p class="card-text text-muted mb-0">Comprehensive digital readiness assessment using SIRI framework to guide your Industry 4.0 transformation journey. Evaluate your current state and develop a roadmap for smart manufacturing.</p>
+                                <h3 class="card-title gradient-text">{{ _('SIRI System Factory Assessment For Industry 4.0') }}</h3>
+                                <p class="card-text text-muted mb-0">{{ _('Comprehensive digital readiness assessment using SIRI framework to guide your Industry 4.0 transformation journey. Evaluate your current state and develop a roadmap for smart manufacturing.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -183,9 +183,9 @@
 <!-- CTA -->
 <section class="section-padding text-center cta-bg">
     <div class="container">
-        <h2 class="gradient-text mb-3">Ready to start?</h2>
-        <p class="text-black-50 mb-4">Contact our team to schedule an assessment or pilot.</p>
-        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg">Contact Us</a>
+        <h2 class="gradient-text mb-3">{{ _('Ready to start?') }}</h2>
+        <p class="text-black-50 mb-4">{{ _('Contact our team to schedule an assessment or pilot.') }}</p>
+        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg">{{ _('Contact Us') }}</a>
     </div>
 </section>
 

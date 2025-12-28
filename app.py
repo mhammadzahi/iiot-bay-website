@@ -1,13 +1,36 @@
-from flask import Flask, render_template, request, jsonify, Response, send_from_directory
+from flask import Flask, render_template, request, jsonify, Response, send_from_directory, redirect, make_response
+from flask_babel import Babel, get_locale
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts, get_random_posts
 from datetime import datetime
 import re
 from markupsafe import escape
 
 
-
-
 app = Flask(__name__)
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'ar']
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+
+babel = Babel(app)
+
+
+def get_locale():
+    # 1. Check for lang cookie
+    lang = request.cookies.get('lang')
+    if lang in app.config['BABEL_SUPPORTED_LOCALES']:
+        return lang
+    
+    # 2. Check Accept-Language header
+    return request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES']) or app.config['BABEL_DEFAULT_LOCALE']
+
+
+babel.init_app(app, locale_selector=get_locale)
+
+
+@app.context_processor
+def inject_locale():
+    """Make get_locale available in all templates"""
+    return {'get_locale': get_locale}
 
 
 @app.after_request
@@ -47,12 +70,33 @@ def set_security_headers(response):
     # Permissions Policy
     response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
     
+    # Content-Language header
+    response.headers['Content-Language'] = str(get_locale())
+    
     return response
 
 
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory('static/img', 'iio-bay-icon.png', mimetype='image/png')
+
+
+@app.route('/set-language/<lang>')
+def set_language(lang):
+    """Set language preference via cookie"""
+    if lang not in app.config['BABEL_SUPPORTED_LOCALES']:
+        lang = app.config['BABEL_DEFAULT_LOCALE']
+    
+    # Get referrer or default to home
+    referrer = request.referrer or '/'
+    
+    # Create response with redirect
+    response = make_response(redirect(referrer))
+    
+    # Set cookie for 1 year
+    response.set_cookie('lang', lang, max_age=60*60*24*365)
+    
+    return response
 
 
 @app.errorhandler(404)
@@ -209,6 +253,6 @@ def robots():
 
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
 

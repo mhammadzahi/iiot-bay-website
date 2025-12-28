@@ -64,10 +64,10 @@
     <div class="container hero-content">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h1 id="hero-heading">Innovating the Industry with the Power of IoT</h1>
-                <p class="lead mb-4">Transforming factories and industries with smart IIoT solutions that optimize operations and unlock Industry 4.0 potential.</p>
-                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3">Get Started</a>
-                <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-lg">Learn More</a>
+                <h1 id="hero-heading">{{ _('Innovating the Industry with the Power of IoT') }}</h1>
+                <p class="lead mb-4">{{ _('Transforming factories and industries with smart IIoT solutions that optimize operations and unlock Industry 4.0 potential.') }}</p>
+                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3">{{ _('Get Started') }}</a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-lg">{{ _('Learn More') }}</a>
             </div>
         </div>
     </div>
@@ -77,16 +77,16 @@
 <section class="section-padding" aria-labelledby="services-heading">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 id="services-heading" class="section-title gradient-text">Our Services</h2>
-            <p class="text-muted">Comprehensive Industrial IoT solutions tailored to your needs</p>
+            <h2 id="services-heading" class="section-title gradient-text">{{ _('Our Services') }}</h2>
+            <p class="text-muted">{{ _('Comprehensive Industrial IoT solutions tailored to your needs') }}</p>
         </div>
         <div class="row g-4">
             <div class="col-md-4">
                 <article class="card h-100 p-4 border-0">
                     <div class="card-body text-center">
                         <i class="fas fa-code fa-3x text-primary mb-3" aria-hidden="true"></i>
-                        <h3 class="card-title mb-3">Software Development</h3>
-                        <p class="card-text text-muted">Custom software solutions tailored to your business needs with modern technologies and best practices.</p>
+                        <h3 class="card-title mb-3">{{ _('Software Development') }}</h3>
+                        <p class="card-text text-muted">{{ _('Custom software solutions tailored to your business needs with modern technologies and best practices.') }}</p>
                     </div>
                 </article>
             </div>
@@ -94,9 +94,8 @@
                 <article class="card h-100 p-4 border-0">
                     <div class="card-body text-center">
                         <i class="fas fa-industry fa-3x text-primary mb-3" aria-hidden="true"></i>
-                        <h3 class="card-title mb-3">Industrial IoT</h3>
-                        <p class="card-text text-muted">Optimize manufacturing processes with real-time monitoring and
-                            predictive maintenance.</p>
+                        <h3 class="card-title mb-3">{{ _('Industrial IoT') }}</h3>
+                        <p class="card-text text-muted">{{ _('Optimize manufacturing processes with real-time monitoring and predictive maintenance.') }}</p>
                     </div>
                 </article>
             </div>
@@ -104,8 +103,8 @@
                 <article class="card h-100 p-4 border-0">
                     <div class="card-body text-center">
                         <i class="fas fa-chart-line fa-3x text-primary mb-3" aria-hidden="true"></i>
-                        <h3 class="card-title mb-3">Factory Machines Real Time Monitoring</h3>
-                        <p class="card-text text-muted">Turn data into Monitoring insights with our advanced and smart tools.</p>
+                        <h3 class="card-title mb-3">{{ _('Factory Machines Real Time Monitoring') }}</h3>
+                        <p class="card-text text-muted">{{ _('Turn data into Monitoring insights with our advanced and smart tools.') }}</p>
                     </div>
                 </article>
             </div>
@@ -113,8 +112,8 @@
                 <article class="card h-100 p-4 border-0">
                     <div class="card-body text-center">
                         <i class="fas fa-shield-alt fa-3x text-primary mb-3" aria-hidden="true"></i>
-                        <h3 class="card-title mb-3">Industrial IoT Security</h3>
-                        <p class="card-text text-muted">Protect your connected devices and networks with enterprise-grade security solutions and threat monitoring.</p>
+                        <h3 class="card-title mb-3">{{ _('Industrial IoT Security') }}</h3>
+                        <p class="card-text text-muted">{{ _('Protect your connected devices and networks with enterprise-grade security solutions and threat monitoring.') }}</p>
                     </div>
                 </article>
             </div>
@@ -122,8 +121,8 @@
                 <article class="card h-100 p-4 border-0">
                     <div class="card-body text-center">
                         <i class="fas fa-tools fa-3x text-primary mb-3" aria-hidden="true"></i>
-                        <h3 class="card-title mb-3">Predictive Maintenance</h3>
-                        <p class="card-text text-muted">Prevent equipment failures before they occur with AI-powered predictive analytics and maintenance scheduling.</p>
+                        <h3 class="card-title mb-3">{{ _('Predictive Maintenance') }}</h3>
+                        <p class="card-text text-muted">{{ _('Prevent equipment failures before they occur with AI-powered predictive analytics and maintenance scheduling.') }}</p>
                     </div>
                 </article>
             </div>
@@ -131,8 +130,8 @@
                 <article class="card h-100 p-4 border-0">
                     <div class="card-body text-center">
                         <i class="fas fa-clipboard-check fa-3x text-primary mb-3" aria-hidden="true"></i>
-                        <h3 class="card-title mb-3">SIRI System Factory Assessment For Industry 4.0</h3>
-                        <p class="card-text text-muted">Comprehensive digital readiness assessment using SIRI framework to guide your Industry 4.0 transformation journey.</p>
+                        <h3 class="card-title mb-3">{{ _('SIRI System Factory Assessment For Industry 4.0') }}</h3>
+                        <p class="card-text text-muted">{{ _('Comprehensive digital readiness assessment using SIRI framework to guide your Industry 4.0 transformation journey.') }}</p>
                     </div>
                 </article>
             </div>
@@ -148,14 +147,14 @@
                 <img src="{{ url_for('static', filename='img/smart-factory.webp') }}" alt="Smart factory with IoT sensors and real-time monitoring systems" class="img-fluid rounded shadow-lg" loading="lazy">
             </div>
             <div class="col-lg-6 ps-lg-5">
-                <h2 id="why-choose-heading" class="section-title gradient-text mb-4">Why Choose IIoT Bay?</h2>
+                <h2 id="why-choose-heading" class="section-title gradient-text mb-4">{{ _('Why Choose IIoT Bay?') }}</h2>
                 <div class="d-flex mb-4">
                     <div class="flex-shrink-0">
                         <i class="fas fa-check-circle fa-2x text-primary"></i>
                     </div>
                     <div class="ms-3">
-                        <h5 class="fw-bold">Expert Team</h5>
-                        <p class="text-muted">Our engineers are pioneers in the Industrial IoT space with years of experience.</p>
+                        <h5 class="fw-bold">{{ _('Expert Team') }}</h5>
+                        <p class="text-muted">{{ _('Our engineers are pioneers in the Industrial IoT space with years of experience.') }}</p>
                     </div>
                 </div>
                 <div class="d-flex mb-4">
@@ -163,9 +162,8 @@
                         <i class="fas fa-shield-alt fa-2x text-primary"></i>
                     </div>
                     <div class="ms-3">
-                        <h5 class="fw-bold">Secure by Design</h5>
-                        <p class="text-muted">Security is not an afterthought. We build it into every layer of our
-                            solutions.</p>
+                        <h5 class="fw-bold">{{ _('Secure by Design') }}</h5>
+                        <p class="text-muted">{{ _('Security is not an afterthought. We build it into every layer of our solutions.') }}</p>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -173,8 +171,8 @@
                         <i class="fas fa-headset fa-2x text-primary"></i>
                     </div>
                     <div class="ms-3">
-                        <h5 class="fw-bold">24/7 Support</h5>
-                        <p class="text-muted">We are always here to help you ensure your systems run smoothly.</p>
+                        <h5 class="fw-bold">{{ _('24/7 Support') }}</h5>
+                        <p class="text-muted">{{ _('We are always here to help you ensure your systems run smoothly.') }}</p>
                     </div>
                 </div>
             </div>
@@ -186,8 +184,8 @@
 <section class="section-padding" style="background-color: #ffffff;" aria-labelledby="partners-heading">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 id="partners-heading" class="section-title gradient-text">Our Partners</h2>
-            <p class="text-muted">Trusted by industry leaders across the region</p>
+            <h2 id="partners-heading" class="section-title gradient-text">{{ _('Our Partners') }}</h2>
+            <p class="text-muted">{{ _('Trusted by industry leaders across the region') }}</p>
         </div>
         <div class="row g-4 align-items-center justify-content-center">
             <div class="col-6 col-md-4 col-lg-3">
@@ -226,8 +224,8 @@
 <section class="section-padding" style="background-color: #f8f9fa;" aria-labelledby="blog-posts-heading">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 id="blog-posts-heading" class="section-title gradient-text">Latest Insights</h2>
-            <p class="text-muted">Explore our latest articles on Industrial IoT and Industry 4.0</p>
+            <h2 id="blog-posts-heading" class="section-title gradient-text">{{ _('Latest Insights') }}</h2>
+            <p class="text-muted">{{ _('Explore our latest articles on Industrial IoT and Industry 4.0') }}</p>
         </div>
         {% if random_posts %}
         <style>
@@ -367,7 +365,7 @@
                                     </time>
                                     <h3 class="card-title h5 mb-3">{{ post.title }}</h3>
                                     <p class="card-text flex-grow-1">{{ (post.content|striptags)[:150] }}...</p>
-                                    <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read more about {{ post.title }}">Read More <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
+                                    <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read more about {{ post.title }}">{{ _('Read More') }} <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
                                 </div>
                             </article>
                         </div>
@@ -381,20 +379,20 @@
             {% if random_posts|length > 3 %}
             <button class="carousel-control-prev" type="button" data-bs-target="#blogPostsCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+                <span class="visually-hidden">{{ _('Previous') }}</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#blogPostsCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+                <span class="visually-hidden">{{ _('Next') }}</span>
             </button>
             {% endif %}
         </div>
         <div class="text-center mt-4">
-            <a href="{{ url_for('blog') }}" class="btn btn-primary">View All Posts</a>
+            <a href="{{ url_for('blog') }}" class="btn btn-primary">{{ _('View All Posts') }}</a>
         </div>
         {% else %}
         <div class="text-center">
-            <p class="text-muted">No blog posts available at the moment.</p>
+            <p class="text-muted">{{ _('No blog posts available at the moment.') }}</p>
         </div>
         {% endif %}
     </div>
@@ -403,9 +401,9 @@
 <!-- CTA Section -->
 <section class="section-padding text-center cta-bg">
     <div class="container">
-        <h2 class="gradient-text mb-3">Ready to Transform Your Business?</h2>
-        <p class="text-black-50 mb-4 lead">Let's discuss how Industrial IoT can drive growth for your factory.</p>
-        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg">Contact Us Today</a>
+        <h2 class="gradient-text mb-3">{{ _('Ready to Transform Your Business?') }}</h2>
+        <p class="text-black-50 mb-4 lead">{{ _("Let's discuss how Industrial IoT can drive growth for your factory.") }}</p>
+        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg">{{ _('Contact Us Today') }}</a>
     </div>
 </section>
 {% endblock %}

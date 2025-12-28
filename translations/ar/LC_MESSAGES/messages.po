@@ -1,0 +1,905 @@
+# Arabic translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-12-28 20:46+0400\n"
+"PO-Revision-Date: 2025-12-28 20:19+0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: env/lib/python3.11/site-packages/click/_termui_impl.py:613
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/_termui_impl.py:617
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1114
+#: env/lib/python3.11/site-packages/click/core.py:1151
+#, python-brace-format
+msgid "{text} {deprecated_message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1170
+msgid "Options"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1245
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1264
+#, python-brace-format
+msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1448
+msgid "Aborted!"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1822
+msgid "Commands"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1853
+msgid "Missing command."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:1931
+#, python-brace-format
+msgid "No such command {name!r}."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:2355
+msgid "Value must be an iterable."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:2378
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: env/lib/python3.11/site-packages/click/core.py:2567
+#, python-brace-format
+msgid ""
+"DeprecationWarning: The {param_type} {name!r} is "
+"deprecated.{extra_message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:3015
+#, python-brace-format
+msgid "env var: {var}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:3018
+#, python-brace-format
+msgid "default: {default}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:3022
+msgid "required"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/core.py:3082
+msgid "(dynamic)"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/decorators.py:465
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/decorators.py:522
+msgid "Show the version and exit."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/decorators.py:548
+msgid "Show this message and exit."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:50
+#: env/lib/python3.11/site-packages/click/exceptions.py:89
+#, python-brace-format
+msgid "Error: {message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:81
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:130
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:132
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:190
+msgid "Missing argument"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:192
+msgid "Missing option"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:194
+msgid "Missing parameter"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:196
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:203
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:223
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:235
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:282
+msgid "unknown error"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/exceptions.py:289
+#, python-brace-format
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/parser.py:199
+#, python-brace-format
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/parser.py:381
+#, python-brace-format
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/parser.py:444
+#, python-brace-format
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: env/lib/python3.11/site-packages/click/shell_completion.py:332
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/shell_completion.py:339
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/termui.py:165
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/termui.py:181
+msgid "Error: The value you entered was invalid."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/termui.py:183
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/termui.py:194
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/termui.py:253
+msgid "Error: invalid input"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/termui.py:872
+msgid "Press any key to continue..."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:332
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:369
+#, python-brace-format
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: env/lib/python3.11/site-packages/click/types.py:460
+#, python-brace-format
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: env/lib/python3.11/site-packages/click/types.py:482
+#, python-brace-format
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:538
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:719
+#, python-brace-format
+msgid "{value!r} is not a valid boolean. Recognized values: {states}"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:747
+#, python-brace-format
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:937
+msgid "file"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:939
+msgid "directory"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:941
+msgid "path"
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:988
+#, python-brace-format
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:997
+#, python-brace-format
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:1005
+#, python-brace-format
+msgid "{name} {filename!r} is a directory."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:1014
+#, python-brace-format
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:1023
+#, python-brace-format
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:1032
+#, python-brace-format
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: env/lib/python3.11/site-packages/click/types.py:1099
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: templates/404.html:15
+msgid "Page Not Found"
+msgstr "الصفحة غير موجودة"
+
+#: templates/404.html:16
+msgid "Sorry — the page you're looking for doesn't exist or has been moved."
+msgstr "عذرًا - الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+
+#: templates/404.html:17
+msgid "Go Home"
+msgstr "العودة للرئيسية"
+
+#: templates/404.html:18
+msgid "Contact Support"
+msgstr "اتصل بالدعم"
+
+#: templates/about.html:33
+msgid "About IIoT Bay"
+msgstr "عن IIoT Bay"
+
+#: templates/about.html:34
+msgid ""
+"We are a team of passionate engineers and visionaries dedicated to "
+"connecting the physical and digital worlds."
+msgstr ""
+"نحن فريق من المهندسين والرؤيويين المتحمسين المكرسين لربط العالمين المادي "
+"والرقمي."
+
+#: templates/about.html:35
+msgid ""
+"Founded in 2020, IIoT Bay has rapidly grown to become a leading provider "
+"of IoT solutions in the region. We believe that technology should serve "
+"people, making lives easier, safer, and more productive."
+msgstr ""
+"تأسست IIoT Bay في عام 2020، ونمت بسرعة لتصبح مزودًا رائدًا لحلول إنترنت "
+"الأشياء في المنطقة. نؤمن بأن التكنولوجيا يجب أن تخدم الناس، مما يجعل "
+"الحياة أسهل وأكثر أمانًا وإنتاجية."
+
+#: templates/about.html:36
+msgid ""
+"Our mission is to democratize access to IoT technology, enabling "
+"businesses of all sizes to leverage the power of connected data."
+msgstr ""
+"مهمتنا هي إضفاء الطابع الديمقراطي على الوصول إلى تكنولوجيا إنترنت "
+"الأشياء، مما يمكّن الشركات بجميع أحجامها من الاستفادة من قوة البيانات "
+"المتصلة."
+
+#: templates/about.html:48
+msgid "Our Values"
+msgstr "قيمنا"
+
+#: templates/about.html:54
+msgid "Innovation"
+msgstr "الابتكار"
+
+#: templates/about.html:55
+msgid "We constantly push the boundaries of what is possible."
+msgstr "ندفع باستمرار حدود ما هو ممكن."
+
+#: templates/about.html:63
+msgid "Integrity"
+msgstr "النزاهة"
+
+#: templates/about.html:64
+msgid "We build trust through transparency and honest relationships."
+msgstr "نبني الثقة من خلال الشفافية والعلاقات الصادقة."
+
+#: templates/about.html:72
+msgid "Collaboration"
+msgstr "التعاون"
+
+#: templates/about.html:73
+msgid "We believe in the power of working together to solve complex problems."
+msgstr "نؤمن بقوة العمل معًا لحل المشاكل المعقدة."
+
+#: templates/about.html:84
+msgid "Our Mission"
+msgstr "مهمتنا"
+
+#: templates/about.html:85
+msgid "Empowering businesses through intelligent connectivity"
+msgstr "تمكين الأعمال من خلال الاتصال الذكي"
+
+#: templates/about.html:94
+msgid "Transforming Industries Through Innovation"
+msgstr "تحويل الصناعات من خلال الابتكار"
+
+#: templates/about.html:96
+msgid ""
+"At IIoT Bay, we are committed to democratizing access to cutting-edge IoT"
+" technology. Our mission is to bridge the gap between the physical and "
+"digital worlds, enabling organizations across Saudi Arabia and beyond to "
+"harness the transformative power of connected devices and real-time data "
+"analytics."
+msgstr ""
+"في IIoT Bay، نحن ملتزمون بإضفاء الطابع الديمقراطي على الوصول إلى "
+"تكنولوجيا إنترنت الأشياء المتطورة. مهمتنا هي سد الفجوة بين العالمين "
+"المادي والرقمي، مما يمكّن المنظمات في جميع أنحاء المملكة العربية السعودية"
+" وخارجها من تسخير القوة التحويلية للأجهزة المتصلة وتحليلات البيانات في "
+"الوقت الفعلي."
+
+#: templates/about.html:99
+msgid ""
+"We strive to create sustainable, scalable IoT solutions that drive "
+"operational efficiency, enhance decision-making, and unlock new "
+"opportunities for growth. By partnering with businesses of all sizes, we "
+"aim to accelerate digital transformation and contribute to Vision 2030's "
+"goals of building a thriving, knowledge-based economy."
+msgstr ""
+"نسعى جاهدين لإنشاء حلول إنترنت الأشياء المستدامة وقابلة للتوسع التي تعزز "
+"الكفاءة التشغيلية، وتعزز اتخاذ القرار، وتفتح فرصًا جديدة للنمو. من خلال "
+"الشراكة مع الشركات بجميع أحجامها، نهدف إلى تسريع التحول الرقمي والمساهمة "
+"في أهداف رؤية 2030 لبناء اقتصاد مزدهر قائم على المعرفة."
+
+#: templates/about.html:109
+msgid "Drive Innovation"
+msgstr "قيادة الابتكار"
+
+#: templates/about.html:110
+msgid ""
+"Leading the IoT revolution with cutting-edge technology and forward-"
+"thinking solutions."
+msgstr "قيادة ثورة إنترنت الأشياء بالتكنولوجيا المتطورة والحلول التفكير المستقبلي."
+
+#: templates/about.html:118
+msgid "Global Impact"
+msgstr "التأثير العالمي"
+
+#: templates/about.html:119
+msgid ""
+"Creating solutions that scale globally while serving local communities "
+"effectively."
+msgstr "إنشاء حلول قابلة للتوسع عالميًا مع خدمة المجتمعات المحلية بفعالية."
+
+#: templates/about.html:127
+msgid "Ensure Security"
+msgstr "ضمان الأمن"
+
+#: templates/about.html:128
+msgid ""
+"Protecting data and systems with industry-leading security standards and "
+"best practices."
+msgstr "حماية البيانات والأنظمة بمعايير الأمان الرائدة في الصناعة وأفضل الممارسات."
+
+#: templates/about.html:136
+msgid "Sustain Growth"
+msgstr "النمو المستدام"
+
+#: templates/about.html:137
+msgid ""
+"Building eco-friendly solutions that promote sustainability and "
+"responsible innovation."
+msgstr "بناء حلول صديقة للبيئة تعزز الاستدامة والابتكار المسؤول."
+
+#: templates/about.html:149 templates/services.html:186
+msgid "Ready to start?"
+msgstr "هل أنت مستعد للبدء؟"
+
+#: templates/about.html:151 templates/services.html:188
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+#: templates/base.html:145 templates/base.html:222
+msgid "Home"
+msgstr "الرئيسية"
+
+#: templates/base.html:148 templates/base.html:223
+msgid "About"
+msgstr "من نحن"
+
+#: templates/base.html:151 templates/base.html:224
+msgid "Services"
+msgstr "خدماتنا"
+
+#: templates/base.html:154 templates/base.html:225
+msgid "Blog"
+msgstr "المدونة"
+
+#: templates/base.html:157 templates/base.html:226 templates/base.html:231
+msgid "Contact"
+msgstr "اتصل بنا"
+
+#: templates/base.html:162
+msgid "Switch language"
+msgstr "تبديل اللغة"
+
+#: templates/base.html:167 templates/index.html:69 templates/services.html:62
+msgid "Get Started"
+msgstr "ابدأ الآن"
+
+#: templates/base.html:191
+msgid ""
+"Connecting the world, one device at a time. We provide cutting-edge "
+"industrial IoT solutions for homes and industries."
+msgstr ""
+"نربط العالم، جهازًا تلو الآخر. نقدم حلول إنترنت الأشياء الصناعية المتطورة"
+" للمنازل والصناعات."
+
+#: templates/base.html:220
+msgid "Links"
+msgstr "روابط"
+
+#: templates/base.html:227
+msgid "Terms & Conditions"
+msgstr "الشروط والأحكام"
+
+#: templates/base.html:233
+msgid "Riyadh, Saudi Arabia"
+msgstr "الرياض، المملكة العربية السعودية"
+
+#: templates/base.html:239
+msgid "Join our weekly newsletter"
+msgstr "اشترك في نشرتنا الأسبوعية"
+
+#: templates/base.html:242
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: templates/base.html:252
+msgid "All rights reserved."
+msgstr "جميع الحقوق محفوظة."
+
+#: templates/blog.html:137
+msgid "Latest News & Insights"
+msgstr "آخر الأخبار والرؤى"
+
+#: templates/blog.html:138
+msgid "Stay updated with the latest trends in industrials IoT and technology."
+msgstr "ابق على اطلاع بأحدث الاتجاهات في إنترنت الأشياء الصناعية والتكنولوجيا."
+
+#: templates/blog.html:153 templates/index.html:368
+msgid "Read More"
+msgstr "اقرأ المزيد"
+
+#: templates/contact.html:38
+msgid "Get in Touch"
+msgstr "تواصل معنا"
+
+#: templates/contact.html:39
+msgid "Have a project in mind? We'd love to hear from you."
+msgstr "هل لديك مشروع في ذهنك؟ نحب أن نسمع منك."
+
+#: templates/contact.html:45
+msgid "Full Name"
+msgstr "الاسم الكامل"
+
+#: templates/contact.html:49
+msgid "Email Address"
+msgstr "عنوان البريد الإلكتروني"
+
+#: templates/contact.html:53
+msgid "Subject"
+msgstr "الموضوع"
+
+#: templates/contact.html:57
+msgid "Message"
+msgstr "الرسالة"
+
+#: templates/contact.html:62
+msgid "Send Message"
+msgstr "إرسال الرسالة"
+
+#: templates/index.html:67
+msgid "Innovating the Industry with the Power of IoT"
+msgstr "نبتكر في الصناعة بقوة إنترنت الأشياء"
+
+#: templates/index.html:68
+msgid ""
+"Transforming factories and industries with smart IIoT solutions that "
+"optimize operations and unlock Industry 4.0 potential."
+msgstr ""
+"نحول المصانع والصناعات بحلول إنترنت الأشياء الصناعية الذكية التي تحسن "
+"العمليات وتطلق إمكانات الصناعة 4.0."
+
+#: templates/index.html:70
+msgid "Learn More"
+msgstr "اعرف المزيد"
+
+#: templates/index.html:80 templates/services.html:60
+msgid "Our Services"
+msgstr "خدماتنا"
+
+#: templates/index.html:81
+msgid "Comprehensive Industrial IoT solutions tailored to your needs"
+msgstr "حلول شاملة لإنترنت الأشياء الصناعية مصممة خصيصًا لاحتياجاتك"
+
+#: templates/index.html:88 templates/services.html:87
+msgid "Software Development"
+msgstr "تطوير البرمجيات"
+
+#: templates/index.html:89
+msgid ""
+"Custom software solutions tailored to your business needs with modern "
+"technologies and best practices."
+msgstr "حلول برمجية مخصصة تلبي احتياجات عملك بأحدث التقنيات وأفضل الممارسات."
+
+#: templates/index.html:97 templates/services.html:104
+msgid "Industrial IoT"
+msgstr "إنترنت الأشياء الصناعية"
+
+#: templates/index.html:98
+msgid ""
+"Optimize manufacturing processes with real-time monitoring and predictive"
+" maintenance."
+msgstr "تحسين عمليات التصنيع من خلال المراقبة في الوقت الفعلي والصيانة التنبؤية."
+
+#: templates/index.html:106 templates/services.html:121
+msgid "Factory Machines Real Time Monitoring"
+msgstr "المراقبة الفورية لآلات المصانع"
+
+#: templates/index.html:107
+msgid "Turn data into Monitoring insights with our advanced and smart tools."
+msgstr "حوّل البيانات إلى رؤى مراقبة بأدواتنا الذكية والمتقدمة."
+
+#: templates/index.html:115
+msgid "Industrial IoT Security"
+msgstr "أمن إنترنت الأشياء الصناعية"
+
+#: templates/index.html:116
+msgid ""
+"Protect your connected devices and networks with enterprise-grade "
+"security solutions and threat monitoring."
+msgstr ""
+"احمِ أجهزتك وشبكاتك المتصلة بحلول أمنية على مستوى المؤسسات ومراقبة "
+"التهديدات."
+
+#: templates/index.html:124 templates/services.html:155
+msgid "Predictive Maintenance"
+msgstr "الصيانة التنبؤية"
+
+#: templates/index.html:125
+msgid ""
+"Prevent equipment failures before they occur with AI-powered predictive "
+"analytics and maintenance scheduling."
+msgstr ""
+"امنع أعطال المعدات قبل حدوثها بالتحليلات التنبؤية المدعومة بالذكاء "
+"الاصطناعي وجدولة الصيانة."
+
+#: templates/index.html:133 templates/services.html:172
+msgid "SIRI System Factory Assessment For Industry 4.0"
+msgstr "تقييم المصنع بنظام SIRI للصناعة 4.0"
+
+#: templates/index.html:134
+msgid ""
+"Comprehensive digital readiness assessment using SIRI framework to guide "
+"your Industry 4.0 transformation journey."
+msgstr ""
+"تقييم شامل للجاهزية الرقمية باستخدام إطار عمل SIRI لإرشادك في رحلة التحول"
+" إلى الصناعة 4.0."
+
+#: templates/index.html:150
+msgid "Why Choose IIoT Bay?"
+msgstr "لماذا تختار IIoT Bay؟"
+
+#: templates/index.html:156
+msgid "Expert Team"
+msgstr "فريق خبراء"
+
+#: templates/index.html:157
+msgid ""
+"Our engineers are pioneers in the Industrial IoT space with years of "
+"experience."
+msgstr "مهندسونا رواد في مجال إنترنت الأشياء الصناعية بخبرة تمتد لسنوات."
+
+#: templates/index.html:165
+msgid "Secure by Design"
+msgstr "آمن بالتصميم"
+
+#: templates/index.html:166
+msgid ""
+"Security is not an afterthought. We build it into every layer of our "
+"solutions."
+msgstr "الأمن ليس فكرة لاحقة. نبنيه في كل طبقة من حلولنا."
+
+#: templates/index.html:174
+msgid "24/7 Support"
+msgstr "دعم على مدار الساعة"
+
+#: templates/index.html:175
+msgid "We are always here to help you ensure your systems run smoothly."
+msgstr "نحن دائمًا هنا لمساعدتك في ضمان عمل أنظمتك بسلاسة."
+
+#: templates/index.html:187
+msgid "Our Partners"
+msgstr "شركاؤنا"
+
+#: templates/index.html:188
+msgid "Trusted by industry leaders across the region"
+msgstr "موثوق من قبل قادة الصناعة في المنطقة"
+
+#: templates/index.html:227
+msgid "Latest Insights"
+msgstr "أحدث الرؤى"
+
+#: templates/index.html:228
+msgid "Explore our latest articles on Industrial IoT and Industry 4.0"
+msgstr "استكشف أحدث مقالاتنا حول إنترنت الأشياء الصناعية والصناعة 4.0"
+
+#: templates/index.html:382
+msgid "Previous"
+msgstr "السابق"
+
+#: templates/index.html:386
+msgid "Next"
+msgstr "التالي"
+
+#: templates/index.html:391
+msgid "View All Posts"
+msgstr "عرض جميع المقالات"
+
+#: templates/index.html:395
+msgid "No blog posts available at the moment."
+msgstr "لا توجد مقالات متاحة في الوقت الحالي."
+
+#: templates/index.html:404
+msgid "Ready to Transform Your Business?"
+msgstr "هل أنت مستعد لتحويل عملك؟"
+
+#: templates/index.html:405
+msgid "Let's discuss how Industrial IoT can drive growth for your factory."
+msgstr "دعنا نناقش كيف يمكن لإنترنت الأشياء الصناعي أن يحفز النمو لمصنعك."
+
+#: templates/index.html:406
+msgid "Contact Us Today"
+msgstr "اتصل بنا اليوم"
+
+#: templates/services.html:61
+msgid "Comprehensive IoT services built to scale and secure your operations."
+msgstr "خدمات إنترنت الأشياء الشاملة المصممة لتوسيع نطاق عملياتك وتأمينها."
+
+#: templates/services.html:63
+msgid "Read Our Blog"
+msgstr "اقرأ مدونتنا"
+
+#: templates/services.html:73
+msgid "What We Offer"
+msgstr "ما نقدمه"
+
+#: templates/services.html:74
+msgid "Tailored services to meet your IoT transformation goals"
+msgstr "خدمات مصممة خصيصًا لتلبية أهداف تحول إنترنت الأشياء الخاصة بك"
+
+#: templates/services.html:88
+msgid ""
+"Custom software solutions tailored to your business needs with modern "
+"technologies and best practices. From web applications to enterprise "
+"systems, we deliver scalable and maintainable code."
+msgstr ""
+"حلول برمجية مخصصة تلبي احتياجات عملك بأحدث التقنيات وأفضل الممارسات. من "
+"تطبيقات الويب إلى أنظمة المؤسسات، نقدم كودًا قابلاً للتوسع والصيانة."
+
+#: templates/services.html:105
+msgid ""
+"Optimize manufacturing processes with real-time monitoring and predictive"
+" maintenance. Connect your factory floor to the cloud for enhanced "
+"visibility and operational efficiency."
+msgstr ""
+"تحسين عمليات التصنيع من خلال المراقبة في الوقت الفعلي والصيانة التنبؤية. "
+"ربط أرضية مصنعك بالسحابة لتحسين الرؤية والكفاءة التشغيلية."
+
+#: templates/services.html:122
+msgid ""
+"Turn data into monitoring insights with our advanced and smart tools. "
+"Real-time dashboards provide instant visibility into machine performance "
+"and production metrics."
+msgstr ""
+"حوّل البيانات إلى رؤى مراقبة بأدواتنا الذكية والمتقدمة. توفر لوحات المعلومات "
+"في الوقت الفعلي رؤية فورية لأداء الآلات ومقاييس الإنتاج."
+
+#: templates/services.html:138
+msgid "IoT Security"
+msgstr "أمن إنترنت الأشياء"
+
+#: templates/services.html:139
+msgid ""
+"Protect your connected devices and networks with enterprise-grade "
+"security solutions and threat monitoring. Comprehensive security "
+"assessments and implementations safeguard your IoT infrastructure."
+msgstr ""
+"احمِ أجهزتك وشبكاتك المتصلة بحلول أمنية على مستوى المؤسسات ومراقبة "
+"التهديدات. تضمن التقييمات الأمنية الشاملة والتنفيذات حماية البنية التحتية"
+" لإنترنت الأشياء الخاصة بك."
+
+#: templates/services.html:156
+msgid ""
+"Prevent equipment failures before they occur with AI-powered predictive "
+"analytics and maintenance scheduling. Leverage sensor data and machine "
+"learning to reduce downtime and extend asset life."
+msgstr ""
+"امنع أعطال المعدات قبل حدوثها بالتحليلات التنبؤية المدعومة بالذكاء الاصطناعي "
+"وجدولة الصيانة. استفد من بيانات المستشعرات والتعلم الآلي لتقليل وقت التعطيل "
+"وإطالة عمر الأصول."
+
+#: templates/services.html:173
+msgid ""
+"Comprehensive digital readiness assessment using SIRI framework to guide "
+"your Industry 4.0 transformation journey. Evaluate your current state and"
+" develop a roadmap for smart manufacturing."
+msgstr ""
+"تقييم شامل للجاهزية الرقمية باستخدام إطار عمل SIRI لإرشادك في رحلة التحول "
+"إلى الصناعة 4.0. قيّم حالتك الحالية وطوّر خارطة طريق للتصنيع الذكي."
+
+#: templates/services.html:187
+msgid "Contact our team to schedule an assessment or pilot."
+msgstr "اتصل بفريقنا لجدولة تقييم أو تجريبي."
+
+#: templates/terms.html:16
+msgid "Terms and Conditions"
+msgstr "الشروط والأحكام"
+
+#: templates/terms.html:17
+msgid "Last Updated: December 1, 2025"
+msgstr "آخر تحديث: 1 ديسمبر 2025"
+
+#: templates/terms.html:21
+msgid "1. Introduction"
+msgstr "1. المقدمة"
+
+#: templates/terms.html:22
+msgid ""
+"Welcome to IIoT Bay. These Terms and Conditions govern your use of our "
+"website and services. By accessing or using our services, you agree to be"
+" bound by these terms."
+msgstr ""
+"مرحبًا بك في IIoT Bay. تحكم هذه الشروط والأحكام استخدامك لموقعنا "
+"الإلكتروني وخدماتنا. من خلال الوصول إلى خدماتنا أو استخدامها، فإنك توافق "
+"على الالتزام بهذه الشروط."
+
+#: templates/terms.html:125
+msgid "12. Contact Information"
+msgstr "12. معلومات الاتصال"
+
+#: templates/terms.html:126
+msgid ""
+"If you have any questions about these Terms and Conditions, please "
+"contact us:"
+msgstr "إذا كان لديك أي أسئلة حول هذه الشروط والأحكام، يرجى الاتصال بنا:"
+
+#: templates/terms.html:137
+msgid "Note:"
+msgstr "ملاحظة:"
+
+#: templates/terms.html:137
+msgid ""
+"By using our services, you acknowledge that you have read, understood, "
+"and agree to be bound by these Terms and Conditions."
+msgstr ""
+"باستخدام خدماتنا، فإنك تقر بأنك قد قرأت وفهمت ووافقت على الالتزام بهذه "
+"الشروط والأحكام."
+
+#: templates/terms.html:141
+msgid "Have Questions? Contact Us"
+msgstr "هل لديك أسئلة؟ اتصل بنا"
+

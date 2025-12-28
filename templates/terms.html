@@ -13,13 +13,13 @@
     <article>
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <h1 class="section-title gradient-text title-underline mb-4">Terms and Conditions</h1>
-            <p class="text-muted mb-4"><small><time datetime="2025-12-01">Last Updated: December 1, 2025</time></small></p>
+            <h1 class="section-title gradient-text title-underline mb-4">{{ _('Terms and Conditions') }}</h1>
+            <p class="text-muted mb-4"><small><time datetime="2025-12-01">{{ _('Last Updated: December 1, 2025') }}</time></small></p>
 
             <section class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
-                    <h2 class="h5 gradient-text mb-3">1. Introduction</h2>
-                    <p class="text-muted">Welcome to IIoT Bay. These Terms and Conditions govern your use of our website and services. By accessing or using our services, you agree to be bound by these terms.</p>
+                    <h2 class="h5 gradient-text mb-3">{{ _('1. Introduction') }}</h2>
+                    <p class="text-muted">{{ _('Welcome to IIoT Bay. These Terms and Conditions govern your use of our website and services. By accessing or using our services, you agree to be bound by these terms.') }}</p>
                 </div>
             </section>
 
@@ -122,8 +122,8 @@
 
             <section class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
-                    <h2 class="h5 gradient-text mb-3">12. Contact Information</h2>
-                    <p class="text-muted mb-2">If you have any questions about these Terms and Conditions, please contact us:</p>
+                    <h2 class="h5 gradient-text mb-3">{{ _('12. Contact Information') }}</h2>
+                    <p class="text-muted mb-2">{{ _('If you have any questions about these Terms and Conditions, please contact us:') }}</p>
                     <ul class="text-muted list-unstyled">
                         <li><i class="fas fa-envelope me-2"></i>Email: <a href="mailto:legal@iiot-bay.com" class="gradient-text">legal@iiot-bay.com</a></li>
                         <li><i class="fas fa-phone me-2"></i>Phone: +966 XX XXX XXXX</li>
@@ -134,11 +134,11 @@
 
             <div class="alert alert-info mt-4" role="note">
                 <i class="fas fa-info-circle me-2" aria-hidden="true"></i>
-                <strong>Note:</strong> By using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.
+                <strong>{{ _('Note:') }}</strong> {{ _('By using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.') }}
             </div>
 
             <div class="text-center mt-5">
-                <a href="{{ url_for('contact') }}" class="btn btn-gradient">Have Questions? Contact Us</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-gradient">{{ _('Have Questions? Contact Us') }}</a>
             </div>
         </div>
     </div>

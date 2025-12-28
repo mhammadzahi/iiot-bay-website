@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ get_locale() }}" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
@@ -142,22 +142,36 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                        <a class="nav-link" href="{{ url_for('index') }}">{{ _('Home') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                        <a class="nav-link" href="{{ url_for('about') }}">{{ _('About') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('services') }}">Services</a>
+                        <a class="nav-link" href="{{ url_for('services') }}">{{ _('Services') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('blog') }}">Blog</a>
+                        <a class="nav-link" href="{{ url_for('blog') }}">{{ _('Blog') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                        <a class="nav-link" href="{{ url_for('contact') }}">{{ _('Contact') }}</a>
                     </li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-gradient btn-sm mt-1 mt-lg-0" href="{{ url_for('contact') }}">Get Started</a>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-outline-light btn-sm language-toggle" 
+                           href="{{ url_for('set_language', lang='ar' if get_locale() == 'en' else 'en') }}"
+                           aria-label="{{ _('Switch language') }}"
+                           style="display: flex; align-items: center; gap: 8px; padding: 0.5rem 1rem !important; margin-top: -4px;">
+                            {% if get_locale() == 'en' %}
+                                <span style="font-size: 2.2em; line-height: 1; display: flex;">🇸🇦</span>
+                                <span>العربية</span>
+                            {% else %}
+                                <span style="font-size: 2.2em; line-height: 1; display: flex;">🇬🇧</span>
+                                <span>English</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-gradient btn-sm mt-1 mt-lg-0" href="{{ url_for('contact') }}">{{ _('Get Started') }}</a>
                     </li>
                 </ul>
             </div>
@@ -181,9 +195,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <h5 class="fw-bold mb-3">IIoT Bay</h5>
-                    <p class="text-muted">Connecting the world, one device at a time. We provide cutting-edge industrial
-                        IoT
-                        solutions for homes and industries.</p>
+                    <p class="text-muted">{{ _('Connecting the world, one device at a time. We provide cutting-edge industrial IoT solutions for homes and industries.') }}</p>
                     <div class="mt-4">
                         <!-- <a href="https://instagram.com/iiot-bay" target="_blank" rel="noopener noreferrer"
                             class="social-icon me-3" aria-label="Follow us on Instagram"><i class="fab fa-instagram"
@@ -212,29 +224,29 @@
                     </div>
                 </div>
                 <div class="col-md-2 mb-4">
-                    <h6 class="fw-bold mb-3">Links</h6>
+                    <h6 class="fw-bold mb-3">{{ _('Links') }}</h6>
                     <ul class="list-unstyled">
-                        <li><a href="{{ url_for('index') }}" class="footer-link">Home</a></li>
-                        <li><a href="{{ url_for('about') }}" class="footer-link">About</a></li>
-                        <li><a href="{{ url_for('services') }}" class="footer-link">Services</a></li>
-                        <li><a href="{{ url_for('blog') }}" class="footer-link">Blog</a></li>
-                        <li><a href="{{ url_for('contact') }}" class="footer-link">Contact</a></li>
-                        <li><a href="{{ url_for('terms') }}" class="footer-link">Terms & Conditions</a></li>
+                        <li><a href="{{ url_for('index') }}" class="footer-link">{{ _('Home') }}</a></li>
+                        <li><a href="{{ url_for('about') }}" class="footer-link">{{ _('About') }}</a></li>
+                        <li><a href="{{ url_for('services') }}" class="footer-link">{{ _('Services') }}</a></li>
+                        <li><a href="{{ url_for('blog') }}" class="footer-link">{{ _('Blog') }}</a></li>
+                        <li><a href="{{ url_for('contact') }}" class="footer-link">{{ _('Contact') }}</a></li>
+                        <li><a href="{{ url_for('terms') }}" class="footer-link">{{ _('Terms & Conditions') }}</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <h6 class="fw-bold mb-3">Contact</h6>
+                    <h6 class="fw-bold mb-3">{{ _('Contact') }}</h6>
                     <ul class="list-unstyled text-muted">
-                        <li><i class="fas fa-map-marker-alt me-2"></i>Riyadh, Saudi Arabia</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>{{ _('Riyadh, Saudi Arabia') }}</li>
                         <li><i class="fas fa-envelope me-2"></i>hello@iiot-bay.com</li>
                         <li><i class="fas fa-phone me-2"></i>+971 50 926 7545</li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <h6 class="fw-bold mb-3">Join our weekly newsletter</h6>
+                    <h6 class="fw-bold mb-3">{{ _('Join our weekly newsletter') }}</h6>
                     <form id="newsletter-form">
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control border-secondary" placeholder="Email" name="email"
+                            <input type="email" class="form-control border-secondary" placeholder="{{ _('Email') }}" name="email"
                                 required>
                             <button class="btn btn-gradient" type="button" id="newsletter-submit"><i
                                     class="fas fa-paper-plane"></i></button>
@@ -244,7 +256,7 @@
             </div>
             <hr class="my-4">
             <div class="text-center text-muted">
-                <small>&copy; 2025 IIoT Bay. All rights reserved.</small>
+                <small>&copy; 2025 IIoT Bay. {{ _('All rights reserved.') }}</small>
             </div>
         </div>
     </footer>
