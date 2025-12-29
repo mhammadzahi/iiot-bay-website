@@ -20,8 +20,8 @@ def get_locale():
     if lang in app.config['BABEL_SUPPORTED_LOCALES']:
         return lang
     
-    # 2. Check Accept-Language header
-    return request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES']) or app.config['BABEL_DEFAULT_LOCALE']
+    # 2. Default to Arabic (ignore browser preferences)
+    return app.config['BABEL_DEFAULT_LOCALE']
 
 
 babel.init_app(app, locale_selector=get_locale)
