@@ -7,7 +7,7 @@ from markupsafe import escape
 
 
 app = Flask(__name__)
-app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+app.config['BABEL_DEFAULT_LOCALE'] = 'ar'
 app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'ar']
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
 
