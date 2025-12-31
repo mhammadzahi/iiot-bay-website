@@ -187,35 +187,154 @@
             <h2 id="partners-heading" class="section-title gradient-text">{{ _('Our Partners') }}</h2>
             <p class="text-muted">{{ _('Trusted by industry leaders across the region') }}</p>
         </div>
-        <div class="row g-4 align-items-center justify-content-center">
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="partner-logo-wrapper">
-                    <a href="https://www.aramco.com" target="_blank" rel="noopener noreferrer" title="Aramco - Saudi Arabian Oil Company - Official Website" aria-label="Visit Aramco partner website">
-                        <img src="{{ url_for('static', filename='img/partners/aramco.webp') }}" alt="Aramco - Saudi Arabian Oil Company partner" class="partner-logo" loading="lazy">
-                    </a>
+        
+        <style>
+            .partners-carousel .carousel-item {
+                transition: transform 0.6s ease-in-out;
+            }
+            
+            .partners-carousel .partner-logo-item {
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                height: 120px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+            
+            .partners-carousel .partner-logo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 173, 181, 0.2);
+            }
+            
+            .partners-carousel .partner-logo-item img {
+                max-height: 80px;
+                width: auto;
+                object-fit: contain;
+                filter: grayscale(0);
+            }
+            
+            .partners-carousel .carousel-control-prev,
+            .partners-carousel .carousel-control-next {
+                width: 50px;
+                height: 50px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+                border-radius: 50%;
+                opacity: 1;
+                transition: all 0.3s ease;
+            }
+            
+            .partners-carousel .carousel-control-prev {
+                left: -60px;
+            }
+            
+            .partners-carousel .carousel-control-next {
+                right: -60px;
+            }
+            
+            .partners-carousel .carousel-control-prev:hover,
+            .partners-carousel .carousel-control-next:hover {
+                transform: translateY(-50%) scale(1.1);
+                box-shadow: 0 8px 20px rgba(0, 173, 181, 0.3);
+            }
+            
+            .partners-carousel .carousel-control-prev-icon,
+            .partners-carousel .carousel-control-next-icon {
+                width: 24px;
+                height: 24px;
+                filter: brightness(0) invert(1);
+            }
+            
+            @media (max-width: 1200px) {
+                .partners-carousel .carousel-control-prev {
+                    left: -25px;
+                }
+                .partners-carousel .carousel-control-next {
+                    right: -25px;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .partners-carousel .carousel-control-prev,
+                .partners-carousel .carousel-control-next {
+                    width: 40px;
+                    height: 40px;
+                }
+                .partners-carousel .carousel-control-prev {
+                    left: -15px;
+                }
+                .partners-carousel .carousel-control-next {
+                    right: -15px;
+                }
+            }
+        </style>
+        
+        <div id="partnersCarousel" class="carousel slide partners-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row g-4 align-items-center justify-content-center">
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item">
+                                <img src="{{ url_for('static', filename='img/clients-logos/download-removebg-preview.png') }}" alt="Partner logo" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item">
+                                <img src="{{ url_for('static', filename='img/clients-logos/NDLB.png') }}" alt="NDLB partner" loading="lazy" style="transform: scale(1.4);">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item">
+                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (1).png') }}" alt="Partner logo" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item">
+                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (2).png') }}" alt="Partner logo" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row g-4 align-items-center justify-content-center">
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item">
+                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (3).png') }}" alt="Partner logo" loading="lazy" style="transform: scale(2);">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item">
+                                <img src="{{ url_for('static', filename='img/clients-logos/incit-logo-new-footer-removebg-preview.png') }}" alt="INCIT partner" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item" style="overflow: hidden;">
+                                <img src="{{ url_for('static', filename='img/clients-logos/KACSTLogo_1_3.png') }}" alt="KACST partner" loading="lazy" style="transform: scale(2);">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="partner-logo-item" style="overflow: hidden;">
+                                <img src="{{ url_for('static', filename='img/clients-logos/vVEMa7xv_400x400-removebg-preview.png') }}" alt="Partner logo" loading="lazy" style="transform: scale(1.6);">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="partner-logo-wrapper">
-                    <a href="https://www.sabic.com" target="_blank" rel="noopener noreferrer" title="SABIC - Saudi Basic Industries Corporation - Official Website" aria-label="Visit SABIC partner website">
-                        <img src="{{ url_for('static', filename='img/partners/sabic.webp') }}" alt="SABIC - Saudi Basic Industries Corporation partner" class="partner-logo" loading="lazy">
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="partner-logo-wrapper">
-                    <a href="https://www.maaden.com" target="_blank" rel="noopener noreferrer" title="Ma'aden - Saudi Arabian Mining Company - Official Website" aria-label="Visit Ma'aden partner website">
-                        <img src="{{ url_for('static', filename='img/partners/maaden.webp') }}" alt="Ma'aden - Saudi Arabian Mining Company partner" class="partner-logo" loading="lazy">
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="partner-logo-wrapper">
-                    <a href="https://www.se.com.sa" target="_blank" rel="noopener noreferrer" title="SEC - Saudi Electricity Company - Official Website" aria-label="Visit SEC partner website">
-                        <img src="{{ url_for('static', filename='img/partners/sec.webp') }}" alt="SEC - Saudi Electricity Company partner" class="partner-logo" loading="lazy">
-                    </a>
-                </div>
-            </div>
+            
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">{{ _('Previous') }}</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">{{ _('Next') }}</span>
+            </button>
         </div>
     </div>
 </section>
