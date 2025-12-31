@@ -208,7 +208,7 @@
                 justify-content: center;
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 position: relative;
-                overflow: hidden;
+                overflow: visible;
                 border: 2px solid transparent;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             }
@@ -303,8 +303,8 @@
             }
         </style>
         
-        <div id="partnersCarousel" class="carousel slide partners-carousel" data-bs-ride="carousel" data-bs-interval="4000" aria-label="Partner organizations carousel">
-            <div class="carousel-inner">
+        <div id="partnersCarousel" class="carousel slide partners-carousel" data-bs-ride="carousel" data-bs-interval="4000" aria-label="Partner organizations carousel" style="overflow: visible;">
+            <div class="carousel-inner" style="overflow: visible;">
                 <div class="carousel-item active" role="group" aria-label="Partners slide 1 of 2">
                     <div class="row g-4 align-items-center justify-content-center">
                         <div class="col-6 col-md-4 col-lg-3">
