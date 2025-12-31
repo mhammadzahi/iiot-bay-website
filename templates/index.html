@@ -181,7 +181,7 @@
 </section>
 
 <!-- Our Partners Section -->
-<section class="section-padding" style="background-color: #ffffff;" aria-labelledby="partners-heading">
+<section class="section-padding" style="background-color: #ffffff;" aria-labelledby="partners-heading" itemscope itemtype="https://schema.org/Organization">
     <div class="container">
         <div class="text-center mb-5">
             <h2 id="partners-heading" class="section-title gradient-text">{{ _('Our Partners') }}</h2>
@@ -189,152 +189,213 @@
         </div>
         
         <style>
+            .partners-carousel {
+                position: relative;
+                padding: 20px 0;
+            }
+            
             .partners-carousel .carousel-item {
-                transition: transform 0.6s ease-in-out;
+                transition: transform 0.8s ease-in-out;
             }
             
             .partners-carousel .partner-logo-item {
-                background-color: white;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-                height: 120px;
+                background: linear-gradient(145deg, #ffffff, #f8f9fa);
+                padding: 25px;
+                border-radius: 16px;
+                height: 140px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: all 0.3s ease;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+                border: 2px solid transparent;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            }
+            
+            .partners-carousel .partner-logo-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+                opacity: 0;
+                transition: opacity 0.4s ease;
+                border-radius: 16px;
+                z-index: 1;
+            }
+            
+            .partners-carousel .partner-logo-item::after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                right: 2px;
+                bottom: 2px;
+                background: white;
+                border-radius: 14px;
+                z-index: 2;
+                transition: all 0.4s ease;
             }
             
             .partners-carousel .partner-logo-item:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 20px rgba(0, 173, 181, 0.2);
+                transform: translateY(-10px) scale(1.03);
+                box-shadow: 0 15px 40px rgba(0, 173, 181, 0.25);
+                border-color: transparent;
+            }
+            
+            .partners-carousel .partner-logo-item:hover::before {
+                opacity: 1;
             }
             
             .partners-carousel .partner-logo-item img {
-                max-height: 80px;
+                max-height: 90px;
+                max-width: 100%;
                 width: auto;
+                height: auto;
                 object-fit: contain;
                 filter: grayscale(0);
-            }
-            
-            .partners-carousel .carousel-control-prev,
-            .partners-carousel .carousel-control-next {
-                width: 50px;
-                height: 50px;
-                top: 50%;
-                transform: translateY(-50%);
-                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
-                border-radius: 50%;
-                opacity: 1;
+                position: relative;
+                z-index: 3;
                 transition: all 0.3s ease;
             }
             
-            .partners-carousel .carousel-control-prev {
-                left: -60px;
+            .partners-carousel .partner-logo-item:hover img {
+                filter: brightness(1.1);
+                transform: scale(1.05);
             }
             
-            .partners-carousel .carousel-control-next {
-                right: -60px;
+            /* Carousel Indicators */
+            .partners-carousel .carousel-indicators {
+                bottom: -45px;
+                margin-bottom: 0;
             }
             
-            .partners-carousel .carousel-control-prev:hover,
-            .partners-carousel .carousel-control-next:hover {
-                transform: translateY(-50%) scale(1.1);
-                box-shadow: 0 8px 20px rgba(0, 173, 181, 0.3);
+            .partners-carousel .carousel-indicators [data-bs-target] {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: #d1d5db;
+                border: none;
+                opacity: 1;
+                transition: all 0.3s ease;
+                margin: 0 6px;
             }
             
-            .partners-carousel .carousel-control-prev-icon,
-            .partners-carousel .carousel-control-next-icon {
-                width: 24px;
-                height: 24px;
-                filter: brightness(0) invert(1);
+            .partners-carousel .carousel-indicators .active {
+                width: 32px;
+                border-radius: 6px;
+                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
             }
             
-            @media (max-width: 1200px) {
-                .partners-carousel .carousel-control-prev {
-                    left: -25px;
-                }
-                .partners-carousel .carousel-control-next {
-                    right: -25px;
-                }
-            }
-            
+            /* Responsive Design */
             @media (max-width: 768px) {
-                .partners-carousel .carousel-control-prev,
-                .partners-carousel .carousel-control-next {
-                    width: 40px;
-                    height: 40px;
+                .partners-carousel .partner-logo-item {
+                    height: 120px;
+                    padding: 20px;
                 }
-                .partners-carousel .carousel-control-prev {
-                    left: -15px;
-                }
-                .partners-carousel .carousel-control-next {
-                    right: -15px;
+                
+                .partners-carousel .partner-logo-item img {
+                    max-height: 70px;
                 }
             }
         </style>
         
-        <div id="partnersCarousel" class="carousel slide partners-carousel" data-bs-ride="carousel">
+        <div id="partnersCarousel" class="carousel slide partners-carousel" data-bs-ride="carousel" data-bs-interval="4000" aria-label="Partner organizations carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div class="carousel-item active" role="group" aria-label="Partners slide 1 of 2">
                     <div class="row g-4 align-items-center justify-content-center">
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item">
-                                <img src="{{ url_for('static', filename='img/clients-logos/download-removebg-preview.png') }}" alt="Partner logo" loading="lazy">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization">
+                                <img src="{{ url_for('static', filename='img/clients-logos/download-removebg-preview.png') }}" 
+                                     alt="Saudi Arabian Government Partner - Ministry or Organization Logo" 
+                                     title="Trusted Government Partner"
+                                     itemprop="logo"
+                                     loading="lazy">
                             </div>
                         </div>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item">
-                                <img src="{{ url_for('static', filename='img/clients-logos/NDLB.png') }}" alt="NDLB partner" loading="lazy" style="transform: scale(1.4);">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization">
+                                <img src="{{ url_for('static', filename='img/clients-logos/NDLB.png') }}" 
+                                     alt="NDLB - National Digital Learning and Business Partner Saudi Arabia" 
+                                     title="NDLB Strategic Partner"
+                                     itemprop="logo"
+                                     loading="lazy" 
+                                     style="transform: scale(1.4);">
                             </div>
                         </div>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item">
-                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (1).png') }}" alt="Partner logo" loading="lazy">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization">
+                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (1).png') }}" 
+                                     alt="Saudi Technology and Innovation Partner Organization" 
+                                     title="Innovation Partner"
+                                     itemprop="logo"
+                                     loading="lazy">
                             </div>
                         </div>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item">
-                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (2).png') }}" alt="Partner logo" loading="lazy">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization">
+                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (2).png') }}" 
+                                     alt="Saudi Industrial Development Partner - Manufacturing and IIoT Solutions" 
+                                     title="Industrial Development Partner"
+                                     itemprop="logo"
+                                     loading="lazy">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" role="group" aria-label="Partners slide 2 of 2">
                     <div class="row g-4 align-items-center justify-content-center">
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item">
-                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (3).png') }}" alt="Partner logo" loading="lazy" style="transform: scale(2);">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization">
+                                <img src="{{ url_for('static', filename='img/clients-logos/images-removebg-preview (3).png') }}" 
+                                     alt="Saudi Research and Development Partner Organization" 
+                                     title="R&D Strategic Partner"
+                                     itemprop="logo"
+                                     loading="lazy" 
+                                     style="transform: scale(2);">
                             </div>
                         </div>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item">
-                                <img src="{{ url_for('static', filename='img/clients-logos/incit-logo-new-footer-removebg-preview.png') }}" alt="INCIT partner" loading="lazy">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization">
+                                <img src="{{ url_for('static', filename='img/clients-logos/incit-logo-new-footer-removebg-preview.png') }}" 
+                                     alt="INCIT - Innovation and Entrepreneurship Institute Partner Saudi Arabia" 
+                                     title="INCIT Innovation Partner"
+                                     itemprop="logo"
+                                     loading="lazy">
                             </div>
                         </div>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item" style="overflow: hidden;">
-                                <img src="{{ url_for('static', filename='img/clients-logos/KACSTLogo_1_3.png') }}" alt="KACST partner" loading="lazy" style="transform: scale(2);">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization" style="overflow: hidden;">
+                                <img src="{{ url_for('static', filename='img/clients-logos/KACSTLogo_1_3.png') }}" 
+                                     alt="KACST - King Abdulaziz City for Science and Technology Partner" 
+                                     title="KACST Research Partner"
+                                     itemprop="logo"
+                                     loading="lazy" 
+                                     style="transform: scale(2);">
                             </div>
                         </div>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="partner-logo-item" style="overflow: hidden;">
-                                <img src="{{ url_for('static', filename='img/clients-logos/vVEMa7xv_400x400-removebg-preview.png') }}" alt="Partner logo" loading="lazy" style="transform: scale(1.6);">
+                            <div class="partner-logo-item" itemprop="partner" itemscope itemtype="https://schema.org/Organization" style="overflow: hidden;">
+                                <img src="{{ url_for('static', filename='img/clients-logos/vVEMa7xv_400x400-removebg-preview.png') }}" 
+                                     alt="Saudi Digital Transformation and Technology Partner" 
+                                     title="Digital Transformation Partner"
+                                     itemprop="logo"
+                                     loading="lazy" 
+                                     style="transform: scale(1.6);">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">{{ _('Previous') }}</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">{{ _('Next') }}</span>
-            </button>
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#partnersCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Show partners slide 1"></button>
+                <button type="button" data-bs-target="#partnersCarousel" data-bs-slide-to="1" aria-label="Show partners slide 2"></button>
+            </div>
         </div>
     </div>
 </section>
