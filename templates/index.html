@@ -467,61 +467,27 @@
                 padding: 1.5rem;
             }
             
-            /* Custom Carousel Controls */
-            .blog-carousel .carousel-control-prev,
-            .blog-carousel .carousel-control-next {
-                width: 50px;
-                height: 50px;
-                top: 50%;
-                transform: translateY(-50%);
-                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+            /* Carousel Indicators */
+            .blog-carousel .carousel-indicators {
+                bottom: -45px;
+                margin-bottom: 0;
+            }
+            
+            .blog-carousel .carousel-indicators [data-bs-target] {
+                width: 12px;
+                height: 12px;
                 border-radius: 50%;
+                background-color: #d1d5db;
+                border: none;
                 opacity: 1;
                 transition: all 0.3s ease;
+                margin: 0 6px;
             }
             
-            .blog-carousel .carousel-control-prev {
-                left: -60px;
-            }
-            
-            .blog-carousel .carousel-control-next {
-                right: -60px;
-            }
-            
-            .blog-carousel .carousel-control-prev:hover,
-            .blog-carousel .carousel-control-next:hover {
-                transform: translateY(-50%) scale(1.1);
-                box-shadow: 0 8px 20px rgba(0, 173, 181, 0.3);
-            }
-            
-            .blog-carousel .carousel-control-prev-icon,
-            .blog-carousel .carousel-control-next-icon {
-                width: 24px;
-                height: 24px;
-                filter: brightness(0) invert(1);
-            }
-            
-            @media (max-width: 1200px) {
-                .blog-carousel .carousel-control-prev {
-                    left: -25px;
-                }
-                .blog-carousel .carousel-control-next {
-                    right: -25px;
-                }
-            }
-            
-            @media (max-width: 768px) {
-                .blog-carousel .carousel-control-prev,
-                .blog-carousel .carousel-control-next {
-                    width: 40px;
-                    height: 40px;
-                }
-                .blog-carousel .carousel-control-prev {
-                    left: -15px;
-                }
-                .blog-carousel .carousel-control-next {
-                    right: -15px;
-                }
+            .blog-carousel .carousel-indicators .active {
+                width: 32px;
+                border-radius: 6px;
+                background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
             }
         </style>
         <div id="blogPostsCarousel" class="carousel slide blog-carousel" data-bs-ride="carousel">
@@ -555,16 +521,13 @@
                 {% endfor %}
             </div>
             
-            <!-- Carousel Controls -->
+            <!-- Carousel Indicators -->
             {% if random_posts|length > 3 %}
-            <button class="carousel-control-prev" type="button" data-bs-target="#blogPostsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">{{ _('Previous') }}</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#blogPostsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">{{ _('Next') }}</span>
-            </button>
+            <div class="carousel-indicators">
+                {% for i in range(0, random_posts|length, 3) %}
+                <button type="button" data-bs-target="#blogPostsCarousel" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %}class="active" aria-current="true"{% endif %} aria-label="Show blog posts slide {{ loop.index }}"></button>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
         <div class="text-center mt-4">
