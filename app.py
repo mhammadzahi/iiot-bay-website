@@ -192,7 +192,7 @@ def contact():
 def sitemap():
     # Get current date for static pages
     today = datetime.now().strftime('%Y-%m-%d')
-    dates_ = ['2025-12-23', '2025-12-15', '2025-12-17', '2025-12-09', '2025-12-15', '2025-12-18', '2025-12-13']
+    dates_ = ['2025-12-23', '2025-12-15', '2025-12-17', '2025-12-09', '2025-01-03', '2025-12-18', '2025-12-13']
 
     
     # Define static pages with lastmod
