@@ -539,6 +539,30 @@ msgstr "تبديل اللغة"
 msgid "Get Started"
 msgstr "ابدأ الآن"
 
+#: templates/index.html:70
+msgid "Get Started with IoT Solutions"
+msgstr "ابدأ مع حلول إنترنت الأشياء"
+
+#: templates/index.html:71
+msgid "Learn More About Us"
+msgstr "تعرف على المزيد عنا"
+
+#: templates/services.html:62
+msgid "Get Started with IIoT"
+msgstr "ابدأ مع إنترنت الأشياء الصناعية"
+
+#: templates/services.html:188
+msgid "Contact Us for IoT Services"
+msgstr "اتصل بنا للحصول على خدمات إنترنت الأشياء"
+
+#: templates/about.html:151
+msgid "Contact Us Today"
+msgstr "اتصل بنا اليوم"
+
+#: templates/index.html:547
+msgid "Contact Us for IoT Consultation"
+msgstr "اتصل بنا للحصول على استشارة إنترنت الأشياء"
+
 #: templates/base.html:191
 msgid ""
 "Connecting the world, one device at a time. We provide cutting-edge "
@@ -578,6 +602,10 @@ msgstr "آخر الأخبار والرؤى"
 #: templates/blog.html:138
 msgid "Stay updated with the latest trends in industrials IoT and technology."
 msgstr "ابق على اطلاع بأحدث الاتجاهات في إنترنت الأشياء الصناعية والتكنولوجيا."
+
+#: templates/blog.html:153 templates/contact.html:151 templates/index.html:514
+msgid "Read article"
+msgstr "اقرأ المقال"
 
 #: templates/blog.html:153 templates/index.html:368
 msgid "Read More"

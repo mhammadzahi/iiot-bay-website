@@ -59,8 +59,8 @@
             <div class="col-lg-8">
                 <h1 id="services-hero-heading" class="gradient-text">{{ _('Our Services') }}</h1>
                 <p class="lead mb-4">{{ _('Comprehensive IoT services built to scale and secure your operations.') }}</p>
-                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3">{{ _('Get Started') }}</a>
-                <a href="{{ url_for('blog') }}" class="btn btn-outline-light btn-lg">{{ _('Read Our Blog') }}</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3" aria-label="Contact us to get started with IIoT services">{{ _('Get Started with IIoT') }}</a>
+                <a href="{{ url_for('blog') }}" class="btn btn-outline-light btn-lg" aria-label="Read IIoT Bay blog articles">{{ _('Read Our Blog') }}</a>
             </div>
         </div>
     </div>
@@ -185,7 +185,7 @@
     <div class="container">
         <h2 class="gradient-text mb-3">{{ _('Ready to start?') }}</h2>
         <p class="text-black-50 mb-4">{{ _('Contact our team to schedule an assessment or pilot.') }}</p>
-        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg">{{ _('Contact Us') }}</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg" aria-label="Contact IIoT Bay for IoT services">{{ _('Contact Us for IoT Services') }}</a>
     </div>
 </section>
 

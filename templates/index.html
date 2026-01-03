@@ -66,8 +66,8 @@
             <div class="col-lg-8">
                 <h1 id="hero-heading">{{ _('Innovating the Industry with the Power of IoT') }}</h1>
                 <p class="lead mb-4">{{ _('Transforming factories and industries with smart IIoT solutions that optimize operations and unlock Industry 4.0 potential.') }}</p>
-                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3">{{ _('Get Started') }}</a>
-                <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-lg">{{ _('Learn More') }}</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg me-3" aria-label="Contact IIoT Bay to get started with IoT solutions">{{ _('Get Started with IoT Solutions') }}</a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-lg" aria-label="Learn more about IIoT Bay services">{{ _('Learn More About Us') }}</a>
             </div>
         </div>
     </div>
@@ -511,7 +511,7 @@
                                     </time>
                                     <h3 class="card-title h5 mb-3">{{ post.title }}</h3>
                                     <p class="card-text flex-grow-1">{{ (post.content|striptags)[:150] }}...</p>
-                                    <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read more about {{ post.title }}">{{ _('Read More') }} <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
+                                    <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read article about {{ post.title }}">{{ _('Read article') }}: {{ post.title[:50] }}{% if post.title|length > 50 %}...{% endif %} <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
                                 </div>
                             </article>
                         </div>
@@ -544,7 +544,7 @@
     <div class="container">
         <h2 class="gradient-text mb-3">{{ _('Ready to Transform Your Business?') }}</h2>
         <p class="text-black-50 mb-4 lead">{{ _("Let's discuss how Industrial IoT can drive growth for your factory.") }}</p>
-        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg">{{ _('Contact Us Today') }}</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-gradient btn-lg" aria-label="Contact IIoT Bay to discuss IoT solutions">{{ _('Contact Us for IoT Consultation') }}</a>
     </div>
 </section>
 {% endblock %}

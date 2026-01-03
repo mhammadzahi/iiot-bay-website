@@ -148,7 +148,7 @@
                                 </time>
                                 <h3 class="card-title h5 mb-2">{{ post.title }}</h3>
                                 <p class="card-text flex-grow-1">{{ (post.content|striptags)[:120] }}...</p>
-                                <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read more about {{ post.title }}">{{ _('Read More') }} <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
+                                <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read article about {{ post.title }}">{{ _('Read article') }}: {{ post.title[:50] }}{% if post.title|length > 50 %}...{% endif %} <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
                             </div>
                         </article>
                     </div>

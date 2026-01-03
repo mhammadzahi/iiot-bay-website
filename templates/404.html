@@ -14,8 +14,8 @@
                 <p class="display-1 fw-bold gradient-text" aria-hidden="true">404</p>
                 <h1 id="error-heading" class="section-title mb-3">{{ _('Page Not Found') }}</h1>
                 <p class="lead text-muted mb-4">{{ _('Sorry — the page you\'re looking for doesn\'t exist or has been moved.') }}</p>
-                <a href="{{ url_for('index') }}" class="btn btn-gradient btn-lg me-3">{{ _('Go Home') }}</a>
-                <a href="{{ url_for('contact') }}" class="btn btn-outline-secondary btn-lg">{{ _('Contact Support') }}</a>
+                <a href="{{ url_for('index') }}" class="btn btn-gradient btn-lg me-3" aria-label="Return to IIoT Bay homepage">{{ _('Go Home') }}</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline-secondary btn-lg" aria-label="Contact IIoT Bay support team">{{ _('Contact Support') }}</a>
             </div>
         </div>
     </div>
