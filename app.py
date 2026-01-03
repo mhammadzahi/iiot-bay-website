@@ -183,7 +183,8 @@ def contact():
         return jsonify({"success": True, "message": "Message sent successfully"}), 200
 
     # GET
-    return render_template('contact.html')
+    random_posts = get_random_posts(limit=6)
+    return render_template('contact.html', random_posts=random_posts)
 
 
 

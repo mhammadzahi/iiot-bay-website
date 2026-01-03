@@ -31,15 +31,150 @@
 
 {% block content %}
 <div class="container section-padding" style="margin-top: 60px;">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <section aria-labelledby="contact-heading">
-            <div class="text-center mb-5">
-                <h1 id="contact-heading" class="section-title gradient-text">{{ _('Get in Touch') }}</h1>
-                <p class="text-muted">{{ _('Have a project in mind? We\'d love to hear from you.') }}</p>
+    <div class="text-center mb-5">
+        <h1 id="contact-heading" class="section-title gradient-text">{{ _('Get in Touch') }}</h1>
+        <p class="text-muted">{{ _('Have a project in mind? We\'d love to hear from you.') }}</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Left Column: Blog Posts Carousel -->
+        <div class="col-lg-6">
+            {% if random_posts %}
+            <style>
+                .contact-blog-carousel .blog-card {
+                    background-color: #FFFFFF !important;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    border: 1px solid rgba(0, 173, 181, 0.15) !important;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+                    border-radius: 12px !important;
+                    height: 100%;
+                }
+                
+                .contact-blog-carousel .blog-card:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 12px 35px rgba(0, 173, 181, 0.2) !important;
+                    border-color: var(--primary-color) !important;
+                }
+                
+                .contact-blog-carousel .blog-card .card-img-top {
+                    border-top-left-radius: 12px;
+                    border-top-right-radius: 12px;
+                    border-bottom: 3px solid var(--primary-color);
+                }
+                
+                .contact-blog-carousel .blog-card .card-title {
+                    color: #222 !important;
+                    font-weight: 700;
+                    line-height: 1.4;
+                    transition: all 0.3s ease;
+                    font-size: 1.1rem !important;
+                }
+                
+                .contact-blog-carousel .blog-card:hover .card-title {
+                    background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                
+                .contact-blog-carousel .blog-card .card-text {
+                    color: #444 !important;
+                    line-height: 1.7;
+                    font-size: 0.9rem;
+                }
+                
+                .contact-blog-carousel .blog-card time {
+                    color: var(--primary-color) !important;
+                    font-weight: 600;
+                    font-size: 0.85rem;
+                }
+                
+                .contact-blog-carousel .blog-card time i {
+                    color: var(--primary-color);
+                }
+                
+                .contact-blog-carousel .blog-card .card-body {
+                    background-color: #FFFFFF;
+                    border-bottom-left-radius: 12px;
+                    border-bottom-right-radius: 12px;
+                    padding: 1.25rem;
+                }
+                
+                .contact-blog-carousel .carousel-indicators {
+                    bottom: -45px;
+                    margin-bottom: 0;
+                }
+                
+                .contact-blog-carousel .carousel-indicators [data-bs-target] {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background-color: #d1d5db;
+                    border: none;
+                    opacity: 1;
+                    transition: all 0.3s ease;
+                    margin: 0 6px;
+                }
+                
+                .contact-blog-carousel .carousel-indicators .active {
+                    width: 32px;
+                    border-radius: 6px;
+                    background: linear-gradient(135deg, #00ADB5 0%, #00D4FF 50%, #7B2CBF 100%);
+                }
+                
+                .contact-blog-carousel .carousel-item {
+                    min-height: 500px;
+                }
+            </style>
+            <div class="mb-3">
+                <h2 class="h4 gradient-text mb-3">{{ _('Latest Insights') }}</h2>
+                <p class="text-muted">{{ _('Explore our latest articles on Industrial IoT') }}</p>
             </div>
-
-            <div class="card p-4 p-md-5">
+            <div id="contactBlogCarousel" class="carousel slide contact-blog-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    {% for post in random_posts[:6] %}
+                    <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                        <article class="card blog-card overflow-hidden">
+                            {% if post.image %}
+                            <img src="{{ post.image }}" 
+                                 class="card-img-top" 
+                                 alt="{{ post.title }}"
+                                 style="height: 200px; object-fit: cover;" 
+                                 loading="lazy">
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <time class="mb-2" datetime="{{ post.date }}">
+                                    <i class="far fa-calendar-alt me-1" aria-hidden="true"></i> {{ post.date }}
+                                </time>
+                                <h3 class="card-title h5 mb-2">{{ post.title }}</h3>
+                                <p class="card-text flex-grow-1">{{ (post.content|striptags)[:120] }}...</p>
+                                <a href="{{ url_for('post', post_slug=post.slug) }}" class="btn btn-gradient mt-3" aria-label="Read more about {{ post.title }}">{{ _('Read More') }} <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Carousel Indicators -->
+                {% if random_posts|length > 1 %}
+                <div class="carousel-indicators">
+                    {% for post in random_posts[:6] %}
+                    <button type="button" data-bs-target="#contactBlogCarousel" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %}class="active" aria-current="true"{% endif %} aria-label="Show blog post {{ loop.index }}"></button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="card p-4">
+                <p class="text-muted text-center">{{ _('No blog posts available at the moment.') }}</p>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Right Column: Contact Form -->
+        <div class="col-lg-6">
+            <section aria-labelledby="contact-heading">
+            <div class="card p-4">
                 <form id="contact-form" aria-label="Contact form">
                     <div class="mb-3">
                         <label for="name" class="form-label gradient-label">{{ _('Full Name') }}</label>
@@ -53,7 +188,7 @@
                         <label for="subject" class="form-label gradient-label">{{ _('Subject') }}</label>
                         <input type="text" class="form-control border-secondary" id="subject" name="subject" autocomplete="off">
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label for="message" class="form-label gradient-label">{{ _('Message') }}</label>
                         <textarea class="form-control border-secondary" id="message" name="message" rows="5"
                             required aria-required="true"></textarea>
