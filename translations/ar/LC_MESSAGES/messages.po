@@ -775,6 +775,10 @@ msgstr "أحدث الرؤى"
 msgid "Explore our latest articles on Industrial IoT and Industry 4.0"
 msgstr "استكشف أحدث مقالاتنا حول إنترنت الأشياء الصناعية والصناعة 4.0"
 
+#: templates/contact.html:131
+msgid "Explore our latest articles on Industrial IoT"
+msgstr "استكشف أحدث مقالاتنا حول إنترنت الأشياء الصناعية"
+
 #: templates/index.html:382
 msgid "Previous"
 msgstr "السابق"
