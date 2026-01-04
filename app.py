@@ -1,16 +1,19 @@
 from flask import Flask, render_template, request, jsonify, Response, send_from_directory, redirect, make_response, url_for as flask_url_for, g
 from flask_babel import Babel, get_locale
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts, get_random_posts
-from datetime import datetime
+from datetime import datetime, timezone
 import re
 from markupsafe import escape
 from functools import wraps
+from urllib.parse import quote
 
 
 app = Flask(__name__)
 app.config['BABEL_DEFAULT_LOCALE'] = 'ar'
 app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'ar']
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+app.config['SITEMAP_BASE_URL'] = 'https://www.iiot-bay.com'
+app.config['SITEMAP_CACHE_TIMEOUT'] = 86400  # 24 hours
 
 babel = Babel(app)
 
@@ -237,85 +240,264 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-@app.route('/sitemap.xml', methods=['GET'])
-def sitemap():
-    # Get current date for static pages
-    today = datetime.now().strftime('%Y-%m-%d')
-    dates_ = ['2025-12-23', '2025-12-15', '2025-12-17', '2025-12-09', '2025-01-03', '2025-12-18', '2025-12-13']
+# ============================================================================
+# SITEMAP GENERATOR - SEO-OPTIMIZED & PRODUCTION-READY
+# ============================================================================
+# This implementation follows Google's sitemap best practices:
+# 1. Includes only canonical, indexable URLs (no redirects, no root)
+# 2. Implements proper hreflang alternates for multilingual content
+# 3. Uses dynamic route discovery to avoid hardcoded routes
+# 4. Caches output for performance (24h)
+# 5. Generates valid XML with proper formatting
+# ============================================================================
 
-    pages = []
+# Global cache for sitemap (simple in-memory cache)
+_sitemap_cache = {'xml': None, 'timestamp': None}
+
+
+def _should_include_route(endpoint, rule):
+    """
+    Filter routes that should NOT be included in sitemap.
     
-    # Define static pages (without language-specific routes)
-    static_routes = [
-        ('index', dates_[4]),
-        ('about', dates_[4]),
-        ('services', dates_[4]),
-        ('blog', dates_[4]),
-        ('contact', dates_[4]),
-        ('terms', dates_[4]),
+    SEO reasoning:
+    - Exclude API endpoints (not indexable HTML)
+    - Exclude admin/auth/internal endpoints (not public)
+    - Exclude static files (handled separately)
+    - Exclude POST-only routes (not accessible to crawlers)
+    - Exclude routes with dynamic parameters that aren't whitelisted
+    """
+    # Exclude these endpoint patterns
+    exclude_patterns = [
+        'static', 'api', 'admin', 'auth', 'debug', 'health', 
+        'newsletter', 'favicon', 'robots', 'sitemap'
     ]
     
-    # Add both language versions of each static page
-    for route_name, lastmod in static_routes:
-        for lang in app.config['BABEL_SUPPORTED_LOCALES']:
-            if route_name == 'index':
-                loc = f"https://www.iiot-bay.com/{lang}/"
-            else:
-                loc = f"https://www.iiot-bay.com/{lang}/{route_name}"
-            
-            pages.append({
-                'loc': loc,
-                'lastmod': lastmod,
-                'alternates': {
-                    'ar': f"https://www.iiot-bay.com/ar/{route_name if route_name != 'index' else ''}".rstrip('/') + ('/' if route_name == 'index' else ''),
-                    'en': f"https://www.iiot-bay.com/en/{route_name if route_name != 'index' else ''}".rstrip('/') + ('/' if route_name == 'index' else ''),
-                }
-            })
+    # Check if endpoint matches exclusion patterns
+    for pattern in exclude_patterns:
+        if pattern in endpoint.lower():
+            return False
     
-    # Add all blog posts (without language prefix as per requirement)
-    posts = get_all_posts()
-    for post in posts:
-        # Parse and format the date to YYYY-MM-DD
-        lastmod = today  # Default to today if parsing fails
-        if post.get('created_at'):
-            try:
-                date_str = post['created_at']
-                # Try common date formats
-                for fmt in ['%Y-%m-%d', '%Y-%m-%d %H:%M:%S', '%Y/%m/%d', '%d/%m/%Y', '%m/%d/%Y']:
-                    try:
-                        dt = datetime.strptime(date_str, fmt)
-                        lastmod = dt.strftime('%Y-%m-%d')
-                        break
-                    except ValueError:
-                        continue
-            except Exception:
-                pass
+    # Exclude POST-only routes (forms, APIs)
+    if 'GET' not in rule.methods:
+        return False
+    
+    # Exclude root redirect (not canonical)
+    if rule.rule == '/':
+        return False
+    
+    # Exclude routes with parameters unless whitelisted
+    # Exception: blog pagination is whitelisted
+    if '<' in rule.rule and 'page' not in rule.rule:
+        return False
+    
+    return True
+
+
+def _build_multilang_url(route_name, lang, base_url):
+    """
+    Build absolute URL for a multilingual route.
+    
+    SEO reasoning:
+    - Always use absolute URLs (required by sitemap spec)
+    - Ensure consistent URL structure across languages
+    - Handle special cases (index route requires trailing slash)
+    """
+    if route_name == 'index':
+        return f"{base_url}/{lang}/"
+    else:
+        # Remove 'lang_' prefix if present in endpoint name
+        path = route_name.replace('lang_', '')
+        return f"{base_url}/{lang}/{path}"
+
+
+def _parse_post_date(date_str):
+    """
+    Parse various date formats and return ISO 8601 format (YYYY-MM-DD).
+    
+    SEO reasoning:
+    - lastmod must be in W3C Datetime format (ISO 8601)
+    - Accurate dates help search engines prioritize fresh content
+    """
+    if not date_str:
+        return datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    
+    # Try common date formats
+    formats = [
+        '%Y-%m-%d',
+        '%Y-%m-%d %H:%M:%S',
+        '%Y-%m-%dT%H:%M:%S',
+        '%Y/%m/%d',
+        '%d/%m/%Y',
+        '%m/%d/%Y'
+    ]
+    
+    for fmt in formats:
+        try:
+            dt = datetime.strptime(str(date_str), fmt)
+            return dt.strftime('%Y-%m-%d')
+        except (ValueError, TypeError):
+            continue
+    
+    # Fallback to current date
+    return datetime.now(timezone.utc).strftime('%Y-%m-%d')
+
+
+def _generate_sitemap_xml(base_url, languages, default_lang):
+    """
+    Generate complete sitemap XML with proper hreflang alternates.
+    
+    SEO reasoning:
+    - Each URL appears ONCE with alternates (not duplicated per language)
+    - hreflang alternates help Google serve correct language version
+    - x-default points to default language (Arabic in this case)
+    - Proper XML formatting ensures parser compatibility
+    """
+    urls = []
+    processed_routes = set()
+    current_time = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    
+    # ========================================================================
+    # STEP 1: Discover and process static routes from Flask app
+    # ========================================================================
+    # This automatically finds all public-facing routes without hardcoding
+    for rule in app.url_map.iter_rules():
+        endpoint = rule.endpoint
         
-        pages.append({
-            'loc': f"https://www.iiot-bay.com/post/{post['slug']}",
-            'lastmod': lastmod,
-            'alternates': None  # Posts don't have language alternates
+        # Skip routes that shouldn't be in sitemap
+        if not _should_include_route(endpoint, rule):
+            continue
+        
+        # Extract route name (remove language parameter)
+        route_pattern = rule.rule.replace('/<lang>/', '').replace('/<lang>', '').strip('/')
+        if not route_pattern:
+            route_pattern = 'index'
+        
+        # Avoid processing same route multiple times
+        if route_pattern in processed_routes:
+            continue
+        processed_routes.add(route_pattern)
+        
+        # Skip blog pagination (we'll only include /ar/blog and /en/blog)
+        if 'page' in route_pattern:
+            continue
+        
+        # Build URL entry with alternates for all languages
+        alternates = {}
+        for lang in languages:
+            if route_pattern == 'index':
+                url = f"{base_url}/{lang}/"
+            else:
+                url = f"{base_url}/{lang}/{route_pattern}"
+            alternates[lang] = url
+        
+        # Use first language's URL as canonical
+        canonical_url = alternates[languages[0]]
+        
+        urls.append({
+            'loc': canonical_url,
+            'lastmod': current_time,
+            'alternates': alternates,
+            'default_lang': default_lang
         })
     
-    # Generate XML with hreflang alternates
-    xml_lines = ['<?xml version="1.0" encoding="UTF-8"?>']
-    xml_lines.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">')
+    # ========================================================================
+    # STEP 2: Add blog posts (language-neutral URLs)
+    # ========================================================================
+    # Posts use /post/{slug} without language prefix for backwards compatibility
+    # They inherit language from cookie/browser, not URL
+    try:
+        posts = get_all_posts()
+        for post in posts:
+            if not post.get('slug'):
+                continue
+            
+            post_url = f"{base_url}/post/{quote(post['slug'])}"
+            post_date = _parse_post_date(post.get('created_at'))
+            
+            # Posts don't have language alternates (single URL for all languages)
+            urls.append({
+                'loc': post_url,
+                'lastmod': post_date,
+                'alternates': None,
+                'default_lang': None
+            })
+    except Exception as e:
+        # Log error but don't break sitemap generation
+        print(f"Error fetching posts for sitemap: {e}")
     
-    for page in pages:
-        xml_lines.append('<url>')
-        xml_lines.append(f'<loc>{page["loc"]}</loc>')
-        xml_lines.append(f'<lastmod>{page["lastmod"]}</lastmod>')
+    # ========================================================================
+    # STEP 3: Generate XML output with proper formatting
+    # ========================================================================
+    # Using list join with newlines for proper XML formatting
+    xml_parts = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ]
+    
+    for url_entry in urls:
+        xml_parts.append('  <url>')
+        xml_parts.append(f'    <loc>{url_entry["loc"]}</loc>')
+        xml_parts.append(f'    <lastmod>{url_entry["lastmod"]}</lastmod>')
         
-        # Add hreflang alternates for pages with translations
-        if page.get('alternates'):
-            for lang, url in page['alternates'].items():
-                xml_lines.append(f'<xhtml:link rel="alternate" hreflang="{lang}" href="{url}"/>')
+        # Add hreflang alternates for multilingual pages
+        if url_entry['alternates']:
+            # Self-referencing alternate
+            for lang, alt_url in url_entry['alternates'].items():
+                xml_parts.append(f'    <xhtml:link rel="alternate" hreflang="{lang}" href="{alt_url}"/>')
+            
+            # x-default points to default language (SEO best practice)
+            default_url = url_entry['alternates'][url_entry['default_lang']]
+            xml_parts.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{default_url}"/>')
         
-        xml_lines.append('</url>')
+        xml_parts.append('  </url>')
     
-    xml_lines.append('</urlset>')
+    xml_parts.append('</urlset>')
     
-    return Response(''.join(xml_lines), mimetype='application/xml')
+    # Join with newlines for proper XML formatting (not one long line)
+    return '\n'.join(xml_parts)
+
+
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    """
+    Dynamic sitemap generator endpoint.
+    
+    SEO Benefits:
+    - Helps search engines discover all pages efficiently
+    - Provides language alternates for international SEO
+    - Updates automatically when routes or posts change
+    - Cached for performance (doesn't slow down crawlers)
+    
+    Caching strategy:
+    - Cache for 24 hours to avoid regenerating on every request
+    - Crawlers typically fetch sitemap once per crawl session
+    - Balance between freshness and server load
+    """
+    global _sitemap_cache
+    
+    # Check if cache is valid
+    cache_timeout = app.config.get('SITEMAP_CACHE_TIMEOUT', 86400)
+    now = datetime.now(timezone.utc).timestamp()
+    
+    if (_sitemap_cache['xml'] and 
+        _sitemap_cache['timestamp'] and 
+        (now - _sitemap_cache['timestamp']) < cache_timeout):
+        # Serve from cache
+        return Response(_sitemap_cache['xml'], mimetype='application/xml; charset=utf-8')
+    
+    # Generate fresh sitemap
+    base_url = app.config.get('SITEMAP_BASE_URL', 'https://www.iiot-bay.com')
+    languages = app.config['BABEL_SUPPORTED_LOCALES']
+    default_lang = app.config['BABEL_DEFAULT_LOCALE']
+    
+    sitemap_xml = _generate_sitemap_xml(base_url, languages, default_lang)
+    
+    # Update cache
+    _sitemap_cache['xml'] = sitemap_xml
+    _sitemap_cache['timestamp'] = now
+    
+    return Response(sitemap_xml, mimetype='application/xml; charset=utf-8')
 
 
 
