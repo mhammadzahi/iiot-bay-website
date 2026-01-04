@@ -314,15 +314,7 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
     """
-    Production-ready sitemap endpoint.
-    
-    Returns valid XML with:
-    - application/xml; charset=utf-8 Content-Type
-    - Proper sitemap and xhtml namespaces
-    - Only canonical URLs with /ar/ and /en/ prefixes
-    - No root, no redirects, no query strings, no fragments
-    - hreflang alternates (ar, en, x-default)
-    - 24-hour cache for performance
+    Production-ready sitemap endpoint with explicit XML response headers.
     """
     global _sitemap_cache
     
@@ -337,8 +329,10 @@ def sitemap():
         _sitemap_cache['xml'] and 
         _sitemap_cache['timestamp'] and 
         (now - _sitemap_cache['timestamp']) < cache_timeout):
-        # Serve from cache
-        return Response(_sitemap_cache['xml'], mimetype='application/xml; charset=utf-8')
+        # Serve from cache with explicit headers
+        response = Response(_sitemap_cache['xml'])
+        response.headers['Content-Type'] = 'application/xml; charset=utf-8'
+        return response
     
     # Generate fresh sitemap
     base_url = app.config.get('SITEMAP_BASE_URL', 'https://www.iiot-bay.com')
@@ -351,7 +345,10 @@ def sitemap():
     _sitemap_cache['xml'] = sitemap_xml
     _sitemap_cache['timestamp'] = now
     
-    return Response(sitemap_xml, mimetype='application/xml; charset=utf-8')
+    # Return with explicit Content-Type header
+    response = Response(sitemap_xml)
+    response.headers['Content-Type'] = 'application/xml; charset=utf-8'
+    return response
 
 
 
