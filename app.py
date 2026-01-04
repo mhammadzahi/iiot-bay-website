@@ -246,68 +246,13 @@ def page_not_found(e):
 # This implementation follows Google's sitemap best practices:
 # 1. Includes only canonical, indexable URLs (no redirects, no root)
 # 2. Implements proper hreflang alternates for multilingual content
-# 3. Uses dynamic route discovery to avoid hardcoded routes
+# 3. Uses explicit whitelist for reliable route inclusion
 # 4. Caches output for performance (24h)
 # 5. Generates valid XML with proper formatting
 # ============================================================================
 
 # Global cache for sitemap (simple in-memory cache)
 _sitemap_cache = {'xml': None, 'timestamp': None}
-
-
-def _should_include_route(endpoint, rule):
-    """
-    Filter routes that should NOT be included in sitemap.
-    
-    SEO reasoning:
-    - Exclude API endpoints (not indexable HTML)
-    - Exclude admin/auth/internal endpoints (not public)
-    - Exclude static files (handled separately)
-    - Exclude POST-only routes (not accessible to crawlers)
-    - Exclude routes with dynamic parameters that aren't whitelisted
-    """
-    # Exclude these endpoint patterns
-    exclude_patterns = [
-        'static', 'api', 'admin', 'auth', 'debug', 'health', 
-        'newsletter', 'favicon', 'robots', 'sitemap'
-    ]
-    
-    # Check if endpoint matches exclusion patterns
-    for pattern in exclude_patterns:
-        if pattern in endpoint.lower():
-            return False
-    
-    # Exclude POST-only routes (forms, APIs)
-    if 'GET' not in rule.methods:
-        return False
-    
-    # Exclude root redirect (not canonical)
-    if rule.rule == '/':
-        return False
-    
-    # Exclude routes with parameters unless whitelisted
-    # Exception: blog pagination is whitelisted
-    if '<' in rule.rule and 'page' not in rule.rule:
-        return False
-    
-    return True
-
-
-def _build_multilang_url(route_name, lang, base_url):
-    """
-    Build absolute URL for a multilingual route.
-    
-    SEO reasoning:
-    - Always use absolute URLs (required by sitemap spec)
-    - Ensure consistent URL structure across languages
-    - Handle special cases (index route requires trailing slash)
-    """
-    if route_name == 'index':
-        return f"{base_url}/{lang}/"
-    else:
-        # Remove 'lang_' prefix if present in endpoint name
-        path = route_name.replace('lang_', '')
-        return f"{base_url}/{lang}/{path}"
 
 
 def _parse_post_date(date_str):
@@ -353,45 +298,36 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
     - Proper XML formatting ensures parser compatibility
     """
     urls = []
-    processed_routes = set()
     current_time = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     
     # ========================================================================
-    # STEP 1: Discover and process static routes from Flask app
+    # STEP 1: Add static multilingual pages (explicit whitelist)
     # ========================================================================
-    # This automatically finds all public-facing routes without hardcoding
-    for rule in app.url_map.iter_rules():
-        endpoint = rule.endpoint
-        
-        # Skip routes that shouldn't be in sitemap
-        if not _should_include_route(endpoint, rule):
-            continue
-        
-        # Extract route name (remove language parameter)
-        route_pattern = rule.rule.replace('/<lang>/', '').replace('/<lang>', '').strip('/')
-        if not route_pattern:
-            route_pattern = 'index'
-        
-        # Avoid processing same route multiple times
-        if route_pattern in processed_routes:
-            continue
-        processed_routes.add(route_pattern)
-        
-        # Skip blog pagination (we'll only include /ar/blog and /en/blog)
-        if 'page' in route_pattern:
-            continue
-        
-        # Build URL entry with alternates for all languages
+    # Explicit whitelist ensures we include exactly the pages we want
+    # These are public-facing pages that exist in both languages
+    static_pages = [
+        '',         # index (root of language)
+        'about',
+        'services',
+        'blog',
+        'contact',
+        'terms',
+    ]
+    
+    for page in static_pages:
         alternates = {}
+        
+        # Build URL for each language
         for lang in languages:
-            if route_pattern == 'index':
+            if page == '':
+                # Index page needs trailing slash
                 url = f"{base_url}/{lang}/"
             else:
-                url = f"{base_url}/{lang}/{route_pattern}"
+                url = f"{base_url}/{lang}/{page}"
             alternates[lang] = url
         
-        # Use first language's URL as canonical
-        canonical_url = alternates[languages[0]]
+        # Use default language as canonical (Arabic)
+        canonical_url = alternates[default_lang]
         
         urls.append({
             'loc': canonical_url,
@@ -473,14 +409,19 @@ def sitemap():
     - Cache for 24 hours to avoid regenerating on every request
     - Crawlers typically fetch sitemap once per crawl session
     - Balance between freshness and server load
+    - Add ?refresh=1 to force cache refresh (for testing/deployment)
     """
     global _sitemap_cache
+    
+    # Check if cache refresh is requested
+    force_refresh = request.args.get('refresh') == '1'
     
     # Check if cache is valid
     cache_timeout = app.config.get('SITEMAP_CACHE_TIMEOUT', 86400)
     now = datetime.now(timezone.utc).timestamp()
     
-    if (_sitemap_cache['xml'] and 
+    if (not force_refresh and
+        _sitemap_cache['xml'] and 
         _sitemap_cache['timestamp'] and 
         (now - _sitemap_cache['timestamp']) < cache_timeout):
         # Serve from cache
