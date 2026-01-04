@@ -284,7 +284,7 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
         '        xmlns:xhtml="http://www.w3.org/1999/xhtml">'
     ]
     
-    # Generate URL entries for each page
+    # Generate URL entries for each static page
     for page in static_pages:
         # Build URLs for both languages
         if page == '':
@@ -305,6 +305,37 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
         xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{url_ar}"/>')
         
         xml_lines.append('  </url>')
+    
+    # Add blog posts (language-neutral URLs without prefixes)
+    # Posts don't have hreflang since they're accessed via /post/{slug}
+    try:
+        posts = get_all_posts()
+        for post in posts:
+            if not post.get('slug'):
+                continue
+            
+            post_url = f"{base_url}/post/{quote(post['slug'])}"
+            
+            # Parse post date
+            post_date = current_time
+            if post.get('created_at'):
+                date_str = str(post['created_at'])
+                for fmt in ['%Y-%m-%d', '%Y-%m-%d %H:%M:%S', '%Y-%m-%dT%H:%M:%S', '%Y/%m/%d']:
+                    try:
+                        dt = datetime.strptime(date_str, fmt)
+                        post_date = dt.strftime('%Y-%m-%d')
+                        break
+                    except (ValueError, TypeError):
+                        continue
+            
+            # Posts don't have hreflang (no language alternates)
+            xml_lines.append('  <url>')
+            xml_lines.append(f'    <loc>{post_url}</loc>')
+            xml_lines.append(f'    <lastmod>{post_date}</lastmod>')
+            xml_lines.append('  </url>')
+    except Exception as e:
+        # Don't break sitemap generation if posts fail
+        print(f"Warning: Could not fetch posts for sitemap: {e}")
     
     xml_lines.append('</urlset>')
     
