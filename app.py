@@ -243,180 +243,93 @@ def page_not_found(e):
 # ============================================================================
 # SITEMAP GENERATOR - SEO-OPTIMIZED & PRODUCTION-READY
 # ============================================================================
-# This implementation follows Google's sitemap best practices:
-# 1. Includes only canonical, indexable URLs (no redirects, no root)
-# 2. Implements proper hreflang alternates for multilingual content
-# 3. Uses explicit whitelist for reliable route inclusion
-# 4. Caches output for performance (24h)
-# 5. Generates valid XML with proper formatting
+# Google-compliant sitemap with:
+# - Valid XML with proper namespaces
+# - Only canonical URLs with language prefixes (/ar/, /en/)
+# - No root (/), no redirects, no query strings
+# - Proper hreflang alternates (ar, en, x-default)
+# - ISO 8601 lastmod dates
 # ============================================================================
 
-# Global cache for sitemap (simple in-memory cache)
+# Global cache for sitemap (24-hour in-memory cache)
 _sitemap_cache = {'xml': None, 'timestamp': None}
-
-
-def _parse_post_date(date_str):
-    """
-    Parse various date formats and return ISO 8601 format (YYYY-MM-DD).
-    
-    SEO reasoning:
-    - lastmod must be in W3C Datetime format (ISO 8601)
-    - Accurate dates help search engines prioritize fresh content
-    """
-    if not date_str:
-        return datetime.now(timezone.utc).strftime('%Y-%m-%d')
-    
-    # Try common date formats
-    formats = [
-        '%Y-%m-%d',
-        '%Y-%m-%d %H:%M:%S',
-        '%Y-%m-%dT%H:%M:%S',
-        '%Y/%m/%d',
-        '%d/%m/%Y',
-        '%m/%d/%Y'
-    ]
-    
-    for fmt in formats:
-        try:
-            dt = datetime.strptime(str(date_str), fmt)
-            return dt.strftime('%Y-%m-%d')
-        except (ValueError, TypeError):
-            continue
-    
-    # Fallback to current date
-    return datetime.now(timezone.utc).strftime('%Y-%m-%d')
 
 
 def _generate_sitemap_xml(base_url, languages, default_lang):
     """
-    Generate complete sitemap XML with proper hreflang alternates.
+    Generate Google-compliant sitemap XML.
     
-    SEO reasoning:
-    - Each URL appears ONCE with alternates (not duplicated per language)
-    - hreflang alternates help Google serve correct language version
-    - x-default points to default language (Arabic in this case)
-    - Proper XML formatting ensures parser compatibility
+    Each page emits ONE <url> block with:
+    - <loc> pointing to Arabic (canonical) URL
+    - hreflang alternates for ar, en, and x-default
+    - <lastmod> in YYYY-MM-DD format
     """
-    urls = []
     current_time = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     
-    # ========================================================================
-    # STEP 1: Add static multilingual pages (explicit whitelist)
-    # ========================================================================
-    # Explicit whitelist ensures we include exactly the pages we want
-    # These are public-facing pages that exist in both languages
+    # Public pages that exist in both languages
+    # Only include pages with language prefixes
     static_pages = [
-        '',         # index (root of language)
-        'about',
-        'services',
-        'blog',
-        'contact',
-        'terms',
+        '',         # index - /ar/ and /en/
+        'about',    # /ar/about and /en/about
+        'services', # /ar/services and /en/services
+        'blog',     # /ar/blog and /en/blog
+        'contact',  # /ar/contact and /en/contact
+        'terms',    # /ar/terms and /en/terms
     ]
     
-    for page in static_pages:
-        alternates = {}
-        
-        # Build URL for each language
-        for lang in languages:
-            if page == '':
-                # Index page needs trailing slash
-                url = f"{base_url}/{lang}/"
-            else:
-                url = f"{base_url}/{lang}/{page}"
-            alternates[lang] = url
-        
-        # Use default language as canonical (Arabic)
-        canonical_url = alternates[default_lang]
-        
-        urls.append({
-            'loc': canonical_url,
-            'lastmod': current_time,
-            'alternates': alternates,
-            'default_lang': default_lang
-        })
-    
-    # ========================================================================
-    # STEP 2: Add blog posts (language-neutral URLs)
-    # ========================================================================
-    # Posts use /post/{slug} without language prefix for backwards compatibility
-    # They inherit language from cookie/browser, not URL
-    try:
-        posts = get_all_posts()
-        for post in posts:
-            if not post.get('slug'):
-                continue
-            
-            post_url = f"{base_url}/post/{quote(post['slug'])}"
-            post_date = _parse_post_date(post.get('created_at'))
-            
-            # Posts don't have language alternates (single URL for all languages)
-            urls.append({
-                'loc': post_url,
-                'lastmod': post_date,
-                'alternates': None,
-                'default_lang': None
-            })
-    except Exception as e:
-        # Log error but don't break sitemap generation
-        print(f"Error fetching posts for sitemap: {e}")
-    
-    # ========================================================================
-    # STEP 3: Generate XML output with proper formatting
-    # ========================================================================
-    # Using list join with newlines for proper XML formatting
-    xml_parts = [
+    # Build XML with proper formatting
+    xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
-        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">'
     ]
     
-    for url_entry in urls:
-        xml_parts.append('  <url>')
-        xml_parts.append(f'    <loc>{url_entry["loc"]}</loc>')
-        xml_parts.append(f'    <lastmod>{url_entry["lastmod"]}</lastmod>')
+    # Generate URL entries for each page
+    for page in static_pages:
+        # Build URLs for both languages
+        if page == '':
+            url_ar = f"{base_url}/ar/"
+            url_en = f"{base_url}/en/"
+        else:
+            url_ar = f"{base_url}/ar/{page}"
+            url_en = f"{base_url}/en/{page}"
         
-        # Add hreflang alternates for multilingual pages
-        if url_entry['alternates']:
-            # Self-referencing alternate
-            for lang, alt_url in url_entry['alternates'].items():
-                xml_parts.append(f'    <xhtml:link rel="alternate" hreflang="{lang}" href="{alt_url}"/>')
-            
-            # x-default points to default language (SEO best practice)
-            default_url = url_entry['alternates'][url_entry['default_lang']]
-            xml_parts.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{default_url}"/>')
+        # Emit one <url> block with Arabic as canonical
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{url_ar}</loc>')
+        xml_lines.append(f'    <lastmod>{current_time}</lastmod>')
         
-        xml_parts.append('  </url>')
+        # hreflang alternates
+        xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="ar" href="{url_ar}"/>')
+        xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="en" href="{url_en}"/>')
+        xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{url_ar}"/>')
+        
+        xml_lines.append('  </url>')
     
-    xml_parts.append('</urlset>')
+    xml_lines.append('</urlset>')
     
-    # Join with newlines for proper XML formatting (not one long line)
-    return '\n'.join(xml_parts)
+    return '\n'.join(xml_lines)
 
 
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
     """
-    Dynamic sitemap generator endpoint.
+    Production-ready sitemap endpoint.
     
-    SEO Benefits:
-    - Helps search engines discover all pages efficiently
-    - Provides language alternates for international SEO
-    - Updates automatically when routes or posts change
-    - Cached for performance (doesn't slow down crawlers)
-    
-    Caching strategy:
-    - Cache for 24 hours to avoid regenerating on every request
-    - Crawlers typically fetch sitemap once per crawl session
-    - Balance between freshness and server load
-    - Add ?refresh=1 to force cache refresh (for testing/deployment)
+    Returns valid XML with:
+    - application/xml; charset=utf-8 Content-Type
+    - Proper sitemap and xhtml namespaces
+    - Only canonical URLs with /ar/ and /en/ prefixes
+    - No root, no redirects, no query strings, no fragments
+    - hreflang alternates (ar, en, x-default)
+    - 24-hour cache for performance
     """
     global _sitemap_cache
     
-    # Check if cache refresh is requested
+    # Force cache refresh if requested (for testing/deployment)
     force_refresh = request.args.get('refresh') == '1'
     
-    # Check if cache is valid
+    # Check cache validity
     cache_timeout = app.config.get('SITEMAP_CACHE_TIMEOUT', 86400)
     now = datetime.now(timezone.utc).timestamp()
     
