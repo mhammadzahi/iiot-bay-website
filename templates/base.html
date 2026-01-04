@@ -26,6 +26,14 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{% block canonical %}{{ request.url }}{% endblock %}">
 
+    <!-- Hreflang tags for multilingual SEO -->
+    {% block hreflang %}
+    {% set path_without_lang = request.path.split('/', 2)[2] if request.path.count('/') >= 2 else '' %}
+    <link rel="alternate" hreflang="ar" href="https://www.iiot-bay.com/ar/{{ path_without_lang }}" />
+    <link rel="alternate" hreflang="en" href="https://www.iiot-bay.com/en/{{ path_without_lang }}" />
+    <link rel="alternate" hreflang="x-default" href="https://www.iiot-bay.com/ar/{{ path_without_lang }}" />
+    {% endblock %}
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:url" content="{{ request.url }}">
@@ -167,8 +175,16 @@
                         <a class="nav-link" href="{{ url_for('contact') }}">{{ _('Contact') }}</a>
                     </li>
                     <li class="nav-item ms-lg-2">
+                        {% set other_lang = 'en' if get_locale() == 'ar' else 'ar' %}
+                        {% if request.path.startswith('/post/') %}
+                            {# For posts without language prefix, redirect to home of other language #}
+                            {% set switch_url = '/' + other_lang + '/' %}
+                        {% else %}
+                            {% set path_without_lang = request.path.split('/', 2)[2] if request.path.count('/') >= 2 else '' %}
+                            {% set switch_url = '/' + other_lang + '/' + path_without_lang %}
+                        {% endif %}
                         <a class="btn btn-outline-light btn-sm language-toggle" 
-                           href="{{ url_for('set_language', lang='ar' if get_locale() == 'en' else 'en') }}"
+                           href="{{ switch_url }}"
                            aria-label="{{ _('Switch language') }}"
                            style="display: flex; align-items: center; gap: 8px; padding: 0.5rem 1rem !important; margin-top: -4px;">
                             {% if get_locale() == 'en' %}

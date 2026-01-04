@@ -17,6 +17,9 @@
 {% block twitter_description %}{{ post.content[:155] | striptags }}{% endblock %}
 {% block twitter_image %}{{ post.image }}{% endblock %}
 
+{# Posts don't have language variants, so override hreflang block #}
+{% block hreflang %}{% endblock %}
+
 {% block structured_data %}
 {% if post %}
 <script type="application/ld+json">
