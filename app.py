@@ -477,8 +477,13 @@ def admin_add_new_post():
         if not slug:
             slug = create_slug(title)
         else:
-            # Clean the provided slug
-            slug = create_slug(slug)
+            # Keep user-provided slug as-is, just clean up spaces and hyphens
+            slug = slug.strip()
+            slug = slug.replace(' ', '-')
+            # Remove duplicate hyphens
+            while '--' in slug:
+                slug = slug.replace('--', '-')
+            slug = slug.strip('-')
         
         # Prefix image filename with full path to match other posts
         if image_filename:
