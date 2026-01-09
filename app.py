@@ -470,8 +470,8 @@ def admin_add_new_post():
                                  error="Title, Author, and Content are required fields!",
                                  form_data=request.form)
         
-        # Use today's date automatically
-        date = datetime.now().strftime('%Y-%m-%d')
+        # Use today's date in the same format as other posts (e.g., "January 09, 2026")
+        date = datetime.now().strftime('%B %d, %Y')
         
         # Generate slug from title if not provided
         if not slug:
@@ -479,6 +479,10 @@ def admin_add_new_post():
         else:
             # Clean the provided slug
             slug = create_slug(slug)
+        
+        # Prefix image filename with full path to match other posts
+        if image_filename:
+            image_filename = f"/static/img/{image_filename}"
         
         # Insert post into database
         success, result = add_new_post(title, date, author, content, image_filename, slug)
