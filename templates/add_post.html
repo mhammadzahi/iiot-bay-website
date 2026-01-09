@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Blog Post - IIoT Bay Admin</title>
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .post-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .post-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="password"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        input[type="file"]::file-selector-button {
+            padding: 8px 16px;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            transform: translateY(-1px);
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="password"]:focus,
+        input[type="file"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 200px;
+            line-height: 1.6;
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        .char-counter {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📝 Add New Blog Post</h1>
+        <p class="subtitle">IIoT Bay Admin Panel</p>
+
+        {% if success %}
+        <div class="alert alert-success">
+            ✓ {{ success }}
+            {% if post_url %}
+            <br>
+            <a href="{{ post_url }}" class="post-link" target="_blank">View Post →</a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-error">
+            ✗ {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="/admin/add-new-post" id="postForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="access_key">Access Key <span class="required">*</span></label>
+                <input type="password" id="access_key" name="access_key" 
+                       required
+                       placeholder="Enter admin access key">
+                <div class="help-text">🔒 Required for authentication</div>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Post Title <span class="required">*</span></label>
+                <input type="text" id="title" name="title" 
+                       value="{{ form_data.title if form_data else '' }}" 
+                       required
+                       placeholder="Enter the post title">
+                <div class="help-text">A clear, descriptive title for your blog post</div>
+            </div>
+
+            <div class="form-group">
+                <label for="author">Author Name <span class="required">*</span></label>
+                <input type="text" id="author" name="author" 
+                       value="{{ form_data.author if form_data else '' }}" 
+                       required
+                       placeholder="Enter author name">
+            </div>
+
+            <div class="form-group">
+                <label for="content">Post Content <span class="required">*</span></label>
+                <textarea id="content" name="content" 
+                          required
+                          placeholder="Write your blog post content here... (HTML supported)">{{ form_data.content if form_data else '' }}</textarea>
+                <div class="char-counter">
+                    <span id="charCount">0</span> characters
+                </div>
+                <div class="help-text">Full content of the blog post. HTML tags are supported.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Post Image</label>
+                <input type="file" id="image" name="image" 
+                       accept="image/*"
+                       onchange="previewImage(this)">
+                <div class="help-text">Upload an image file. Will be automatically converted to .webp format and saved in static/img/</div>
+                <div id="imagePreview" style="margin-top: 10px; display: none;">
+                    <img id="previewImg" style="max-width: 300px; max-height: 200px; border-radius: 8px; border: 2px solid #e0e0e0;" />
+                    <p id="previewFilename" style="font-size: 12px; color: #666; margin-top: 5px;"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="slug">URL Slug</label>
+                <input type="text" id="slug" name="slug" 
+                       value="{{ form_data.slug if form_data else '' }}" 
+                       placeholder="url-friendly-slug">
+                <div class="help-text">Leave blank to auto-generate from title. Only lowercase letters, numbers, and hyphens.</div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-secondary" onclick="resetForm()">Reset Form</button>
+                <button type="submit" class="btn-primary">Publish Post</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Character counter for content
+        const contentField = document.getElementById('content');
+        const charCount = document.getElementById('charCount');
+
+        function updateCharCount() {
+            charCount.textContent = contentField.value.length.toLocaleString();
+        }
+
+        contentField.addEventListener('input', updateCharCount);
+        updateCharCount();
+
+        // Auto-generate slug from title
+        const titleField = document.getElementById('title');
+        const slugField = document.getElementById('slug');
+
+        titleField.addEventListener('input', function() {
+            if (!slugField.value || slugField.dataset.autoGenerated) {
+                const slug = this.value
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .trim();
+                slugField.value = slug;
+                slugField.dataset.autoGenerated = 'true';
+            }
+        });
+
+        slugField.addEventListener('input', function() {
+            if (this.value) {
+                delete this.dataset.autoGenerated;
+            }
+        });
+
+        // Image preview
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+            const previewFilename = document.getElementById('previewFilename');
+            
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const reader = new FileReader();
+                
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Please select an image file',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                    input.value = '';
+                    preview.style.display = 'none';
+                    return;
+                }
+                
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                    
+                    // Generate the .webp filename that will be saved
+                    const slug = slugField.value || titleField.value
+                        .toLowerCase()
+                        .replace(/[^a-z0-9\s-]/g, '')
+                        .replace(/\s+/g, '-')
+                        .replace(/-+/g, '-')
+                        .trim();
+                    previewFilename.textContent = `Will be saved as: ${slug}.webp`;
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            Swal.fire({
+                title: 'Reset form?',
+                text: 'All entered data will be lost',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#667eea',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('postForm').reset();
+                    updateCharCount();
+                    document.getElementById('imagePreview').style.display = 'none';
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Form reset successfully',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+                }
+            });
+        }
+
+        // Form validation
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            const accessKey = document.getElementById('access_key').value.trim();
+            const title = titleField.value.trim();
+            const author = document.getElementById('author').value.trim();
+            const content = contentField.value.trim();
+
+            if (!accessKey) {
+                e.preventDefault();
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Please enter the access key',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+                return false;
+            }
+
+            if (!title || !author || !content) {
+                e.preventDefault();
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Please fill in all required fields',
+                    text: 'Access Key, Title, Author, and Content are required',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true
+                });
+                return false;
+            }
+        });
+    </script>
+</body>
+
+</html>

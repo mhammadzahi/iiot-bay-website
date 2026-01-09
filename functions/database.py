@@ -101,3 +101,40 @@ def get_random_posts(limit: int = 6):
     random_posts = [dict(r) for r in rows]
     conn.close()
     return random_posts
+
+def create_slug(title: str) -> str:
+    """Create a URL-friendly slug from the title"""
+    slug = title.lower()
+    slug = slug.replace(' ', '-')
+    # Remove special characters
+    allowed_chars = 'abcdefghijklmnopqrstuvwxyz0123456789-'
+    slug = ''.join(c for c in slug if c in allowed_chars)
+    # Remove duplicate hyphens
+    while '--' in slug:
+        slug = slug.replace('--', '-')
+    slug = slug.strip('-')
+    return slug
+
+def add_new_post(title: str, date: str, author: str, content: str, image: str, slug: str) -> tuple:
+    """Insert a new blog post into the database"""
+    try:
+        from datetime import datetime
+        conn = get_db()
+        cur = conn.cursor()
+        
+        created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
+        cur.execute("""
+            INSERT INTO posts (title, date, author, content, image, slug, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (title, date, author, content, image, slug, created_at))
+        
+        conn.commit()
+        post_id = cur.lastrowid
+        conn.close()
+        
+        return True, post_id
+    except sqlite3.IntegrityError as e:
+        return False, f"Slug '{slug}' already exists. Please use a different title or slug."
+    except Exception as e:
+        return False, f"Error inserting post: {str(e)}"

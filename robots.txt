@@ -4,6 +4,9 @@ Allow: /
 # Disallow API endpoints
 Disallow: /api/
 
+# Disallow admin endpoints
+Disallow: /admin/
+
 # REMOVED THE STATIC BLOCK HERE
 # Allowing Google to crawl /static/ is required for the favicon 
 # and for Google to understand your page layout (CSS/JS).

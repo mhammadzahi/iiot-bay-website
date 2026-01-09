@@ -1,11 +1,18 @@
 from flask import Flask, render_template, request, jsonify, Response, send_from_directory, redirect, make_response, url_for as flask_url_for, g
 from flask_babel import Babel, get_locale
-from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts, get_random_posts
+from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts, get_random_posts, add_new_post, create_slug
 from datetime import datetime, timezone
 import re
+import os
 from markupsafe import escape
 from functools import wraps
 from urllib.parse import quote
+from dotenv import load_dotenv
+from PIL import Image
+from werkzeug.utils import secure_filename
+
+# Load environment variables
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -390,6 +397,103 @@ def robots():
     return Response(robots_txt, mimetype='text/plain')
 
 
+@app.route('/admin/add-new-post', methods=['GET', 'POST'])
+def admin_add_new_post():
+    """Admin endpoint to add a new blog post - protected by access key"""
+    # Get the admin key from environment
+    admin_key = os.getenv('admin_add_new_post_key')
+    
+    if request.method == 'POST':
+        # Verify access key first
+        provided_key = request.form.get('access_key', '').strip()
+        
+        if not provided_key:
+            return render_template('add_post.html', 
+                                 error="Access key is required!",
+                                 form_data=request.form)
+        
+        if provided_key != admin_key:
+            return render_template('add_post.html', 
+                                 error="Invalid access key! Access denied.",
+                                 form_data=request.form)
+        
+        # Get form data
+        title = request.form.get('title', '').strip()
+        author = request.form.get('author', '').strip()
+        content = request.form.get('content', '').strip()
+        slug = request.form.get('slug', '').strip()
+        
+        # Handle image upload
+        image_filename = ''
+        if 'image' in request.files:
+            file = request.files['image']
+            if file and file.filename:
+                # Validate it's an image
+                allowed_extensions = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'tiff'}
+                file_ext = file.filename.rsplit('.', 1)[1].lower() if '.' in file.filename else ''
+                
+                if file_ext not in allowed_extensions:
+                    return render_template('add_post.html', 
+                                         error="Invalid file type. Only image files are allowed!",
+                                         form_data=request.form)
+                
+                try:
+                    # Generate filename from slug or title
+                    base_name = slug if slug else create_slug(title)
+                    image_filename = f"{base_name}.webp"
+                    
+                    # Open and convert image to WebP
+                    img = Image.open(file.stream)
+                    
+                    # Convert RGBA to RGB if necessary (WebP handles both, but let's be safe)
+                    if img.mode in ('RGBA', 'LA', 'P'):
+                        background = Image.new('RGB', img.size, (255, 255, 255))
+                        if img.mode == 'P':
+                            img = img.convert('RGBA')
+                        background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+                        img = background
+                    elif img.mode != 'RGB':
+                        img = img.convert('RGB')
+                    
+                    # Save as WebP
+                    img_path = os.path.join('static', 'img', image_filename)
+                    img.save(img_path, 'WEBP', quality=85, optimize=True)
+                    
+                except Exception as e:
+                    return render_template('add_post.html', 
+                                         error=f"Error processing image: {str(e)}",
+                                         form_data=request.form)
+        
+        # Validate required fields
+        if not title or not author or not content:
+            return render_template('add_post.html', 
+                                 error="Title, Author, and Content are required fields!",
+                                 form_data=request.form)
+        
+        # Use today's date automatically
+        date = datetime.now().strftime('%Y-%m-%d')
+        
+        # Generate slug from title if not provided
+        if not slug:
+            slug = create_slug(title)
+        else:
+            # Clean the provided slug
+            slug = create_slug(slug)
+        
+        # Insert post into database
+        success, result = add_new_post(title, date, author, content, image_filename, slug)
+        
+        if success:
+            return render_template('add_post.html', 
+                                 success=f"Post added successfully! Post ID: {result}",
+                                 post_url=f"/post/{slug}")
+        else:
+            return render_template('add_post.html', 
+                                 error=result,
+                                 form_data=request.form)
+    
+    # GET request - show the form
+    return render_template('add_post.html')
 
 
 # if __name__ == '__main__':
