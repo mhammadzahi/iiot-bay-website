@@ -15,5 +15,5 @@ Disallow: /admin/
 Disallow: /*.db$
 Disallow: /env/
 
-# Sitemap location
-Sitemap: https://iiot-bay.com/sitemap.xml
+# Sitemap location (canonical URL with www)
+Sitemap: https://www.iiot-bay.com/sitemap.xml

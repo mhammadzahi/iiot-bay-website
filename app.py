@@ -2,8 +2,7 @@ from flask import Flask, render_template, request, jsonify, Response, send_from_
 from flask_babel import Babel, get_locale
 from functions.database import new_subscriber, new_message, get_posts_paginated, get_post_by_slug, get_all_posts, get_random_posts, add_new_post, create_slug
 from datetime import datetime, timezone
-import re
-import os
+import re, os
 from markupsafe import escape
 from functools import wraps
 from urllib.parse import quote
@@ -11,7 +10,6 @@ from dotenv import load_dotenv
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-# Load environment variables
 load_dotenv()
 
 
@@ -47,6 +45,71 @@ def get_locale():
 babel.init_app(app, locale_selector=get_locale)
 
 
+# ============================================================================
+# CANONICAL URL ENFORCEMENT - SEO CRITICAL
+# ============================================================================
+# Enforce: HTTPS + www + language prefix with 301 redirects
+# This prevents Google from indexing non-canonical URLs
+# ============================================================================
+
+@app.before_request
+def enforce_canonical_url():
+    """
+    Enforce canonical URL structure with 301 permanent redirects:
+    - Force HTTPS (if not already)
+    - Force www subdomain
+    - Ensure language prefix exists (handled separately in routes)
+    
+    This should run BEFORE Cloudflare, but Cloudflare rules will handle
+    the heavy lifting for protocol and domain. This is backup/verification.
+    """
+    # Skip enforcement for:
+    # 1. Static files (performance)
+    # 2. API endpoints (may be called from various sources)
+    # 3. Admin endpoints (may need flexibility)
+    # 4. Sitemap/robots (should work on any domain)
+    if (request.path.startswith('/static/') or 
+        request.path.startswith('/api/') or 
+        request.path.startswith('/admin/') or
+        request.path in ['/sitemap.xml', '/robots.txt', '/favicon.ico']):
+        return None
+    
+    # Get the current URL components
+    scheme = request.scheme
+    host = request.host.lower()
+    path = request.path
+    query_string = request.query_string.decode('utf-8')
+    
+    # Check if redirect is needed
+    needs_redirect = False
+    canonical_scheme = 'https'
+    canonical_host = 'www.iiot-bay.com'
+    
+    # Force HTTPS (Cloudflare should handle this, but backup check)
+    if scheme != canonical_scheme:
+        needs_redirect = True
+        scheme = canonical_scheme
+    
+    # Force www subdomain
+    # Handle both iiot-bay.com and any other variants
+    if host != canonical_host:
+        # Only redirect if it's our domain (not localhost for development)
+        if 'iiot-bay.com' in host or (host not in ['localhost', '127.0.0.1'] and not host.startswith('localhost:')):
+            needs_redirect = True
+            host = canonical_host
+    
+    if needs_redirect:
+        # Build canonical URL
+        canonical_url = f"{scheme}://{host}{path}"
+        if query_string:
+            canonical_url += f"?{query_string}"
+        
+        # 301 permanent redirect to canonical URL
+        return redirect(canonical_url, code=301)
+    
+    return None
+
+
 # Decorator to validate language prefix
 def with_lang(f):
     """Decorator to handle language prefix in URLs"""
@@ -54,8 +117,8 @@ def with_lang(f):
     def decorated_function(lang, *args, **kwargs):
         # Validate language
         if lang not in app.config['BABEL_SUPPORTED_LOCALES']:
-            # Redirect to default language
-            return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}{request.path}")
+            # Redirect to default language with 301 (permanent)
+            return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}{request.path}", code=301)
         
         # Store language in g for use in get_locale()
         g.lang = lang
@@ -146,8 +209,8 @@ def favicon():
 # Root redirect to default language
 @app.route('/')
 def root():
-    """Redirect root to default language"""
-    return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/")
+    """Redirect root to default language with 301 (permanent)"""
+    return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/", code=301)
 
 
 @app.route('/<lang>/')

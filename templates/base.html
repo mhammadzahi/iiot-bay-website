@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="48x48" href="https://iiot-bay.com/static/img/iiot-bay-icon.png">
-    <!-- <link rel="apple-touch-icon" sizes="180x180" href="https://iiot-bay.com/static/img/iiot-bay-icon.png">
-    <link rel="shortcut icon" href="https://iiot-bay.com/static/img/iiot-bay-icon.png" type="image/x-icon"> -->
+    <link rel="icon" type="image/png" sizes="48x48" href="https://www.iiot-bay.com/static/img/iiot-bay-icon.png">
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="https://www.iiot-bay.com/static/img/iiot-bay-icon.png">
+    <link rel="shortcut icon" href="https://www.iiot-bay.com/static/img/iiot-bay-icon.png" type="image/x-icon"> -->
 
     <!-- Primary Meta Tags -->
     <title>{% block title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}</title>
@@ -23,15 +23,31 @@
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="{% block canonical %}{{ request.url }}{% endblock %}">
+    <!-- Canonical URL - Force HTTPS + www + language prefix -->
+    {% block canonical_tag %}
+    {% set canonical_base = 'https://www.iiot-bay.com' %}
+    {% if current_lang and request.endpoint != 'post' %}
+        {% set canonical_path = request.path %}
+        <link rel="canonical" href="{{ canonical_base }}{{ canonical_path }}">
+    {% elif request.endpoint == 'post' %}
+        {# Posts don't have language prefix #}
+        <link rel="canonical" href="{{ canonical_base }}{{ request.path }}">
+    {% else %}
+        <link rel="canonical" href="{{ canonical_base }}/{{ current_lang }}/{{ request.path.lstrip('/').split('/', 1)[-1] if '/' in request.path.lstrip('/') else '' }}">
+    {% endif %}
+    {% endblock %}
 
-    <!-- Hreflang tags for multilingual SEO -->
+    <!-- Hreflang tags for multilingual SEO (only for pages with language prefix) -->
     {% block hreflang %}
-    {% set path_without_lang = request.path.split('/', 2)[2] if request.path.count('/') >= 2 else '' %}
-    <link rel="alternate" hreflang="ar" href="https://www.iiot-bay.com/ar/{{ path_without_lang }}" />
-    <link rel="alternate" hreflang="en" href="https://www.iiot-bay.com/en/{{ path_without_lang }}" />
-    <link rel="alternate" hreflang="x-default" href="https://www.iiot-bay.com/ar/{{ path_without_lang }}" />
+    {% if current_lang and request.endpoint != 'post' %}
+        {# Extract path after language prefix #}
+        {% set path_parts = request.path.strip('/').split('/', 1) %}
+        {% set path_after_lang = path_parts[1] if path_parts|length > 1 else '' %}
+        <link rel="alternate" hreflang="ar" href="https://www.iiot-bay.com/ar/{{ path_after_lang }}" />
+        <link rel="alternate" hreflang="en" href="https://www.iiot-bay.com/en/{{ path_after_lang }}" />
+        <link rel="alternate" hreflang="x-default" href="https://www.iiot-bay.com/ar/{{ path_after_lang }}" />
+    {% endif %}
+    {# Posts don't have hreflang since they're language-neutral #}
     {% endblock %}
 
     <!-- Open Graph / Facebook -->
