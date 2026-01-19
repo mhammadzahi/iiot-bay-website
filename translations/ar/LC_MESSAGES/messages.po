@@ -935,3 +935,28 @@ msgstr ""
 msgid "Have Questions? Contact Us"
 msgstr "هل لديك أسئلة؟ اتصل بنا"
 
+# Meta Descriptions
+msgid "Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services."
+msgstr "مزود رائد لحلول إنترنت الأشياء الصناعية في المملكة العربية السعودية. أتمتة المنازل الذكية، إنترنت الأشياء الصناعي، المراقبة في الوقت الفعلي، وخدمات التحول إلى الصناعة 4.0."
+
+msgid "Transform your business with IIoT Bay's cutting-edge Industrial IoT solutions in Saudi Arabia. Experts in smart home automation, industrial IoT, real-time factory monitoring, and Industry 4.0 transformation."
+msgstr "حوّل عملك مع حلول إنترنت الأشياء الصناعية المتطورة من IIoT Bay في المملكة العربية السعودية. خبراء في أتمتة المنازل الذكية، إنترنت الأشياء الصناعي، مراقبة المصانع في الوقت الفعلي، والتحول إلى الصناعة 4.0."
+
+msgid "Comprehensive IoT services in Saudi Arabia: Custom software development, industrial IoT solutions, real-time factory monitoring, IoT security, predictive maintenance, and SIRI Industry 4.0 assessments."
+msgstr "خدمات إنترنت الأشياء الشاملة في المملكة العربية السعودية: تطوير برمجيات مخصصة، حلول إنترنت الأشياء الصناعية، مراقبة المصانع في الوقت الفعلي، أمن إنترنت الأشياء، الصيانة التنبؤية، وتقييمات SIRI للصناعة 4.0."
+
+msgid "Learn about IIoT Bay, a pioneering IoT solutions company in Saudi Arabia. Founded in 2020, we specialize in smart home automation, industrial IoT, and Industry 4.0 transformation services."
+msgstr "تعرف على IIoT Bay، شركة رائدة في حلول إنترنت الأشياء في المملكة العربية السعودية. تأسست عام 2020، نحن متخصصون في أتمتة المنازل الذكية، إنترنت الأشياء الصناعي، وخدمات التحول إلى الصناعة 4.0."
+
+msgid "Contact IIoT Bay for IoT solutions in Saudi Arabia. Reach our team in Riyadh for smart home automation, industrial IoT, and Industry 4.0 consultations. Email: info@iiot-bay.com"
+msgstr "اتصل بـ IIoT Bay للحصول على حلول إنترنت الأشياء في المملكة العربية السعودية. تواصل مع فريقنا في الرياض للحصول على استشارات حول أتمتة المنازل الذكية، إنترنت الأشياء الصناعي، والصناعة 4.0. البريد الإلكتروني: info@iiot-bay.com"
+
+msgid "Stay updated with the latest IoT trends, technology insights, and industry news. Expert articles on smart home, industrial IoT, Industry 4.0, and digital transformation in Saudi Arabia."
+msgstr "ابق على اطلاع بأحدث اتجاهات إنترنت الأشياء والرؤى التقنية وأخبار الصناعة. مقالات خبراء حول المنزل الذكي، إنترنت الأشياء الصناعي، الصناعة 4.0، والتحول الرقمي في المملكة العربية السعودية."
+
+msgid "Read IIoT Bay's terms and conditions for using our IoT solutions and services in Saudi Arabia. Detailed information about service agreements, data protection, and user responsibilities."
+msgstr "اقرأ شروط وأحكام IIoT Bay لاستخدام حلول وخدمات إنترنت الأشياء الخاصة بنا في المملكة العربية السعودية. معلومات مفصلة حول اتفاقيات الخدمة وحماية البيانات ومسؤوليات المستخدم."
+
+msgid "The page you're looking for doesn't exist or has been moved. Return to IIoT Bay homepage or contact our support team for assistance."
+msgstr "الصفحة التي تبحث عنها غير موجودة أو تم نقلها. عد إلى الصفحة الرئيسية لـ IIoT Bay أو اتصل بفريق الدعم للحصول على المساعدة."
+
