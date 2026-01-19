@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ get_locale() }}" dir="ltr">
+<html lang="{{ get_locale() }}" dir="{% if get_locale() == 'ar' %}rtl{% else %}ltr{% endif %}">
 
 <head>
     <meta charset="UTF-8">
@@ -11,16 +11,16 @@
     <link rel="shortcut icon" href="https://www.iiot-bay.com/static/img/iiot-bay-icon.png" type="image/x-icon"> -->
 
     <!-- Primary Meta Tags -->
-    <title>{% block title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}</title>
+    <title>{% block title %}{{ _("IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia") }}{% endblock %}</title>
     <meta name="title"
-        content="{% block meta_title %}IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia{% endblock %}">
+        content="{% block meta_title %}{{ _("IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia") }}{% endblock %}">
     <meta name="description"
         content="{% block meta_description %}{{ _('Leading industrial IoT solutions provider in Saudi Arabia. Smart home automation, industrial IoT, real-time monitoring, and Industry 4.0 transformation services.') }}{% endblock %}">
     <meta name="keywords"
-        content="{% block meta_keywords %}industrial IoT solutions Saudi Arabia, Internet of Things, Smart Home, Industrial IoT, Factory Monitoring, Industry 4.0, SIRI Assessment, Predictive Maintenance, IoT Security, Riyadh, KSA{% endblock %}">
+        content="{% block meta_keywords %}{{ _("industrial IoT solutions Saudi Arabia, Internet of Things, Smart Home, Industrial IoT, Factory Monitoring, Industry 4.0, SIRI Assessment, Predictive Maintenance, IoT Security, Riyadh, KSA") }}{% endblock %}">
     <meta name="author" content="IIoT Bay">
     <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
-    <meta name="language" content="English">
+    <meta name="language" content="{% if get_locale() == 'ar' %}Arabic{% else %}English{% endif %}">
     <meta name="revisit-after" content="7 days">
 
     <!-- Canonical URL - Force HTTPS + www + language prefix -->

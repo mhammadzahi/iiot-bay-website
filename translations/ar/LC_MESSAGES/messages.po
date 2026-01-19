@@ -960,3 +960,51 @@ msgstr "اقرأ شروط وأحكام IIoT Bay لاستخدام حلول وخد
 msgid "The page you're looking for doesn't exist or has been moved. Return to IIoT Bay homepage or contact our support team for assistance."
 msgstr "الصفحة التي تبحث عنها غير موجودة أو تم نقلها. عد إلى الصفحة الرئيسية لـ IIoT Bay أو اتصل بفريق الدعم للحصول على المساعدة."
 
+# Meta Title and Keywords
+msgid "IIoT Bay - Innovative industrial IoT Solutions in Saudi Arabia"
+msgstr "IIoT Bay - حلول إنترنت الأشياء الصناعية المبتكرة في المملكة العربية السعودية"
+
+msgid "industrial IoT solutions Saudi Arabia, Internet of Things, Smart Home, Industrial IoT, Factory Monitoring, Industry 4.0, SIRI Assessment, Predictive Maintenance, IoT Security, Riyadh, KSA"
+msgstr "حلول إنترنت الأشياء الصناعية السعودية, إنترنت الأشياء, المنزل الذكي, إنترنت الأشياء الصناعي, مراقبة المصنع, الصناعة 4.0, تقييم SIRI, الصيانة التنبؤية, أمن إنترنت الأشياء, الرياض, المملكة العربية السعودية"
+
+# Page Titles
+msgid "IIoT Bay - Leading IoT Solutions Provider in Saudi Arabia | Smart Home & Industrial IoT"
+msgstr "IIoT Bay - مزود حلول إنترنت الأشياء الرائد في المملكة العربية السعودية | المنزل الذكي وإنترنت الأشياء الصناعي"
+
+msgid "IoT Services - Software Development, Industrial IoT & Industry 4.0 | IIoT Bay"
+msgstr "خدمات إنترنت الأشياء - تطوير البرمجيات، إنترنت الأشياء الصناعي والصناعة 4.0 | IIoT Bay"
+
+msgid "About IIoT Bay - Leading IoT Solutions Company in Saudi Arabia"
+msgstr "عن IIoT Bay - شركة حلول إنترنت الأشياء الرائدة في المملكة العربية السعودية"
+
+msgid "Contact IIoT Bay - Get in Touch with IoT Experts in Saudi Arabia"
+msgstr "اتصل بـ IIoT Bay - تواصل مع خبراء إنترنت الأشياء في المملكة العربية السعودية"
+
+msgid "IoT Blog - Latest News, Insights & Technology Trends | IIoT Bay"
+msgstr "مدونة إنترنت الأشياء - آخر الأخبار والرؤى والاتجاهات التقنية | IIoT Bay"
+
+msgid "Terms and Conditions - IIoT Bay"
+msgstr "الشروط والأحكام - IIoT Bay"
+
+msgid "404 Page Not Found - IIoT Bay"
+msgstr "404 الصفحة غير موجودة - IIoT Bay"
+
+# Page Keywords
+msgid "Industrial IoT solutions Saudi Arabia, Industrial IoT company Riyadh, smart home automation KSA, industrial IoT Saudi Arabia, factory monitoring systems, Industry 4.0 Saudi Arabia, SIRI assessment, predictive maintenance, Industrial IoT security, Industrial IoT consulting"
+msgstr "حلول إنترنت الأشياء الصناعية السعودية, شركة إنترنت الأشياء الصناعية الرياض, أتمتة المنزل الذكي السعودية, إنترنت الأشياء الصناعي السعودية, أنظمة مراقبة المصانع, الصناعة 4.0 السعودية, تقييم SIRI, الصيانة التنبؤية, أمن إنترنت الأشياء الصناعي, استشارات إنترنت الأشياء الصناعية"
+
+msgid "IoT services, software development Saudi Arabia, industrial IoT solutions, factory monitoring, IoT security services, predictive maintenance, SIRI assessment, Industry 4.0 services, IoT consulting"
+msgstr "خدمات إنترنت الأشياء, تطوير البرمجيات السعودية, حلول إنترنت الأشياء الصناعية, مراقبة المصانع, خدمات أمن إنترنت الأشياء, الصيانة التنبؤية, تقييم SIRI, خدمات الصناعة 4.0, استشارات إنترنت الأشياء"
+
+msgid "about IIoT Bay, IoT company Saudi Arabia, IoT solutions provider Riyadh, smart technology company KSA, industrial IoT experts, Industry 4.0 consultants"
+msgstr "عن IIoT Bay, شركة إنترنت الأشياء السعودية, مزود حلول إنترنت الأشياء الرياض, شركة التكنولوجيا الذكية السعودية, خبراء إنترنت الأشياء الصناعي, مستشارو الصناعة 4.0"
+
+msgid "contact IIoT Bay, IoT consultation Saudi Arabia, Riyadh IoT company, IoT services inquiry, industrial IoT contact, smart home consultation"
+msgstr "اتصل بـ IIoT Bay, استشارات إنترنت الأشياء السعودية, شركة إنترنت الأشياء الرياض, استفسار خدمات إنترنت الأشياء, التواصل مع إنترنت الأشياء الصناعي, استشارات المنزل الذكي"
+
+msgid "IoT blog, IoT news, smart home articles, industrial IoT insights, Industry 4.0 trends, IoT technology Saudi Arabia, digital transformation news"
+msgstr "مدونة إنترنت الأشياء, أخبار إنترنت الأشياء, مقالات المنزل الذكي, رؤى إنترنت الأشياء الصناعي, اتجاهات الصناعة 4.0, تكنولوجيا إنترنت الأشياء السعودية, أخبار التحول الرقمي"
+
+msgid "IIoT Bay terms, terms and conditions, IoT services terms, user agreement, service level agreement, Saudi Arabia"
+msgstr "شروط IIoT Bay, الشروط والأحكام, شروط خدمات إنترنت الأشياء, اتفاقية المستخدم, اتفاقية مستوى الخدمة, المملكة العربية السعودية"
+
