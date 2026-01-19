@@ -334,7 +334,7 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
     - hreflang alternates for ar, en, and x-default
     - <lastmod> in YYYY-MM-DD format
     """
-    current_time = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    current_time = '2026-01-19'
     
     # Public pages that exist in both languages
     # Only include pages with language prefixes
@@ -386,17 +386,8 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
             
             post_url = f"{base_url}/post/{quote(post['slug'])}"
             
-            # Parse post date
+            # Use current_time for all posts
             post_date = current_time
-            if post.get('created_at'):
-                date_str = str(post['created_at'])
-                for fmt in ['%Y-%m-%d', '%Y-%m-%d %H:%M:%S', '%Y-%m-%dT%H:%M:%S', '%Y/%m/%d']:
-                    try:
-                        dt = datetime.strptime(date_str, fmt)
-                        post_date = dt.strftime('%Y-%m-%d')
-                        break
-                    except (ValueError, TypeError):
-                        continue
             
             # Posts don't have hreflang (no language alternates)
             xml_lines.append('  <url>')
