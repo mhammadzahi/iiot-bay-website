@@ -164,11 +164,11 @@ def set_security_headers(response):
     # Content Security Policy - Prevent XSS
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com; "
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
         "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; "
         "img-src 'self' data: https:; "
-        "connect-src 'self'; "
+        "connect-src 'self' https://www.google-analytics.com; "
         "frame-ancestors 'none'; "
         "base-uri 'self'; "
         "form-action 'self';"
