@@ -3,3 +3,4 @@ Flask-Babel==4.0.0
 python-dotenv==1.0.0
 pillow==12.1.0
 gunicorn==23.0.0
+requests==2.32.3

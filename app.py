@@ -265,6 +265,28 @@ def contact():
         email_address = data.get('email', '').strip()
         subject = escape(data.get('subject', '').strip())
         message = escape(data.get('message', '').strip())
+        turnstile_response = data.get('cf-turnstile-response', '').strip()
+        
+        # Validate Cloudflare Turnstile
+        if not turnstile_response:
+            return jsonify({"success": False, "message": "Please complete the security verification"}), 400
+        
+        # Verify Turnstile token with Cloudflare
+        import requests
+        verify_url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+        verify_data = {
+            'secret': os.getenv('TURNSTILE_SECRET_KEY'),
+            'response': turnstile_response,
+            'remoteip': request.remote_addr
+        }
+        
+        try:
+            turnstile_result = requests.post(verify_url, data=verify_data, timeout=5).json()
+            if not turnstile_result.get('success'):
+                return jsonify({"success": False, "message": "Security verification failed. Please try again."}), 400
+        except Exception as e:
+            print(f"Turnstile verification error: {e}")
+            return jsonify({"success": False, "message": "Security verification error. Please try again."}), 500
         
         # Validate required fields
         if not name or not email_address or not message:
