@@ -371,6 +371,11 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
         'terms',    # /ar/terms and /en/terms
     ]
     
+    # Custom lastmod dates for specific pages
+    page_lastmod = {
+        'contact': '2026-01-25',
+    }
+    
     # Build XML with proper formatting
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -388,10 +393,13 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
             url_ar = f"{base_url}/ar/{page}"
             url_en = f"{base_url}/en/{page}"
         
+        # Get lastmod date (custom or default)
+        lastmod = page_lastmod.get(page, current_time)
+        
         # Emit one <url> block with Arabic as canonical
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{url_ar}</loc>')
-        xml_lines.append(f'    <lastmod>{current_time}</lastmod>')
+        xml_lines.append(f'    <lastmod>{lastmod}</lastmod>')
         
         # hreflang alternates
         xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="ar" href="{url_ar}"/>')
