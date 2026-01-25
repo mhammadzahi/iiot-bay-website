@@ -396,9 +396,21 @@ def _generate_sitemap_xml(base_url, languages, default_lang):
         # Get lastmod date (custom or default)
         lastmod = page_lastmod.get(page, current_time)
         
-        # Emit one <url> block with Arabic as canonical
+        # Emit Arabic <url> block
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{url_ar}</loc>')
+        xml_lines.append(f'    <lastmod>{lastmod}</lastmod>')
+        
+        # hreflang alternates
+        xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="ar" href="{url_ar}"/>')
+        xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="en" href="{url_en}"/>')
+        xml_lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{url_ar}"/>')
+        
+        xml_lines.append('  </url>')
+        
+        # Emit English <url> block
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{url_en}</loc>')
         xml_lines.append(f'    <lastmod>{lastmod}</lastmod>')
         
         # hreflang alternates
