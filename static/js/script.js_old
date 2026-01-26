@@ -111,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const subject = formData.get('subject').trim();
             const message = formData.get('message').trim();
             
+            // Get Turnstile token
+            const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
+            const turnstileToken = turnstileResponse ? turnstileResponse.value : '';
+            
             // Validate form
             if (!name || !email || !message) {
                 Swal.fire({
@@ -138,13 +142,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            if (!turnstileToken) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Please wait for security verification to complete',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+                return;
+            }
+            
             // Disable button and show loading state
             contactSubmit.disabled = true;
             const originalContent = contactSubmit.innerHTML;
             contactSubmit.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
             
+            // Get current page URL to extract language
+            const currentPath = window.location.pathname;
+            const contactUrl = currentPath; // Use current URL which includes language prefix
+            
             // Submit form as JSON
-            fetch('/contact', {
+            fetch(contactUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -153,7 +174,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     name: name,
                     email: email,
                     subject: subject,
-                    message: message
+                    message: message,
+                    'cf-turnstile-response': turnstileToken
                 })
             })
             .then(response => response.json())
@@ -169,6 +191,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         timerProgressBar: true
                     });
                     contactForm.reset();
+                    // Reset Turnstile widget
+                    if (typeof turnstile !== 'undefined') {
+                        turnstile.reset();
+                    }
                 } else {
                     throw new Error(data.message || 'Failed to send message');
                 }
