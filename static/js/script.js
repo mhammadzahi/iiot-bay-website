@@ -190,12 +190,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         timer: 3000,
                         timerProgressBar: true
                     });
-                    // contactForm.reset();
-                    // // Reset Turnstile widget
-                    // if (typeof turnstile !== 'undefined') {
-                    //     turnstile.reset();
-                    // }
-                    document.location.href = '/';
+                    contactForm.reset();
+                    // Reset Turnstile widget
+                    if (typeof turnstile !== 'undefined') {
+                        turnstile.reset();
+                    }
+                    // Redirect to services page after showing success message
+                    setTimeout(() => {
+                        window.location.href = '/services';
+                    }, 2000);
+                    
                 } else {
                     throw new Error(data.message || 'Failed to send message');
                 }
