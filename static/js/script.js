@@ -197,7 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     // Redirect to services page after showing success message
                     setTimeout(() => {
-                        window.location.href = '/services';
+                        const currentLang = window.location.pathname.split('/')[1]; // Extract language from URL
+                        window.location.href = `/${currentLang}/services`;
                     }, 2000);
                     
                 } else {
