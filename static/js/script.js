@@ -190,11 +190,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         timer: 3000,
                         timerProgressBar: true
                     });
-                    contactForm.reset();
-                    // Reset Turnstile widget
-                    if (typeof turnstile !== 'undefined') {
-                        turnstile.reset();
-                    }
+                    // contactForm.reset();
+                    // // Reset Turnstile widget
+                    // if (typeof turnstile !== 'undefined') {
+                    //     turnstile.reset();
+                    // }
+                    document.location.href = '/';
                 } else {
                     throw new Error(data.message || 'Failed to send message');
                 }
