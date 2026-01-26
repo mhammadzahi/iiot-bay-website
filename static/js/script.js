@@ -195,12 +195,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (typeof turnstile !== 'undefined') {
                         turnstile.reset();
                     }
-                    // Redirect to services page after showing success message
-                    setTimeout(() => {
-                        const currentLang = window.location.pathname.split('/')[1]; // Extract language from URL
-                        window.location.href = `/${currentLang}/services`;
-                    }, 2000);
-                    
                 } else {
                     throw new Error(data.message || 'Failed to send message');
                 }
