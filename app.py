@@ -215,6 +215,42 @@ def root():
     return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/", code=301)
 
 
+# Redirect common routes without language prefix to default language
+@app.route('/contact')
+@app.route('/contact/')
+def redirect_contact():
+    """Redirect /contact to default language version"""
+    return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/contact", code=301)
+
+
+@app.route('/about')
+@app.route('/about/')
+def redirect_about():
+    """Redirect /about to default language version"""
+    return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/about", code=301)
+
+
+@app.route('/services')
+@app.route('/services/')
+def redirect_services():
+    """Redirect /services to default language version"""
+    return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/services", code=301)
+
+
+@app.route('/blog')
+@app.route('/blog/')
+def redirect_blog():
+    """Redirect /blog to default language version"""
+    return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/blog", code=301)
+
+
+@app.route('/terms')
+@app.route('/terms/')
+def redirect_terms():
+    """Redirect /terms to default language version"""
+    return redirect(f"/{app.config['BABEL_DEFAULT_LOCALE']}/terms", code=301)
+
+
 @app.route('/<lang>/')
 @with_lang
 def index():
