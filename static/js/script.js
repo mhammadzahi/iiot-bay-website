@@ -177,9 +177,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     'cf-turnstile-response': turnstileToken
                 })
             })
-            .then(response => response.json())
+            .then(async response => {
+                const contentType = response.headers.get('content-type') || '';
+                const isJson = contentType.includes('application/json');
+                const payload = isJson ? await response.json() : await response.text();
+                if (!response.ok) {
+                    const message = isJson && payload && payload.message ? payload.message : (payload || 'Something went wrong');
+                    throw new Error(message);
+                }
+                return payload;
+            })
             .then(data => {
-                if (data.success) {
+                if (data && data.success) {
                     Swal.fire({
                         toast: true,
                         position: 'top-end',
@@ -195,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         turnstile.reset();
                     }
                 } else {
-                    throw new Error(data.message || 'Failed to send message');
+                    throw new Error((data && data.message) || 'Failed to send message');
                 }
             })
             .catch(error => {
