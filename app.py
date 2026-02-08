@@ -294,56 +294,66 @@ def post(post_slug):
     return render_template('post.html', post=post)
 
 
+def _handle_contact_submission(data):
+    name = escape(data.get('name', '').strip())
+    email_address = data.get('email', '').strip()
+    subject = escape(data.get('subject', '').strip())
+    message = escape(data.get('message', '').strip())
+    turnstile_response = data.get('cf-turnstile-response', '').strip()
+
+    # Validate Cloudflare Turnstile
+    if not turnstile_response:
+        return jsonify({"success": False, "message": "Please complete the security verification"}), 400
+
+    # Verify Turnstile token with Cloudflare
+    import requests
+    verify_url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+    verify_data = {
+        'secret': os.getenv('TURNSTILE_SECRET_KEY'),
+        'response': turnstile_response,
+        'remoteip': request.remote_addr
+    }
+
+    try:
+        turnstile_result = requests.post(verify_url, data=verify_data, timeout=5).json()
+        if not turnstile_result.get('success'):
+            return jsonify({"success": False, "message": "Security verification failed. Please try again."}), 400
+    except Exception as e:
+        print(f"Turnstile verification error: {e}")
+        return jsonify({"success": False, "message": "Security verification error. Please try again."}), 500
+
+    # Validate required fields
+    if not name or not email_address or not message:
+        return jsonify({"success": False, "message": "All required fields must be filled"}), 400
+
+    # Validate email format
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not re.match(email_pattern, email_address):
+        return jsonify({"success": False, "message": "Invalid email address"}), 400
+
+    if not new_message(name, email_address, subject, message):
+        print("Failed to save message: ", data)
+        return jsonify({"success": False, "message": "Failed to send message"}), 500
+
+    return jsonify({"success": True, "message": "Message sent successfully"}), 200
+
+
 @app.route('/<lang>/contact', methods=['GET', 'POST'])
 @with_lang
 def contact():
     if request.method == 'POST':
-        data = request.json
-        name = escape(data.get('name', '').strip())
-        email_address = data.get('email', '').strip()
-        subject = escape(data.get('subject', '').strip())
-        message = escape(data.get('message', '').strip())
-        turnstile_response = data.get('cf-turnstile-response', '').strip()
-        
-        # Validate Cloudflare Turnstile
-        if not turnstile_response:
-            return jsonify({"success": False, "message": "Please complete the security verification"}), 400
-        
-        # Verify Turnstile token with Cloudflare
-        import requests
-        verify_url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
-        verify_data = {
-            'secret': os.getenv('TURNSTILE_SECRET_KEY'),
-            'response': turnstile_response,
-            'remoteip': request.remote_addr
-        }
-        
-        try:
-            turnstile_result = requests.post(verify_url, data=verify_data, timeout=5).json()
-            if not turnstile_result.get('success'):
-                return jsonify({"success": False, "message": "Security verification failed. Please try again."}), 400
-        except Exception as e:
-            print(f"Turnstile verification error: {e}")
-            return jsonify({"success": False, "message": "Security verification error. Please try again."}), 500
-        
-        # Validate required fields
-        if not name or not email_address or not message:
-            return jsonify({"success": False, "message": "All required fields must be filled"}), 400
-        
-        # Validate email format
-        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        if not re.match(email_pattern, email_address):
-            return jsonify({"success": False, "message": "Invalid email address"}), 400
-
-        if not new_message(name, email_address, subject, message):
-            print("Failed to save message: ", data)
-            return jsonify({"success": False, "message": "Failed to send message"}), 500
-
-        return jsonify({"success": True, "message": "Message sent successfully"}), 200
+        data = request.get_json(silent=True) or {}
+        return _handle_contact_submission(data)
 
     # GET
     random_posts = get_random_posts(limit=6)
     return render_template('contact.html', random_posts=random_posts)
+
+
+@app.route('/api/contact', methods=['POST'])
+def api_contact():
+    data = request.get_json(silent=True) or {}
+    return _handle_contact_submission(data)
 
 
 @app.route('/api/newsletter/subscribe', methods=['POST'])

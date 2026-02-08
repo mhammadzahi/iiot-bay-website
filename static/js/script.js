@@ -160,9 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const originalContent = contactSubmit.innerHTML;
             contactSubmit.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
             
-            // Get current page URL to extract language
-            const currentPath = window.location.pathname;
-            const contactUrl = currentPath; // Use current URL which includes language prefix
+            // Use API endpoint for contact submissions
+            const contactUrl = '/api/contact';
             
             // Submit form as JSON
             fetch(contactUrl, {
